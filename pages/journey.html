@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Growth Journey — Canopy Consulting</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .phase-block {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      border-top: 1px solid var(--border);
+    }
+    .phase-block:last-child { border-bottom: 1px solid var(--border); }
+    .phase-block--alt { background: var(--cream); }
+
+    .phase-num-col {
+      display: flex; align-items: flex-start;
+      justify-content: center; padding: 48px 0 0;
+      background: var(--forest);
+    }
+    .phase-num-col span {
+      font-family: var(--font-sans); font-size: 10px; font-weight: 700;
+      color: rgba(255,255,255,0.3); letter-spacing: 2px;
+      writing-mode: vertical-rl; text-transform: uppercase;
+    }
+    .phase-num-col.coming { background: var(--slate); }
+
+    .phase-content {
+      padding: 48px 60px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 52px; align-items: start;
+    }
+
+    .phase-icon-lg { font-size: 36px; margin-bottom: 12px; }
+    .phase-name-lg { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--forest); margin-bottom: 6px; }
+    .phase-tagline  { font-family: var(--font-serif); font-size: 16px; font-style: italic; color: var(--mid-green); margin-bottom: 16px; }
+    .phase-desc     { font-size: 14px; line-height: 1.85; color: var(--text-mid); margin-bottom: 20px; }
+
+    .phase-list h4  { font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; }
+    .phase-list li  { font-size: 13px; color: var(--text-mid); padding: 7px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .phase-list li::before { content:'›'; color: var(--amber); font-weight: 700; font-size: 14px; flex-shrink: 0; }
+
+    .phase-coming-note {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--text-light); font-style: italic;
+    }
+    .phase-coming-note::before { content:''; width:6px; height:6px; border-radius:50%; background: rgba(26,77,58,0.2); }
+  </style>
+</head>
+<body>
+  <div id="nav-slot"></div>
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="eyebrow"><div class="eyebrow-line"></div><span>The Growth Journey</span></div>
+      <h1>Five phases. One <em>complete transformation.</em></h1>
+      <p class="lead">Every business grows through the same five stages. Our model is built around this reality — meeting you where you are and building from there.</p>
+    </div>
+  </div>
+
+  <!-- Phase 1 -->
+  <div class="phase-block">
+    <div class="phase-num-col"><span>Phase 01</span></div>
+    <div class="phase-content">
+      <div class="reveal">
+        <div class="phase-icon-lg">🌱</div>
+        <div class="phase-name-lg">Foundation</div>
+        <div class="phase-tagline">Build your business on solid ground.</div>
+        <p class="phase-desc">Before a business grows it needs a base. Phase 1 creates the strategic, financial, and operational blueprint that every decision builds on. This is where ideas become viable, fundable businesses.</p>
+        <span class="badge badge-gold" style="margin-bottom:16px;display:inline-block;">Available Now</span>
+        <br><a href="../pages/contact.html" class="btn btn-dark" style="margin-top:8px;">Start Here</a>
+      </div>
+      <div class="phase-list reveal">
+        <h4>What's Included</h4>
+        <ul>
+          <li>Business plan (investor & loan-ready)</li>
+          <li>Financial projections & cash flow model</li>
+          <li>Market research & competitive analysis</li>
+          <li>Business model & offer structure</li>
+          <li>Pricing strategy</li>
+          <li>Business Audit (entry offer)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="phase-block phase-block--alt">
+    <div class="phase-num-col"><span>Phase 02</span></div>
+    <div class="phase-content">
+      <div class="reveal">
+        <div class="phase-icon-lg">🌿</div>
+        <div class="phase-name-lg">Presence</div>
+        <div class="phase-tagline">Make your business visible and credible.</div>
+        <p class="phase-desc">A business that cannot be found or trusted online is leaving money on the table. Phase 2 builds the digital infrastructure that turns visibility into leads and first impressions into lasting credibility.</p>
+        <span class="badge badge-gold" style="margin-bottom:16px;display:inline-block;">Available Now</span>
+        <br><a href="../pages/contact.html" class="btn btn-dark" style="margin-top:8px;">Start Here</a>
+      </div>
+      <div class="phase-list reveal">
+        <h4>What's Included</h4>
+        <ul>
+          <li>Website design & development</li>
+          <li>Brand identity & visual guidelines</li>
+          <li>Lead capture & contact systems</li>
+          <li>Google Business & directory setup</li>
+          <li>Basic funnel structure</li>
+          <li>Social media foundation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="phase-block">
+    <div class="phase-num-col coming"><span>Phase 03</span></div>
+    <div class="phase-content">
+      <div class="reveal">
+        <div class="phase-icon-lg">🌳</div>
+        <div class="phase-name-lg">Systems</div>
+        <div class="phase-tagline">Turn chaos into smooth, repeatable systems.</div>
+        <p class="phase-desc">Most businesses plateau not from lack of effort, but because they run on memory instead of systems. Phase 3 installs the operational backbone that allows you to scale without becoming the bottleneck.</p>
+        <span class="phase-coming-note">Coming Soon — we are building this phase ourselves first</span>
+        <br><a href="../pages/contact.html" class="btn btn-ghost-dark" style="margin-top:20px;">Join the Waitlist</a>
+      </div>
+      <div class="phase-list reveal">
+        <h4>What's Included</h4>
+        <ul>
+          <li>CRM selection & full setup</li>
+          <li>Workflow & task automation</li>
+          <li>SOP creation & documentation</li>
+          <li>Tech stack consolidation</li>
+          <li>Internal process design</li>
+          <li>Team training support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 4 -->
+  <div class="phase-block phase-block--alt">
+    <div class="phase-num-col coming"><span>Phase 04</span></div>
+    <div class="phase-content">
+      <div class="reveal">
+        <div class="phase-icon-lg">🌲</div>
+        <div class="phase-name-lg">Optimization</div>
+        <div class="phase-tagline">Make your business more profitable.</div>
+        <p class="phase-desc">Once systems are in place the focus shifts to performance. Phase 4 audits every part of the business for efficiency, identifies profit leaks, and builds data visibility so you can make smart decisions fast.</p>
+        <span class="phase-coming-note">Coming in a future phase</span>
+        <br><a href="../pages/contact.html" class="btn btn-ghost-dark" style="margin-top:20px;">Join the Waitlist</a>
+      </div>
+      <div class="phase-list reveal">
+        <h4>What's Included</h4>
+        <ul>
+          <li>Business profitability audit</li>
+          <li>KPI dashboard setup</li>
+          <li>Cost reduction analysis</li>
+          <li>Conversion rate optimization</li>
+          <li>Process efficiency review</li>
+          <li>Revenue growth strategy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 5 -->
+  <div class="phase-block">
+    <div class="phase-num-col coming"><span>Phase 05</span></div>
+    <div class="phase-content">
+      <div class="reveal">
+        <div class="phase-icon-lg">🌴</div>
+        <div class="phase-name-lg">Scale</div>
+        <div class="phase-tagline">Grow without adding chaos.</div>
+        <p class="phase-desc">Phase 5 is where all the previous work compounds. With a strong foundation, credible presence, efficient systems, and optimized operations — the business is ready to grow significantly and sustain it.</p>
+        <span class="phase-coming-note">Coming in a future phase</span>
+        <br><a href="../pages/contact.html" class="btn btn-ghost-dark" style="margin-top:20px;">Join the Waitlist</a>
+      </div>
+      <div class="phase-list reveal">
+        <h4>What's Included</h4>
+        <ul>
+          <li>AI tool integration</li>
+          <li>Advanced workflow automation</li>
+          <li>Scaling strategy & roadmap</li>
+          <li>Expansion planning</li>
+          <li>Fractional COO advisory</li>
+          <li>Monthly retainer support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-strip geo-pattern">
+    <h2>Not sure which phase you are in?</h2>
+    <div class="rule"></div>
+    <p>Start with a free Business Audit. We assess where you are, identify the gaps, and give you a clear roadmap.</p>
+    <a href="../pages/contact.html" class="btn btn-gold">Book a Free Business Audit</a>
+  </div>
+
+  <div id="footer-slot"></div>
+  <script src="../js/main.js"></script>
+</body>
+</html>

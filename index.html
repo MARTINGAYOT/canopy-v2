@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canopy Consulting — Deep roots. Wide reach. Unstoppable growth.</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--forest-deep);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: var(--nav-h);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Jungle texture overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='140' height='140' viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.025)' stroke-width='0.8'%3E%3Cellipse cx='35' cy='25' rx='22' ry='11' transform='rotate(-35 35 25)'/%3E%3Cellipse cx='95' cy='18' rx='17' ry='9' transform='rotate(22 95 18)'/%3E%3Cellipse cx='20' cy='80' rx='19' ry='10' transform='rotate(-22 20 80)'/%3E%3Cellipse cx='105' cy='75' rx='24' ry='12' transform='rotate(18 105 75)'/%3E%3Cellipse cx='65' cy='110' rx='18' ry='9' transform='rotate(-12 65 110)'/%3E%3Cpath d='M35 25 Q45 50 40 75' stroke-width='0.5'/%3E%3Cpath d='M95 18 Q100 45 88 68' stroke-width='0.5'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    /* Mayan geometry top-right */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 300px; height: 300px;
+      background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(184,134,11,0.08)' stroke-width='0.8'%3E%3Crect x='20' y='20' width='260' height='260'/%3E%3Crect x='50' y='50' width='200' height='200'/%3E%3Crect x='80' y='80' width='140' height='140'/%3E%3Crect x='110' y='110' width='80' height='80'/%3E%3Cline x1='20' y1='20' x2='280' y2='280'/%3E%3Cline x1='280' y1='20' x2='20' y2='280'/%3E%3Ccircle cx='150' cy='150' r='40' stroke-dasharray='4 4'/%3E%3Ccircle cx='150' cy='150' r='80' stroke-dasharray='2 6'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .hero-left {
+      padding: 80px 60px 80px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tagline-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(184,134,11,0.12);
+      border: 1px solid rgba(184,134,11,0.25);
+      padding: 6px 16px;
+      margin-bottom: 32px;
+    }
+
+    .hero-tagline-pill span {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    .hero-tagline-pill::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      animation: pulse-amber 2s ease-in-out infinite;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(42px, 5.5vw, 70px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.06;
+      margin-bottom: 28px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 em { font-style: italic; color: var(--amber-light); }
+
+    .hero-sub {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      line-height: 1.78;
+      color: rgba(255,255,255,0.65);
+      max-width: 440px;
+      margin-bottom: 48px;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 80px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 2;
+    }
+
+    .hero-scroll-hint span {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .scroll-line {
+      width: 40px; height: 1px;
+      background: rgba(255,255,255,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--amber);
+      animation: slideRight 2s ease-in-out infinite;
+    }
+
+    @keyframes slideRight {
+      0%   { left: -100%; }
+      50%  { left: 100%; }
+      100% { left: 100%; }
+    }
+
+    /* Botanical right panel */
+    .hero-right {
+      position: relative;
+      z-index: 2;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 80px 80px 0;
+    }
+
+    .botanical-art {
+      width: 100%;
+      max-width: 460px;
+      position: relative;
+    }
+
+    .botanical-art svg {
+      width: 100%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Floating data points */
+    .data-point {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .data-point .dp-val {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .data-point .dp-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    .data-point-1 { top: 15%; right: 5%; }
+    .data-point-2 { bottom: 25%; left: 0%; }
+
+    /* ── INTRO STRIP ── */
+    .intro-strip {
+      background: var(--forest);
+      padding: 0 80px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='0.5'%3E%3Crect x='5' y='5' width='50' height='50'/%3E%3Crect x='15' y='15' width='30' height='30'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .intro-stat {
+      padding: 48px 40px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      position: relative;
+    }
+
+    .intro-stat:last-child { border-right: none; }
+
+    .intro-stat .num {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .intro-stat .num .unit { font-size: 24px; color: var(--amber); }
+
+    .intro-stat .label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── ABOUT TEASER ── */
+    .about-teaser {
+      padding: 100px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      background: var(--offwhite);
+      position: relative;
+    }
+
+    .about-teaser::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 200px; height: 200px;
+      background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(26,77,58,0.06)' stroke-width='1'%3E%3Ccircle cx='100' cy='100' r='90'/%3E%3Ccircle cx='100' cy='100' r='70'/%3E%3Ccircle cx='100' cy='100' r='50'/%3E%3Ccircle cx='100' cy='100' r='30'/%3E%3Cline x1='10' y1='100' x2='190' y2='100'/%3E%3Cline x1='100' y1='10' x2='100' y2='190'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .about-leaf-art {
+      position: relative;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .leaf-ring {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      border: 1px solid rgba(26,77,58,0.12);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: leafSway 8s ease-in-out infinite;
+    }
+
+    .leaf-ring::before {
+      content: '';
+      position: absolute;
+      inset: 20px;
+      border-radius: 50%;
+      border: 1px dashed rgba(184,134,11,0.2);
+    }
+
+    .leaf-ring svg {
+      width: 200px;
+      height: 200px;
+    }
+
+    .about-text p {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--text-mid);
+      margin-bottom: 18px;
+    }
+
+    .about-text p:first-of-type {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      color: var(--text-dark);
+    }
+
+    /* ── JOURNEY SECTION ── */
+    .journey-section {
+      background: var(--forest-deep);
+      padding: 100px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .journey-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(184,134,11,0.04)' stroke-width='0.5'%3E%3Crect x='10' y='10' width='60' height='60'/%3E%3Crect x='20' y='20' width='40' height='40'/%3E%3Cline x1='10' y1='10' x2='70' y2='70'/%3E%3Cline x1='70' y1='10' x2='10' y2='70'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .journey-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 64px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      background: rgba(255,255,255,0.04);
+      position: relative;
+      z-index: 1;
+    }
+
+    .phase-card {
+      background: rgba(255,255,255,0.02);
+      padding: 36px 24px;
+      border-top: 2px solid rgba(255,255,255,0.06);
+      transition: background 0.25s, border-color 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .phase-card:hover {
+      background: rgba(255,255,255,0.06);
+      border-top-color: var(--amber);
+    }
+
+    .phase-card.available { border-top-color: var(--amber); }
+
+    .pc-num {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.2);
+      margin-bottom: 20px;
+    }
+
+    .pc-icon { font-size: 28px; margin-bottom: 14px; }
+
+    .pc-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .pc-desc {
+      font-size: 12px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 18px;
+    }
+
+    /* ── WHY SECTION ── */
+    .why-section {
+      background: var(--cream);
+      padding: 100px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-section::after {
+      content: '';
+      position: absolute;
+      top: -60px; left: -60px;
+      width: 400px; height: 400px;
+      background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(26,77,58,0.05)' stroke-width='1'%3E%3Ccircle cx='200' cy='200' r='180'/%3E%3Ccircle cx='200' cy='200' r='140'/%3E%3Ccircle cx='200' cy='200' r='100'/%3E%3Ccircle cx='200' cy='200' r='60'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(26,77,58,0.08);
+      margin-top: 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .why-card {
+      background: var(--cream);
+      padding: 44px 36px;
+      transition: background 0.22s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-card::before {
+      content: attr(data-num);
+      position: absolute;
+      top: 16px; right: 20px;
+      font-family: var(--font-display);
+      font-size: 72px;
+      font-weight: 900;
+      color: rgba(26,77,58,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .why-card:hover { background: #fff; }
+
+    .wc-icon {
+      width: 42px; height: 42px;
+      background: var(--forest);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+    }
+
+    .wc-icon svg { width: 20px; height: 20px; }
+
+    .wc-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 10px;
+    }
+
+    .wc-text { font-size: 14px; line-height: 1.8; color: var(--text-mid); }
+
+    /* ── SERVICES PREVIEW ── */
+    .services-section {
+      background: var(--offwhite);
+      padding: 100px 80px;
+    }
+
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 56px;
+    }
+
+    .sp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+    }
+
+    .sp-card {
+      background: var(--offwhite);
+      padding: 44px 36px;
+      position: relative;
+      transition: background 0.22s;
+      border-left: 3px solid transparent;
+    }
+
+    .sp-card:hover { background: var(--light-green); border-left-color: var(--amber); }
+    .sp-card.dimmed { opacity: 0.6; }
+
+    .sp-phase {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 12px;
+    }
+
+    .sp-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 10px;
+    }
+
+    .sp-text { font-size: 13px; line-height: 1.8; color: var(--text-mid); margin-bottom: 20px; }
+
+    .sp-list { margin-bottom: 28px; }
+
+    .sp-list li {
+      font-size: 12px;
+      color: var(--text-mid);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sp-list li::before {
+      content: '›';
+      color: var(--amber);
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .sp-tag {
+      position: absolute;
+      top: 20px; right: 20px;
+    }
+
+    /* ── BELIZE STRIP ── */
+    .belize-strip {
+      background: var(--forest);
+      padding: 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .belize-strip::before {
+      content: '';
+      position: absolute;
+      right: -40px; top: -40px;
+      width: 360px; height: 360px;
+      background-image: url("data:image/svg+xml,%3Csvg width='360' height='360' viewBox='0 0 360 360' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'%3E%3Cpolygon points='180,20 340,260 20,260'/%3E%3Cpolygon points='180,60 300,240 60,240'/%3E%3Cpolygon points='180,100 260,220 100,220'/%3E%3Cpolygon points='180,140 220,200 140,200'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .belize-text h2 {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .belize-text h2 em { font-style: italic; color: var(--amber-light); }
+
+    .belize-text p {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      line-height: 1.78;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 32px;
+    }
+
+    /* Belize map SVG art */
+    .belize-map-art {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .belize-map-art svg {
+      filter: drop-shadow(0 0 20px rgba(184,134,11,0.15));
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-slot"></div>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tagline-pill anim-1">
+        <span>Business Consulting · Belize</span>
+      </div>
+      <h1 class="anim-2">From <em>chaos</em> to a business built to last.</h1>
+      <p class="hero-sub anim-3">We partner with small and mid-sized businesses to build the foundations, systems, and strategies they need to grow with confidence — not chaos.</p>
+      <div class="hero-actions anim-4">
+        <a href="pages/contact.html" class="btn btn-gold">Book a Discovery Call</a>
+        <a href="pages/journey.html" class="btn btn-outline-light">See the Journey</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="botanical-art">
+        <!-- Botanical SVG illustration -->
+        <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer ring -->
+          <circle cx="200" cy="250" r="180" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <circle cx="200" cy="250" r="150" stroke="rgba(184,134,11,0.08)" stroke-width="1" stroke-dasharray="4 8"/>
+          <circle cx="200" cy="250" r="120" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+
+          <!-- Shield outline -->
+          <path d="M200 80 L290 110 L290 240 Q290 320 200 360 Q110 320 110 240 L110 110 Z"
+                fill="rgba(26,77,58,0.3)" stroke="rgba(46,125,82,0.5)" stroke-width="1.5"/>
+          <path d="M135 110 L135 128 L200 128 L265 128 L265 110"
+                fill="none" stroke="rgba(46,125,82,0.5)" stroke-width="1.5"/>
+
+          <!-- Trunk -->
+          <rect x="196" y="290" width="8" height="55" rx="3" fill="rgba(255,255,255,0.3)"/>
+
+          <!-- Roots -->
+          <path d="M200 335 Q178 340 158 350" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M200 335 Q222 340 242 350" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M200 340 L200 355" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+          <!-- Branches -->
+          <path d="M200 260 Q170 240 148 215" stroke="rgba(255,255,255,0.35)" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M200 260 Q230 240 252 215" stroke="rgba(255,255,255,0.35)" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M200 245 Q175 228 158 200" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M200 245 Q225 228 242 200" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+          <!-- Gold leaves -->
+          <ellipse cx="148" cy="212" rx="20" ry="11" fill="#B8860B" opacity="0.85" transform="rotate(-28 148 212)"/>
+          <ellipse cx="252" cy="212" rx="20" ry="11" fill="#B8860B" opacity="0.85" transform="rotate(28 252 212)"/>
+          <ellipse cx="136" cy="195" rx="13" ry="7" fill="#D4A017" opacity="0.6" transform="rotate(-20 136 195)"/>
+          <ellipse cx="264" cy="195" rx="13" ry="7" fill="#D4A017" opacity="0.6" transform="rotate(20 264 195)"/>
+
+          <!-- Canopy -->
+          <ellipse cx="200" cy="185" rx="62" ry="48" fill="rgba(30,100,65,0.7)"/>
+          <ellipse cx="182" cy="175" rx="40" ry="32" fill="rgba(46,125,82,0.6)"/>
+          <ellipse cx="218" cy="175" rx="40" ry="32" fill="rgba(46,125,82,0.6)"/>
+          <ellipse cx="200" cy="162" rx="36" ry="34" fill="rgba(61,122,90,0.7)"/>
+          <ellipse cx="188" cy="154" rx="20" ry="16" fill="rgba(93,170,120,0.5)"/>
+          <ellipse cx="212" cy="154" rx="20" ry="16" fill="rgba(93,170,120,0.5)"/>
+
+          <!-- Decorative dots -->
+          <circle cx="148" cy="212" r="2" fill="#B8860B" opacity="0.9"/>
+          <circle cx="252" cy="212" r="2" fill="#B8860B" opacity="0.9"/>
+          <circle cx="200" cy="360" r="3" fill="rgba(184,134,11,0.3)"/>
+
+          <!-- Corner botanical accents -->
+          <path d="M30 80 Q50 60 70 75 Q55 90 30 80Z" fill="rgba(46,125,82,0.15)" stroke="rgba(46,125,82,0.2)" stroke-width="0.5"/>
+          <path d="M370 80 Q350 60 330 75 Q345 90 370 80Z" fill="rgba(46,125,82,0.15)" stroke="rgba(46,125,82,0.2)" stroke-width="0.5"/>
+          <path d="M30 420 Q50 440 70 425 Q55 410 30 420Z" fill="rgba(46,125,82,0.15)" stroke="rgba(46,125,82,0.2)" stroke-width="0.5"/>
+          <path d="M370 420 Q350 440 330 425 Q345 410 370 420Z" fill="rgba(46,125,82,0.15)" stroke="rgba(46,125,82,0.2)" stroke-width="0.5"/>
+        </svg>
+
+        <!-- Floating data points -->
+        <div class="data-point data-point-1 anim-3">
+          <span class="dp-val">5</span>
+          <span class="dp-label">Phase framework</span>
+        </div>
+        <div class="data-point data-point-2 anim-4">
+          <span class="dp-val">1</span>
+          <span class="dp-label">Dedicated partner</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- ── STAT STRIP ── -->
+  <div class="intro-strip">
+    <div class="intro-stat reveal">
+      <div class="num"><span data-count="5">0</span></div>
+      <div class="label">Phase growth framework</div>
+    </div>
+    <div class="intro-stat reveal">
+      <div class="num"><span data-count="2">0</span> <span class="unit">Now</span></div>
+      <div class="label">Phases available today</div>
+    </div>
+    <div class="intro-stat reveal">
+      <div class="num">BZ</div>
+      <div class="label">Rooted in Belize</div>
+    </div>
+  </div>
+
+  <!-- ── ABOUT TEASER ── -->
+  <div class="about-teaser">
+    <div class="about-leaf-art reveal">
+      <div class="leaf-ring">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Botanical leaf cluster illustration -->
+          <g opacity="0.9">
+            <ellipse cx="100" cy="70" rx="22" ry="38" fill="#1A4D3A" transform="rotate(-10 100 70)"/>
+            <ellipse cx="70" cy="90" rx="18" ry="32" fill="#2E7D52" transform="rotate(-35 70 90)"/>
+            <ellipse cx="130" cy="90" rx="18" ry="32" fill="#2E7D52" transform="rotate(35 130 90)"/>
+            <ellipse cx="55" cy="115" rx="15" ry="26" fill="#3D7A5A" transform="rotate(-50 55 115)"/>
+            <ellipse cx="145" cy="115" rx="15" ry="26" fill="#3D7A5A" transform="rotate(50 145 115)"/>
+            <!-- Gold accent leaves -->
+            <ellipse cx="72" cy="108" rx="12" ry="8" fill="#B8860B" opacity="0.8" transform="rotate(-30 72 108)"/>
+            <ellipse cx="128" cy="108" rx="12" ry="8" fill="#B8860B" opacity="0.8" transform="rotate(30 128 108)"/>
+            <!-- Stem -->
+            <path d="M100 140 L100 175" stroke="#2C3E35" stroke-width="3" stroke-linecap="round"/>
+            <path d="M100 175 Q82 180 68 185" stroke="#2C3E35" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M100 175 Q118 180 132 185" stroke="#2C3E35" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <!-- Leaf veins -->
+            <path d="M100 70 L100 110" stroke="rgba(255,255,255,0.15)" stroke-width="0.8" fill="none"/>
+            <path d="M100 80 L88 92" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" fill="none"/>
+            <path d="M100 80 L112 92" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" fill="none"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <div class="eyebrow"><div class="eyebrow-line"></div><span>Who We Are</span></div>
+      <h2 class="section-title" style="margin-bottom:20px;">A partner at every stage of your business journey.</h2>
+      <p>Canopy Consulting is a Belize-based business consulting firm built to give small and mid-sized businesses access to structured, strategic support that was once reserved for large corporations.</p>
+      <p>We do not just advise. We build alongside you — from your first business plan to a fully optimized, scalable operation.</p>
+      <div style="margin-top:28px;">
+        <a href="pages/about.html" class="btn btn-dark">Our Story</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── JOURNEY ── -->
+  <div class="journey-section">
+    <div class="journey-header">
+      <div>
+        <div class="eyebrow"><div class="eyebrow-line"></div><span>The Growth Journey</span></div>
+        <h2 class="section-title light" style="margin-bottom:0;">Every business grows through <em>five stages.</em></h2>
+      </div>
+      <p class="section-lead light">Enter the journey wherever you are. The framework meets you at your current stage and builds from there.</p>
+    </div>
+    <div class="phase-grid stagger-children">
+      <a href="pages/journey.html" class="phase-card available">
+        <div class="pc-num">01</div>
+        <div class="pc-icon">🌱</div>
+        <div class="pc-name">Foundation</div>
+        <p class="pc-desc">Business plans, financial projections, loan prep, market positioning.</p>
+        <span class="badge badge-gold">Available</span>
+      </a>
+      <a href="pages/journey.html" class="phase-card available">
+        <div class="pc-num">02</div>
+        <div class="pc-icon">🌿</div>
+        <div class="pc-name">Presence</div>
+        <p class="pc-desc">Website design, brand identity, lead capture, digital footprint.</p>
+        <span class="badge badge-gold">Available</span>
+      </a>
+      <a href="pages/journey.html" class="phase-card">
+        <div class="pc-num">03</div>
+        <div class="pc-icon">🌳</div>
+        <div class="pc-name">Systems</div>
+        <p class="pc-desc">CRM, workflow automation, SOP documentation, process design.</p>
+        <span class="badge badge-ghost">Coming Soon</span>
+      </a>
+      <a href="pages/journey.html" class="phase-card">
+        <div class="pc-num">04</div>
+        <div class="pc-icon">🌲</div>
+        <div class="pc-name">Optimization</div>
+        <p class="pc-desc">KPI dashboards, profitability analysis, cost reduction.</p>
+        <span class="badge badge-ghost">Coming Soon</span>
+      </a>
+      <a href="pages/journey.html" class="phase-card">
+        <div class="pc-num">05</div>
+        <div class="pc-icon">🌴</div>
+        <div class="pc-name">Scale</div>
+        <p class="pc-desc">AI integration, advanced automation, expansion strategy.</p>
+        <span class="badge badge-ghost">Coming Soon</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── WHY ── -->
+  <div class="why-section">
+    <div class="eyebrow"><div class="eyebrow-line"></div><span>Why Canopy</span></div>
+    <h2 class="section-title">Strategy. Systems. Results.</h2>
+    <div class="why-grid">
+      <div class="why-card reveal" data-num="01">
+        <div class="wc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <h3 class="wc-title">End-to-End Partnership</h3>
+        <p class="wc-text">Most consultants offer strategy or execution. We offer both — from your first plan to a fully scaled operation.</p>
+      </div>
+      <div class="why-card reveal" data-num="02">
+        <div class="wc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3 class="wc-title">Radical Transparency</h3>
+        <p class="wc-text">We build Canopy Consulting using our own five-phase framework and document it publicly. Buy into a process you can watch work.</p>
+      </div>
+      <div class="why-card reveal" data-num="03">
+        <div class="wc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h3 class="wc-title">Rooted in Belize</h3>
+        <p class="wc-text">We know the Belizean market — its opportunities, its culture, its challenges. We are here, building alongside you.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SERVICES ── -->
+  <div class="services-section">
+    <div class="services-header">
+      <div>
+        <div class="eyebrow"><div class="eyebrow-line"></div><span>Services</span></div>
+        <h2 class="section-title" style="margin-bottom:0;">Where are you in your journey?</h2>
+      </div>
+      <p class="section-lead">Phases 1 and 2 are available now. Phases 3 through 5 are coming — join the waitlist.</p>
+    </div>
+    <div class="sp-grid">
+      <div class="sp-card reveal">
+        <span class="sp-tag badge badge-gold">Available Now</span>
+        <div class="sp-phase">Phase 1 — Foundation</div>
+        <h3 class="sp-title">Launch & Foundation</h3>
+        <p class="sp-text">Build on solid ground from day one. Strategic and financial blueprint ready for lenders and investors.</p>
+        <ul class="sp-list">
+          <li>Loan-ready business plan</li>
+          <li>Financial projections</li>
+          <li>Market & competitive analysis</li>
+          <li>Pricing strategy</li>
+        </ul>
+        <a href="pages/services.html" class="btn btn-dark">Learn More</a>
+      </div>
+      <div class="sp-card reveal">
+        <span class="sp-tag badge badge-gold">Available Now</span>
+        <div class="sp-phase">Phase 2 — Presence</div>
+        <h3 class="sp-title">Brand & Presence</h3>
+        <p class="sp-text">A professional digital footprint designed to generate leads, not just look good.</p>
+        <ul class="sp-list">
+          <li>Website design & development</li>
+          <li>Brand identity & guidelines</li>
+          <li>Lead capture systems</li>
+          <li>Google Business setup</li>
+        </ul>
+        <a href="pages/services.html" class="btn btn-dark">Learn More</a>
+      </div>
+      <div class="sp-card dimmed reveal">
+        <span class="sp-tag badge badge-ghost">Coming Soon</span>
+        <div class="sp-phase">Phase 3 — Systems</div>
+        <h3 class="sp-title">Systems Setup</h3>
+        <p class="sp-text">CRM, automation, and SOPs that turn chaotic operations into repeatable, scalable systems.</p>
+        <ul class="sp-list">
+          <li>CRM selection & setup</li>
+          <li>Workflow automation</li>
+          <li>SOP documentation</li>
+          <li>Tech stack consolidation</li>
+        </ul>
+        <a href="pages/contact.html" class="btn btn-ghost-dark">Join Waitlist</a>
+      </div>
+      <div class="sp-card dimmed reveal">
+        <span class="sp-tag badge badge-ghost">Coming Soon</span>
+        <div class="sp-phase">Phases 4 & 5</div>
+        <h3 class="sp-title">Optimization & Scale</h3>
+        <p class="sp-text">KPI dashboards, profitability analysis, AI integration, and fractional COO advisory.</p>
+        <ul class="sp-list">
+          <li>KPI dashboards</li>
+          <li>Profitability analysis</li>
+          <li>AI tool integration</li>
+          <li>Fractional COO retainer</li>
+        </ul>
+        <a href="pages/contact.html" class="btn btn-ghost-dark">Join Waitlist</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BELIZE STRIP ── -->
+  <div class="belize-strip">
+    <div class="belize-text reveal">
+      <div class="eyebrow"><div class="eyebrow-line"></div><span>Rooted in Belize</span></div>
+      <h2><em>Sub Umbra Floreo.</em></h2>
+      <p>Under the shade, we flourish. The national motto of Belize — and the idea at the heart of everything Canopy Consulting does. We provide the structure and shelter that lets businesses grow.</p>
+      <a href="pages/about.html" class="btn btn-gold">Our Story</a>
+    </div>
+    <div class="belize-map-art reveal">
+      <!-- Stylized Belize map SVG -->
+      <svg width="280" height="340" viewBox="0 0 280 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Belize approximate outline -->
+        <path d="M140 20 L200 30 L220 60 L215 100 L230 130 L220 160 L230 190 L210 220 L200 260 L180 300 L160 320 L140 315 L120 300 L100 270 L90 240 L80 210 L70 180 L75 150 L65 120 L70 90 L85 60 L110 35 Z"
+              fill="rgba(46,125,82,0.15)" stroke="rgba(184,134,11,0.4)" stroke-width="1.5" stroke-linejoin="round"/>
+        <!-- Interior detail lines -->
+        <path d="M140 20 L140 315" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" fill="none"/>
+        <path d="M65 170 L215 170" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" fill="none"/>
+        <!-- District markers -->
+        <circle cx="140" cy="80" r="3" fill="rgba(184,134,11,0.5)"/>
+        <circle cx="160" cy="140" r="3" fill="rgba(184,134,11,0.5)"/>
+        <circle cx="120" cy="200" r="3" fill="rgba(184,134,11,0.5)"/>
+        <circle cx="150" cy="260" r="3" fill="rgba(184,134,11,0.5)"/>
+        <!-- Pulsing center dot (capital) -->
+        <circle cx="150" cy="170" r="6" fill="rgba(184,134,11,0.2)" stroke="var(--amber)" stroke-width="1"/>
+        <circle cx="150" cy="170" r="3" fill="var(--amber)" opacity="0.8"/>
+        <!-- Label -->
+        <text x="162" y="174" font-family="Space Grotesk, sans-serif" font-size="9" fill="rgba(255,255,255,0.4)" letter-spacing="1">BELIZE</text>
+        <!-- Outer decorative ring -->
+        <circle cx="140" cy="170" r="130" stroke="rgba(184,134,11,0.06)" stroke-width="1" stroke-dasharray="3 6"/>
+        <circle cx="140" cy="170" r="115" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ── CTA ── -->
+  <div class="cta-strip geo-pattern">
+    <h2>Ready to build something that lasts?</h2>
+    <div class="rule"></div>
+    <p>Start with a free 30-minute discovery call. No pressure — just clarity on where your business is and where it could be.</p>
+    <a href="pages/contact.html" class="btn btn-gold">Book Your Free Discovery Call</a>
+  </div>
+
+  <div id="footer-slot"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>
