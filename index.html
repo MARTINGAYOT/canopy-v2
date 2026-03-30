@@ -1,918 +1,645 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Canopy Consulting — Deep roots. Wide reach. Unstoppable growth.</title>
-  <link rel="stylesheet" href="css/main.css">
-  <style>
-    /* ── NAV: always has dark bg so logo is visible ── */
-    .nav {
-      background: rgba(8,20,14,0.85) !important;
-      backdrop-filter: blur(14px);
-    }
-
-    .nav-logo img {
-      height: 64px !important;
-    }
-
-    /* ── HERO: shorter, shows next section on load ── */
-    .hero {
-      min-height: 88vh;
-      background: var(--forest-deep);
-      display: grid;
-      grid-template-columns: 55fr 45fr;
-      align-items: center;
-      padding-top: var(--nav-h);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='140' height='140' viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.02)' stroke-width='0.8'%3E%3Cellipse cx='35' cy='25' rx='22' ry='11' transform='rotate(-35 35 25)'/%3E%3Cellipse cx='95' cy='18' rx='17' ry='9' transform='rotate(22 95 18)'/%3E%3Cellipse cx='20' cy='80' rx='19' ry='10' transform='rotate(-22 20 80)'/%3E%3Cellipse cx='105' cy='75' rx='24' ry='12' transform='rotate(18 105 75)'/%3E%3Cpath d='M35 25 Q45 50 40 75' stroke-width='0.5'/%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    /* Gradient break at bottom so next section peeks through */
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 120px;
-      background: linear-gradient(to bottom, transparent, rgba(8,20,14,0.6));
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .hero-left {
-      padding: 60px 48px 80px 80px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-tagline-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(184,134,11,0.12);
-      border: 1px solid rgba(184,134,11,0.25);
-      padding: 6px 16px;
-      margin-bottom: 28px;
-    }
-    .hero-tagline-pill span {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--amber);
-    }
-    .hero-tagline-pill::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--amber);
-      animation: pulse-amber 2s ease-in-out infinite;
-    }
-
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(38px, 4.5vw, 62px);
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.06;
-      margin-bottom: 24px;
-      letter-spacing: -0.5px;
-    }
-    .hero h1 em { font-style: italic; color: var(--amber-light); }
-
-    .hero-sub {
-      font-family: var(--font-serif);
-      font-size: 19px;
-      line-height: 1.78;
-      color: rgba(255,255,255,0.6);
-      max-width: 420px;
-      margin-bottom: 40px;
-    }
-
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-
-    /* ── SCROLL HINT ── */
-    .hero-scroll-hint {
-      position: absolute;
-      bottom: 28px; left: 80px;
-      display: flex; align-items: center; gap: 12px;
-      z-index: 3;
-    }
-    .hero-scroll-hint span {
-      font-size: 9px; font-weight: 600;
-      letter-spacing: 3px; text-transform: uppercase;
-      color: rgba(255,255,255,0.2);
-    }
-    .scroll-line {
-      width: 40px; height: 1px;
-      background: rgba(255,255,255,0.1);
-      position: relative; overflow: hidden;
-    }
-    .scroll-line::after {
-      content: '';
-      position: absolute; top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: var(--amber);
-      animation: slideRight 2.2s ease-in-out infinite;
-    }
-    @keyframes slideRight {
-      0%   { left: -100%; }
-      50%  { left: 100%; }
-      100% { left: 100%; }
-    }
-
-    /* ── HERO RIGHT: INTERACTIVE SHOWCASE ── */
-    .hero-right {
-      position: relative;
-      z-index: 2;
-      height: 88vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 80px 60px 80px 20px;
-    }
-
-    .showcase {
-      width: 100%;
-      max-width: 420px;
-      position: relative;
-    }
-
-    /* Tab switcher */
-    .showcase-tabs {
-      display: flex;
-      gap: 2px;
-      margin-bottom: 16px;
-    }
-
-    .showcase-tab {
-      flex: 1;
-      padding: 8px 0;
-      font-family: var(--font-sans);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      text-align: center;
-      color: rgba(255,255,255,0.3);
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-bottom: 2px solid transparent;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .showcase-tab.active {
-      color: var(--amber);
-      background: rgba(184,134,11,0.08);
-      border-color: rgba(184,134,11,0.2);
-      border-bottom-color: var(--amber);
-    }
-
-    .showcase-tab:hover:not(.active) {
-      color: rgba(255,255,255,0.6);
-      background: rgba(255,255,255,0.05);
-    }
-
-    /* Panel container */
-    .showcase-panels {
-      position: relative;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(8,20,14,0.6);
-      backdrop-filter: blur(8px);
-      overflow: hidden;
-    }
-
-    .showcase-panel {
-      display: none;
-      padding: 28px;
-      animation: panelFadeIn 0.4s ease;
-    }
-
-    .showcase-panel.active { display: block; }
-
-    @keyframes panelFadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Panel header */
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .panel-title {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--amber);
-    }
-
-    .panel-live {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 9px;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 1px;
-    }
-
-    .panel-live::before {
-      content: '';
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: #4CAF7D;
-      animation: pulse-amber 2s infinite;
-    }
-
-    /* ── PANEL 1: Journey progress ── */
-    .journey-phase-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .journey-phase-row:last-child { border-bottom: none; }
-
-    .jpr-num {
-      font-family: var(--font-sans);
-      font-size: 9px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.2);
-      width: 18px;
-      flex-shrink: 0;
-    }
-
-    .jpr-icon { font-size: 16px; flex-shrink: 0; }
-
-    .jpr-info { flex: 1; min-width: 0; }
-
-    .jpr-name {
-      font-size: 12px;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-
-    .jpr-bar {
-      height: 3px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-
-    .jpr-fill {
-      height: 100%;
-      border-radius: 2px;
-      transition: width 1.2s ease;
-    }
-
-    .jpr-fill.amber  { background: var(--amber); }
-    .jpr-fill.green  { background: #4CAF7D; }
-    .jpr-fill.dim    { background: rgba(255,255,255,0.1); }
-
-    .jpr-status {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .jpr-status.live   { color: #4CAF7D; }
-    .jpr-status.soon   { color: rgba(255,255,255,0.25); }
-
-    /* ── PANEL 2: Belize map ── */
-    .belize-panel-map {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 0;
-    }
-
-    .map-pin {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .map-pin-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--amber);
-      border: 2px solid rgba(184,134,11,0.3);
-      animation: pulse-amber 2.5s ease-in-out infinite;
-    }
-
-    .map-pin-label {
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-top: 4px;
-      white-space: nowrap;
-    }
-
-    .map-stat-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1px;
-      background: rgba(255,255,255,0.04);
-      margin-top: 16px;
-    }
-
-    .map-stat {
-      background: rgba(8,20,14,0.6);
-      padding: 12px;
-      text-align: center;
-    }
-
-    .map-stat .ms-val {
-      font-family: var(--font-display);
-      font-size: 22px;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1;
-    }
-
-    .map-stat .ms-label {
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      margin-top: 3px;
-    }
-
-    /* ── PANEL 3: What we do ── */
-    .service-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      cursor: default;
-      transition: background 0.2s;
-    }
-
-    .service-row:last-child { border-bottom: none; }
-
-    .service-row:hover { background: rgba(255,255,255,0.02); }
-
-    .sr-icon {
-      width: 32px; height: 32px;
-      background: rgba(184,134,11,0.1);
-      border: 1px solid rgba(184,134,11,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; flex-shrink: 0;
-      clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
-    }
-
-    .sr-name { font-size: 12px; font-weight: 600; color: #fff; margin-bottom: 3px; }
-    .sr-desc { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
-
-    /* ── PANEL 4: Why us ── */
-    .trust-metric {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: rgba(255,255,255,0.04);
-      margin-bottom: 16px;
-    }
-
-    .tm-cell {
-      background: rgba(8,20,14,0.6);
-      padding: 16px 14px;
-    }
-
-    .tm-val {
-      font-family: var(--font-display);
-      font-size: 28px;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .tm-val span { font-size: 16px; color: var(--amber); }
-
-    .tm-label {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-    }
-
-    .trust-quote {
-      border-left: 2px solid var(--amber);
-      padding: 12px 16px;
-      margin-bottom: 14px;
-      background: rgba(184,134,11,0.05);
-    }
-
-    .tq-text {
-      font-family: var(--font-serif);
-      font-size: 14px;
-      font-style: italic;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.6;
-      margin-bottom: 6px;
-    }
-
-    .tq-name {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--amber);
-    }
-
-    /* Auto-rotate progress bar */
-    .showcase-progress {
-      height: 2px;
-      background: rgba(255,255,255,0.04);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .showcase-progress-fill {
-      height: 100%;
-      background: var(--amber);
-      width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    /* Intro strip below hero */
-    .intro-strip {
-      background: var(--forest);
-      padding: 0 80px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .intro-strip::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.025)' stroke-width='0.5'%3E%3Crect x='5' y='5' width='50' height='50'/%3E%3Crect x='15' y='15' width='30' height='30'/%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    .intro-stat { padding: 44px 40px; border-right: 1px solid rgba(255,255,255,0.07); position: relative; }
-    .intro-stat:last-child { border-right: none; }
-    .intro-stat .num { font-family: var(--font-display); font-size: 48px; font-weight: 900; color: #fff; line-height: 1; margin-bottom: 4px; }
-    .intro-stat .num .unit { font-size: 22px; color: var(--amber); }
-    .intro-stat .label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
-
-    /* ── ABOUT TEASER ── */
-    .about-teaser {
-      padding: 96px 80px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      background: var(--offwhite);
-      position: relative;
-    }
-    .about-teaser::after {
-      content: '';
-      position: absolute; bottom: 0; right: 0;
-      width: 200px; height: 200px;
-      background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(26,77,58,0.06)' stroke-width='1'%3E%3Ccircle cx='100' cy='100' r='90'/%3E%3Ccircle cx='100' cy='100' r='70'/%3E%3Ccircle cx='100' cy='100' r='50'/%3E%3Ccircle cx='100' cy='100' r='30'/%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-    .about-leaf-art { position: relative; height: 360px; display: flex; align-items: center; justify-content: center; }
-    .leaf-ring {
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      border: 1px solid rgba(26,77,58,0.1);
-      display: flex; align-items: center; justify-content: center;
-      animation: leafSway 8s ease-in-out infinite;
-      position: relative;
-    }
-    .leaf-ring::before {
-      content: '';
-      position: absolute; inset: 20px;
-      border-radius: 50%;
-      border: 1px dashed rgba(184,134,11,0.18);
-    }
-    .leaf-ring svg { width: 180px; height: 180px; }
-    .about-text p { font-size: 15px; line-height: 1.9; color: var(--text-mid); margin-bottom: 16px; }
-    .about-text p:first-of-type { font-family: var(--font-serif); font-size: 19px; color: var(--text-dark); }
-
-    /* ── JOURNEY SECTION ── */
-    .journey-section {
-      background: var(--forest-deep);
-      padding: 96px 80px;
-      position: relative; overflow: hidden;
-    }
-    .journey-section::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(184,134,11,0.03)' stroke-width='0.5'%3E%3Crect x='10' y='10' width='60' height='60'/%3E%3Crect x='20' y='20' width='40' height='40'/%3E%3Cline x1='10' y1='10' x2='70' y2='70'/%3E%3Cline x1='70' y1='10' x2='10' y2='70'/%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-    .journey-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 56px; position: relative; z-index: 1; }
-    .phase-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; background: rgba(255,255,255,0.03); position: relative; z-index: 1; }
-    .phase-card { background: rgba(255,255,255,0.02); padding: 32px 22px; border-top: 2px solid rgba(255,255,255,0.05); transition: background 0.22s, border-color 0.22s; cursor: pointer; text-decoration: none; display: block; }
-    .phase-card:hover { background: rgba(255,255,255,0.05); border-top-color: var(--amber); }
-    .phase-card.available { border-top-color: var(--amber); }
-    .pc-num { font-family: var(--font-sans); font-size: 10px; font-weight: 700; letter-spacing: 3px; color: rgba(255,255,255,0.18); margin-bottom: 18px; }
-    .pc-icon { font-size: 26px; margin-bottom: 12px; }
-    .pc-name { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-    .pc-desc { font-size: 12px; line-height: 1.6; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
-
-    /* ── WHY ── */
-    .why-section { background: var(--cream); padding: 96px 80px; position: relative; overflow: hidden; }
-    .why-section::after {
-      content: '';
-      position: absolute; top: -60px; left: -60px;
-      width: 400px; height: 400px;
-      background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(26,77,58,0.04)' stroke-width='1'%3E%3Ccircle cx='200' cy='200' r='180'/%3E%3Ccircle cx='200' cy='200' r='140'/%3E%3Ccircle cx='200' cy='200' r='100'/%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(26,77,58,0.07); margin-top: 52px; position: relative; z-index: 1; }
-    .why-card { background: var(--cream); padding: 42px 32px; transition: background 0.2s; position: relative; overflow: hidden; }
-    .why-card::before { content: attr(data-num); position: absolute; top: 14px; right: 18px; font-family: var(--font-display); font-size: 68px; font-weight: 900; color: rgba(26,77,58,0.04); line-height: 1; pointer-events: none; }
-    .why-card:hover { background: #fff; }
-    .wc-icon { width: 40px; height: 40px; background: var(--forest); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px)); }
-    .wc-icon svg { width: 18px; height: 18px; }
-    .wc-title { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--forest); margin-bottom: 8px; }
-    .wc-text { font-size: 13px; line-height: 1.8; color: var(--text-mid); }
-
-    /* ── SERVICES ── */
-    .services-section { background: var(--offwhite); padding: 96px 80px; }
-    .services-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 52px; }
-    .sp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); }
-    .sp-card { background: var(--offwhite); padding: 40px 34px; position: relative; transition: background 0.2s; border-left: 3px solid transparent; }
-    .sp-card:hover { background: var(--light-green); border-left-color: var(--amber); }
-    .sp-card.dimmed { opacity: 0.6; }
-    .sp-phase { font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
-    .sp-title { font-family: var(--font-display); font-size: 21px; font-weight: 700; color: var(--forest); margin-bottom: 8px; }
-    .sp-text { font-size: 13px; line-height: 1.8; color: var(--text-mid); margin-bottom: 18px; }
-    .sp-list { margin-bottom: 24px; }
-    .sp-list li { font-size: 12px; color: var(--text-mid); padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
-    .sp-list li::before { content: '›'; color: var(--amber); font-weight: 700; font-size: 13px; flex-shrink: 0; }
-    .sp-tag { position: absolute; top: 18px; right: 18px; }
-
-    /* ── BELIZE STRIP ── */
-    .belize-strip { background: var(--forest); padding: 72px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; overflow: hidden; }
-    .belize-strip::before {
-      content: '';
-      position: absolute; right: -40px; top: -40px;
-      width: 360px; height: 360px;
-      background-image: url("data:image/svg+xml,%3Csvg width='360' height='360' viewBox='0 0 360 360' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'%3E%3Cpolygon points='180,20 340,260 20,260'/%3E%3Cpolygon points='180,60 300,240 60,240'/%3E%3Cpolygon points='180,100 260,220 100,220'/%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-    .belize-text h2 { font-family: var(--font-display); font-size: 36px; font-weight: 700; color: #fff; margin-bottom: 14px; }
-    .belize-text h2 em { font-style: italic; color: var(--amber-light); }
-    .belize-text p { font-family: var(--font-serif); font-size: 17px; line-height: 1.78; color: rgba(255,255,255,0.58); margin-bottom: 28px; }
-    .belize-map-art { display: flex; align-items: center; justify-content: center; position: relative; }
-    .belize-map-art svg { filter: drop-shadow(0 0 18px rgba(184,134,11,0.12)); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canopy Consulting — Deep roots. Wide reach. Unstoppable growth.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --f:#1A4D3A;--fd:#0D2E22;--fm:#2E7D52;
+  --a:#B8860B;--al:#D4A017;--ap:#FDF3DC;
+  --tl:#4CAF7D;--cr:#F7F4EE;--cl:#E8F2EC;
+  --w:#FFFFFF;--t1:#1C1A17;--t2:#4A5248;--t3:#7A8A7E;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Space Grotesk',sans-serif;background:var(--cr);color:var(--t1);overflow-x:hidden}
+.pd{font-family:'Playfair Display',serif}
+.eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow-line{width:24px;height:1px;background:var(--a);flex-shrink:0}
+.eyebrow span{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--a)}
+
+/* NAV */
+nav{background:rgba(8,20,14,0.92);padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(10px)}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-shield{width:28px;height:32px}
+.nav-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff;letter-spacing:0.3px}
+.nav-sub{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--a)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.55);cursor:pointer;transition:color 0.2s;border:none;background:none;text-decoration:none}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--a)!important;color:#fff!important;padding:8px 18px;font-size:10px!important;clip-path:polygon(0 0,calc(100% - 7px) 0,100% 7px,100% 100%,7px 100%,0 calc(100% - 7px))}
+.nav-cta:hover{background:var(--al)!important}
+
+/* HERO */
+.hero{background:var(--fd);min-height:92vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-geo{position:absolute;top:0;right:0;width:340px;height:340px;opacity:0.6;pointer-events:none}
+.hero-left{padding:80px 48px 80px 64px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(184,134,11,0.12);border:1px solid rgba(184,134,11,0.3);padding:6px 14px;margin-bottom:28px;width:fit-content}
+.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--a);animation:pls 2s ease-in-out infinite}
+@keyframes pls{0%,100%{opacity:0.5}50%{opacity:1}}
+.hero-pill span{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--a)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,4.5vw,58px);font-weight:900;color:#fff;line-height:1.08;margin-bottom:22px}
+.hero h1 em{font-style:italic;color:var(--al)}
+.hero-sub{font-size:16px;line-height:1.8;color:rgba(255,255,255,0.58);max-width:400px;margin-bottom:38px}
+.hero-acts{display:flex;gap:12px;flex-wrap:wrap}
+.btn-g{background:var(--a);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:13px 28px;border:none;cursor:pointer;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));transition:background 0.2s}
+.btn-g:hover{background:var(--al)}
+.btn-o{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.28);font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:12px 28px;cursor:pointer;transition:all 0.2s}
+.btn-o:hover{border-color:#fff;background:rgba(255,255,255,0.05)}
+.hero-scroll{display:flex;align-items:center;gap:10px;margin-top:48px}
+.hero-scroll span{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2)}
+.scroll-bar{width:36px;height:1px;background:rgba(255,255,255,0.08);position:relative;overflow:hidden}
+.scroll-bar::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--a);animation:sb 2.4s ease-in-out infinite}
+@keyframes sb{0%{left:-100%}50%{left:100%}100%{left:100%}}
+
+/* HERO RIGHT SHOWCASE */
+.hero-right{display:flex;align-items:center;justify-content:center;padding:60px 64px 60px 20px;position:relative;z-index:2}
+.showcase{width:100%;max-width:400px}
+.sc-tabs{display:flex;gap:2px;margin-bottom:12px}
+.sc-tab{flex:1;padding:7px 0;font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;color:rgba(255,255,255,0.28);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-bottom:2px solid transparent;cursor:pointer;transition:all 0.2s}
+.sc-tab.on{color:var(--a);background:rgba(184,134,11,0.08);border-color:rgba(184,134,11,0.2);border-bottom-color:var(--a)}
+.sc-tab:hover:not(.on){color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.04)}
+.sc-prog{height:2px;background:rgba(255,255,255,0.04);overflow:hidden}
+.sc-prog-f{height:100%;background:var(--a);width:0%;transition:width 0.08s linear}
+.sc-panels{border:1px solid rgba(255,255,255,0.08);background:rgba(8,20,14,0.55);backdrop-filter:blur(6px)}
+.sc-panel{display:none;padding:24px;animation:pfade 0.35s ease}
+.sc-panel.on{display:block}
+@keyframes pfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.ph-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--a)}
+.ph-live{display:flex;align-items:center;gap:5px;font-size:9px;color:rgba(255,255,255,0.28);letter-spacing:1px}
+.ph-live::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--tl);animation:pls 2s infinite}
+.jrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.jrow:last-child{border:none}
+.jn{font-size:9px;font-weight:700;color:rgba(255,255,255,0.18);width:16px;flex-shrink:0}
+.ji{font-size:14px;flex-shrink:0;width:20px}
+.jinfo{flex:1;min-width:0}
+.jname{font-size:12px;font-weight:600;color:#fff;margin-bottom:3px}
+.jbar{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
+.jfill{height:100%;border-radius:2px}
+.fa{background:var(--a)}.fg{background:var(--tl)}.fb{background:#5DCAA5}.fd2{background:rgba(255,255,255,0.1)}
+.jst{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;flex-shrink:0}
+.jst.live{color:var(--tl)}.jst.soon{color:rgba(255,255,255,0.22)}
+.map-wrap{display:flex;justify-content:center;padding:4px 0}
+.map-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,0.04);margin-top:12px}
+.ms{background:rgba(8,20,14,0.6);padding:10px;text-align:center}
+.ms-v{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#fff;line-height:1}
+.ms-l{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-top:2px}
+.srow{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.srow:last-child{border:none}
+.si{width:30px;height:30px;background:rgba(184,134,11,0.1);border:1px solid rgba(184,134,11,0.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px))}
+.si svg{width:14px;height:14px}
+.sname{font-size:12px;font-weight:600;color:#fff;margin-bottom:2px}
+.sdesc{font-size:11px;color:rgba(255,255,255,0.38);line-height:1.5}
+.tmet{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.04);margin-bottom:14px}
+.tc{background:rgba(8,20,14,0.6);padding:14px 12px}
+.tv{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#fff;line-height:1;margin-bottom:3px}
+.tv span{font-size:14px;color:var(--a)}
+.tl2{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.28)}
+.tq{border-left:2px solid var(--a);padding:10px 14px;background:rgba(184,134,11,0.05)}
+.tq-t{font-size:13px;font-style:italic;color:rgba(255,255,255,0.65);line-height:1.6;margin-bottom:5px;font-family:'Playfair Display',serif}
+.tq-n{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--a)}
+
+/* STAT STRIP */
+.stats{background:var(--f);display:grid;grid-template-columns:repeat(3,1fr)}
+.stat{padding:40px;border-right:1px solid rgba(255,255,255,0.06)}
+.stat:last-child{border:none}
+.stat-n{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;color:#fff;line-height:1;margin-bottom:4px}
+.stat-n em{font-style:normal;font-size:22px;color:var(--a)}
+.stat-l{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35)}
+
+/* DIVIDER */
+.divider{background:var(--ap);padding:28px 64px;display:flex;align-items:center;gap:20px;overflow:hidden}
+.divider-line{flex:1;height:1px;background:rgba(184,134,11,0.25)}
+.divider-text{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(184,134,11,0.6);white-space:nowrap}
+
+/* ABOUT */
+.about{background:var(--w);padding:90px 64px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.leaf-art{display:flex;align-items:center;justify-content:center}
+.leaf-ring{width:280px;height:280px;border-radius:50%;border:1px solid rgba(26,77,58,0.1);display:flex;align-items:center;justify-content:center;position:relative;animation:sway 8s ease-in-out infinite}
+.leaf-ring::before{content:'';position:absolute;inset:18px;border-radius:50%;border:1px dashed rgba(184,134,11,0.18)}
+@keyframes sway{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
+.about-text p{font-size:15px;line-height:1.9;color:var(--t2);margin-bottom:16px}
+.about-text p:first-of-type{font-size:18px;color:var(--t1);font-family:'Playfair Display',serif}
+.vals{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(26,77,58,0.07);margin-top:24px}
+.val{background:var(--w);padding:16px;transition:background 0.2s}
+.val:hover{background:var(--cl)}
+.val-n{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--a);margin-bottom:4px}
+.val-t{font-size:13px;font-weight:600;color:var(--f)}
+.val-d{font-size:12px;color:var(--t3);line-height:1.6;margin-top:3px}
+
+/* JOURNEY */
+.journey{background:var(--fd);padding:90px 64px;position:relative;overflow:hidden}
+.jgeo{position:absolute;bottom:0;right:0;width:300px;height:300px;opacity:0.4;pointer-events:none}
+.journey h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;color:#fff;margin-bottom:8px}
+.journey h2 em{font-style:italic;color:var(--al)}
+.journey-lead{font-size:16px;color:rgba(255,255,255,0.5);max-width:520px;margin-bottom:52px}
+.phases{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:rgba(255,255,255,0.03);position:relative;z-index:1}
+.phase{background:rgba(255,255,255,0.02);padding:28px 20px;border-top:2px solid rgba(255,255,255,0.05);cursor:pointer;transition:background 0.22s,border-color 0.22s;overflow:hidden}
+.phase:hover,.phase.sel{background:rgba(255,255,255,0.06);border-top-color:var(--a)}
+.phase.avail{border-top-color:var(--a)}
+.p-num{font-size:9px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,0.15);margin-bottom:14px}
+.p-icon{font-size:22px;margin-bottom:10px;display:block}
+.p-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:7px}
+.p-desc{font-size:11px;line-height:1.6;color:rgba(255,255,255,0.38);margin-bottom:14px}
+.p-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06)}
+.phase.sel .p-detail{display:block}
+.p-detail li{font-size:11px;color:rgba(255,255,255,0.5);padding:3px 0;display:flex;align-items:center;gap:7px}
+.p-detail li::before{content:'';width:4px;height:1px;background:var(--a);flex-shrink:0}
+.badge{display:inline-block;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 9px}
+.bg{background:var(--a);color:#fff}
+.bs{background:transparent;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.12)}
+
+/* WHY */
+.why{background:var(--cr);padding:90px 64px;position:relative;overflow:hidden}
+.why-geo{position:absolute;top:-60px;left:-60px;width:380px;height:380px;pointer-events:none;opacity:0.5}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(26,77,58,0.08);margin-top:48px;position:relative;z-index:1}
+.wcard{background:var(--cr);padding:38px 30px;transition:background 0.2s;position:relative;overflow:hidden}
+.wcard::before{content:attr(data-n);position:absolute;top:10px;right:14px;font-family:'Playfair Display',serif;font-size:64px;font-weight:900;color:rgba(26,77,58,0.04);line-height:1;pointer-events:none}
+.wcard:hover{background:var(--w)}
+.wc-ico{width:38px;height:38px;background:var(--f);display:flex;align-items:center;justify-content:center;margin-bottom:16px;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px))}
+.wc-ico svg{width:18px;height:18px}
+.wc-t{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--f);margin-bottom:8px}
+.wc-d{font-size:13px;line-height:1.8;color:var(--t2)}
+
+/* BELIZE */
+.belize{background:var(--f);padding:72px 64px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;position:relative;overflow:hidden}
+.belize-geo{position:absolute;right:-50px;top:-50px;width:340px;height:340px;pointer-events:none}
+.belize h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:#fff;margin-bottom:14px}
+.belize h2 em{font-style:italic;color:var(--al)}
+.belize p{font-size:16px;line-height:1.78;color:rgba(255,255,255,0.55);margin-bottom:28px;font-family:'Playfair Display',serif}
+.motto{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:8px}
+.belize-map{display:flex;align-items:center;justify-content:center}
+
+/* SERVICES */
+.services{background:var(--w);padding:90px 64px}
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(26,77,58,0.07);margin-top:52px}
+.sc{background:var(--w);padding:38px 32px;position:relative;transition:background 0.2s;border-left:3px solid transparent}
+.sc:hover{background:var(--cl);border-left-color:var(--a)}
+.sc.dim{opacity:0.58}
+.sc-ph{font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--a);margin-bottom:10px}
+.sc-t{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--f);margin-bottom:8px}
+.sc-d{font-size:13px;line-height:1.8;color:var(--t2);margin-bottom:16px}
+.sc-list{margin-bottom:22px}
+.sc-list li{font-size:12px;color:var(--t2);padding:5px 0;border-bottom:1px solid rgba(26,77,58,0.08);display:flex;align-items:center;gap:8px}
+.sc-list li::before{content:'›';color:var(--a);font-weight:700;font-size:13px;flex-shrink:0}
+.sc-tag{position:absolute;top:16px;right:16px}
+.btn-d{background:var(--f);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:11px 24px;border:none;cursor:pointer;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:background 0.2s}
+.btn-d:hover{background:var(--fm)}
+.btn-gh{background:transparent;color:var(--f);border:1px solid var(--f);font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:10px 24px;cursor:pointer;transition:all 0.2s}
+.btn-gh:hover{background:var(--cl)}
+
+/* CONTACT */
+.contact{background:var(--fd);padding:80px 64px;display:grid;grid-template-columns:1fr 1fr;gap:64px;position:relative;overflow:hidden}
+.contact-geo{position:absolute;top:-60px;right:-60px;width:320px;height:320px;pointer-events:none;opacity:0.5}
+.contact h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,40px);font-weight:700;color:#fff;margin-bottom:12px}
+.contact h2 em{font-style:italic;color:var(--al)}
+.contact-sub{font-size:15px;line-height:1.8;color:rgba(255,255,255,0.5);margin-bottom:32px}
+.cd{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px}
+.cd-ico{width:32px;height:32px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px))}
+.cd-ico svg{width:13px;height:13px}
+.cd-l{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--a);margin-bottom:2px}
+.cd-v{font-size:13px;color:rgba(255,255,255,0.55)}
+.form-g{margin-bottom:14px}
+.form-g label{display:block;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:6px}
+.form-g input,.form-g select,.form-g textarea{width:100%;padding:11px 14px;font-family:'Space Grotesk',sans-serif;font-size:13px;color:#fff;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);outline:none;transition:border-color 0.2s;border-radius:0;appearance:none;-webkit-appearance:none}
+.form-g input:focus,.form-g select:focus,.form-g textarea:focus{border-color:rgba(184,134,11,0.5)}
+.form-g input::placeholder,.form-g textarea::placeholder{color:rgba(255,255,255,0.2)}
+.form-g select option{background:var(--fd);color:#fff}
+.form-g textarea{resize:vertical;min-height:90px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-note{font-size:11px;color:rgba(255,255,255,0.25);margin-top:8px}
+.contact-motto{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:rgba(255,255,255,0.18);margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05)}
+
+/* FOOTER */
+footer{background:#060E0A;padding:40px 64px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.foot-l{font-size:11px;color:rgba(255,255,255,0.2)}
+.foot-r{font-family:'Playfair Display',serif;font-size:12px;font-style:italic;color:rgba(255,255,255,0.18)}
+.foot-links{display:flex;gap:20px}
+.foot-links a{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.2);cursor:pointer;transition:color 0.2s;border:none;background:none;text-decoration:none}
+.foot-links a:hover{color:rgba(255,255,255,0.6)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 24px}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-right{display:none}
+  .hero-left{padding:100px 28px 60px}
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06);padding:28px 28px}
+  .about,.belize,.contact{grid-template-columns:1fr;padding:60px 28px;gap:40px}
+  .leaf-art{display:none}
+  .journey,.why,.services{padding:60px 28px}
+  .phases{grid-template-columns:1fr 1fr;gap:2px}
+  .why-grid,.svc-grid{grid-template-columns:1fr}
+  .divider{padding:20px 28px}
+  footer{padding:32px 28px;flex-direction:column;align-items:flex-start;gap:12px}
+}
+</style>
 </head>
 <body>
-  <div id="nav-slot"></div>
 
-  <!-- ── HERO ── -->
-  <section class="hero">
-    <div class="hero-left">
-      <div class="hero-tagline-pill anim-1">
-        <span>Business Consulting · Belize</span>
-      </div>
-      <h1 class="anim-2">From <em>chaos</em> to a business built to last.</h1>
-      <p class="hero-sub anim-3">We partner with small and mid-sized businesses to build the foundations, systems, and strategies they need to grow with confidence — not chaos.</p>
-      <div class="hero-actions anim-4">
-        <a href="pages/contact.html" class="btn btn-gold">Book a Discovery Call</a>
-        <a href="pages/journey.html" class="btn btn-outline-light">See the Journey</a>
-      </div>
+<nav>
+  <div class="nav-brand">
+    <svg class="nav-shield" viewBox="0 0 80 90" fill="none">
+      <path d="M40 4L74 14L74 58Q74 80 40 90Q6 80 6 58L6 14Z" fill="none" stroke="#2E7D52" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M18 14L18 24L40 24L62 24L62 14" fill="none" stroke="#2E7D52" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="37" y="60" width="6" height="20" rx="2" fill="rgba(255,255,255,0.4)"/>
+      <path d="M40 74Q31 77 23 81" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M40 74Q49 77 57 81" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <ellipse cx="27" cy="49" rx="9" ry="5" fill="#B8860B" transform="rotate(-28 27 49)"/>
+      <ellipse cx="53" cy="49" rx="9" ry="5" fill="#B8860B" transform="rotate(28 53 49)"/>
+      <ellipse cx="40" cy="34" rx="22" ry="17" fill="#1A4D3A"/>
+      <ellipse cx="31" cy="29" rx="14" ry="11" fill="#2E7D52"/>
+      <ellipse cx="49" cy="29" rx="14" ry="11" fill="#2E7D52"/>
+      <ellipse cx="40" cy="23" rx="12" ry="12" fill="#3D7A5A"/>
+    </svg>
+    <div><div class="nav-name">Canopy Consulting</div><div class="nav-sub">Belize</div></div>
+  </div>
+  <div class="nav-links">
+    <a onclick="scroll2('about')">About</a>
+    <a onclick="scroll2('journey')">The Journey</a>
+    <a onclick="scroll2('services')">Services</a>
+    <a onclick="scroll2('contact')" class="nav-cta">Book a Call</a>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <svg class="hero-geo" viewBox="0 0 340 340" fill="none">
+    <rect x="20" y="20" width="300" height="300" stroke="rgba(184,134,11,0.09)" stroke-width="0.8"/>
+    <rect x="50" y="50" width="240" height="240" stroke="rgba(184,134,11,0.07)" stroke-width="0.8"/>
+    <rect x="80" y="80" width="180" height="180" stroke="rgba(184,134,11,0.06)" stroke-width="0.8"/>
+    <rect x="110" y="110" width="120" height="120" stroke="rgba(184,134,11,0.05)" stroke-width="0.8"/>
+    <line x1="20" y1="20" x2="320" y2="320" stroke="rgba(184,134,11,0.04)" stroke-width="0.6" fill="none"/>
+    <line x1="320" y1="20" x2="20" y2="320" stroke="rgba(184,134,11,0.04)" stroke-width="0.6" fill="none"/>
+    <circle cx="170" cy="170" r="60" stroke="rgba(184,134,11,0.05)" stroke-width="0.8" stroke-dasharray="4 6" fill="none"/>
+    <circle cx="170" cy="170" r="100" stroke="rgba(184,134,11,0.04)" stroke-width="0.8" stroke-dasharray="2 8" fill="none"/>
+  </svg>
+  <div class="hero-left">
+    <div class="hero-pill"><div class="hero-pill-dot"></div><span>Business Consulting · Belize</span></div>
+    <h1>From <em>chaos</em> to a business built to last.</h1>
+    <p class="hero-sub">We partner with small and mid-sized businesses to build the foundations, systems, and strategies they need to grow with confidence — not chaos.</p>
+    <div class="hero-acts">
+      <button class="btn-g" onclick="scroll2('contact')">Book a Discovery Call</button>
+      <button class="btn-o" onclick="scroll2('journey')">See the Journey</button>
     </div>
-
-    <div class="hero-right">
-      <div class="showcase anim-3">
-        <!-- Tab switcher -->
-        <div class="showcase-tabs">
-          <div class="showcase-tab active" onclick="switchTab(0)">Journey</div>
-          <div class="showcase-tab" onclick="switchTab(1)">Belize</div>
-          <div class="showcase-tab" onclick="switchTab(2)">Services</div>
-          <div class="showcase-tab" onclick="switchTab(3)">Why Us</div>
+    <div class="hero-scroll"><div class="scroll-bar"></div><span>Scroll to explore</span></div>
+  </div>
+  <div class="hero-right">
+    <div class="showcase">
+      <div class="sc-tabs">
+        <div class="sc-tab on" onclick="tab(0)">Journey</div>
+        <div class="sc-tab" onclick="tab(1)">Belize</div>
+        <div class="sc-tab" onclick="tab(2)">Services</div>
+        <div class="sc-tab" onclick="tab(3)">Why Us</div>
+      </div>
+      <div class="sc-prog"><div class="sc-prog-f" id="pf"></div></div>
+      <div class="sc-panels">
+        <div class="sc-panel on" id="p0">
+          <div class="ph"><div class="ph-title">The Growth Journey</div><div class="ph-live">Live framework</div></div>
+          <div class="jrow"><div class="jn">01</div><div class="ji">🌱</div><div class="jinfo"><div class="jname">Foundation</div><div class="jbar"><div class="jfill fa" style="width:100%"></div></div></div><div class="jst live">Live</div></div>
+          <div class="jrow"><div class="jn">02</div><div class="ji">🌿</div><div class="jinfo"><div class="jname">Presence</div><div class="jbar"><div class="jfill fg" style="width:80%"></div></div></div><div class="jst live">Live</div></div>
+          <div class="jrow"><div class="jn">03</div><div class="ji">🌳</div><div class="jinfo"><div class="jname">Systems</div><div class="jbar"><div class="jfill fb" style="width:55%"></div></div></div><div class="jst live">Live</div></div>
+          <div class="jrow"><div class="jn">04</div><div class="ji">🌲</div><div class="jinfo"><div class="jname">Optimization</div><div class="jbar"><div class="jfill fd2" style="width:0%"></div></div></div><div class="jst soon">Soon</div></div>
+          <div class="jrow"><div class="jn">05</div><div class="ji">🌴</div><div class="jinfo"><div class="jname">Scale</div><div class="jbar"><div class="jfill fd2" style="width:0%"></div></div></div><div class="jst soon">Soon</div></div>
         </div>
-
-        <!-- Auto-rotate progress bar -->
-        <div class="showcase-progress"><div class="showcase-progress-fill" id="progressFill"></div></div>
-
-        <div class="showcase-panels">
-
-          <!-- Panel 1: Growth Journey -->
-          <div class="showcase-panel active" id="panel-0">
-            <div class="panel-header">
-              <div class="panel-title">The Growth Journey</div>
-              <div class="panel-live">Live framework</div>
-            </div>
-            <div class="journey-phase-row">
-              <div class="jpr-num">01</div>
-              <div class="jpr-icon">🌱</div>
-              <div class="jpr-info">
-                <div class="jpr-name">Foundation</div>
-                <div class="jpr-bar"><div class="jpr-fill amber" style="width:100%"></div></div>
-              </div>
-              <div class="jpr-status live">Live</div>
-            </div>
-            <div class="journey-phase-row">
-              <div class="jpr-num">02</div>
-              <div class="jpr-icon">🌿</div>
-              <div class="jpr-info">
-                <div class="jpr-name">Presence</div>
-                <div class="jpr-bar"><div class="jpr-fill green" style="width:75%"></div></div>
-              </div>
-              <div class="jpr-status live">Live</div>
-            </div>
-            <div class="journey-phase-row">
-              <div class="jpr-num">03</div>
-              <div class="jpr-icon">🌳</div>
-              <div class="jpr-info">
-                <div class="jpr-name">Systems</div>
-                <div class="jpr-bar"><div class="jpr-fill dim" style="width:20%"></div></div>
-              </div>
-              <div class="jpr-status soon">Soon</div>
-            </div>
-            <div class="journey-phase-row">
-              <div class="jpr-num">04</div>
-              <div class="jpr-icon">🌲</div>
-              <div class="jpr-info">
-                <div class="jpr-name">Optimization</div>
-                <div class="jpr-bar"><div class="jpr-fill dim" style="width:0%"></div></div>
-              </div>
-              <div class="jpr-status soon">Soon</div>
-            </div>
-            <div class="journey-phase-row">
-              <div class="jpr-num">05</div>
-              <div class="jpr-icon">🌴</div>
-              <div class="jpr-info">
-                <div class="jpr-name">Scale</div>
-                <div class="jpr-bar"><div class="jpr-fill dim" style="width:0%"></div></div>
-              </div>
-              <div class="jpr-status soon">Soon</div>
-            </div>
+        <div class="sc-panel" id="p1">
+          <div class="ph"><div class="ph-title">Rooted in Belize</div><div class="ph-live">Sub Umbra Floreo</div></div>
+          <div class="map-wrap">
+            <svg width="140" height="200" viewBox="0 0 140 210" fill="none">
+              <path d="M38 8 L42 6 L48 8 L52 6 L56 10 L60 8 L64 12 L80 14 L84 18 L80 22 L84 26 L80 28 L82 34 L78 36 L80 40 L76 42 L78 50 L74 54 L76 60 L78 66 L74 70 L76 76 L74 82 L72 88 L74 96 L70 102 L72 110 L68 116 L70 124 L66 130 L68 138 L64 144 L62 152 L58 158 L56 166 L52 172 L48 178 L44 184 L40 190 L36 196 L32 200 L28 196 L26 188 L28 180 L26 172 L28 164 L26 156 L28 148 L26 140 L28 132 L26 124 L28 116 L26 108 L28 100 L26 92 L28 84 L26 76 L28 68 L26 60 L28 52 L26 44 L28 36 L30 28 L28 20 L32 14 L38 8 Z" fill="rgba(46,125,82,0.25)" stroke="rgba(184,134,11,0.55)" stroke-width="1.2" stroke-linejoin="round"/>
+              <ellipse cx="92" cy="20" rx="5" ry="3" fill="rgba(46,125,82,0.2)" stroke="rgba(184,134,11,0.35)" stroke-width="0.8"/>
+              <ellipse cx="98" cy="32" rx="4" ry="2.5" fill="rgba(46,125,82,0.18)" stroke="rgba(184,134,11,0.3)" stroke-width="0.7"/>
+              <ellipse cx="93" cy="44" rx="3" ry="1.8" fill="rgba(46,125,82,0.15)" stroke="rgba(184,134,11,0.25)" stroke-width="0.6"/>
+              <circle cx="68" cy="62" r="2.5" fill="rgba(184,134,11,0.5)" stroke="#B8860B" stroke-width="1"/>
+              <text x="72" y="66" font-family="Space Grotesk,sans-serif" font-size="7" fill="rgba(255,255,255,0.4)">Belize City</text>
+              <circle cx="52" cy="108" r="5" fill="rgba(184,134,11,0.15)" stroke="#B8860B" stroke-width="1.2"/>
+              <circle cx="52" cy="108" r="2.5" fill="#B8860B" opacity="0.9"/>
+              <text x="58" y="112" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="rgba(255,255,255,0.55)">Belmopan</text>
+              <circle cx="42" cy="42" r="2" fill="rgba(184,134,11,0.45)" stroke="#B8860B" stroke-width="0.8"/>
+              <text x="16" y="42" font-family="Space Grotesk,sans-serif" font-size="7" fill="rgba(255,255,255,0.35)">O.Walk</text>
+              <circle cx="38" cy="165" r="2" fill="rgba(184,134,11,0.45)" stroke="#B8860B" stroke-width="0.8"/>
+              <text x="10" y="169" font-family="Space Grotesk,sans-serif" font-size="7" fill="rgba(255,255,255,0.35)">Placencia</text>
+              <circle cx="52" cy="104" r="90" stroke="rgba(184,134,11,0.04)" stroke-width="1" stroke-dasharray="3 6" fill="none"/>
+            </svg>
           </div>
-
-          <!-- Panel 2: Belize -->
-          <div class="showcase-panel" id="panel-1">
-            <div class="panel-header">
-              <div class="panel-title">Rooted in Belize</div>
-              <div class="panel-live">Sub Umbra Floreo</div>
-            </div>
-            <div class="belize-panel-map">
-              <svg width="220" height="260" viewBox="0 0 220 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M110 16 L164 28 L172 55 L168 88 L178 112 L170 138 L178 162 L162 190 L154 220 L136 242 L110 248 L84 238 L68 212 L58 186 L50 160 L52 132 L44 106 L48 78 L60 52 L84 30 Z"
-                      fill="rgba(46,125,82,0.12)" stroke="rgba(184,134,11,0.35)" stroke-width="1.2" stroke-linejoin="round"/>
-                <path d="M110 16 L110 248" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
-                <path d="M44 132 L178 132" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
-                <!-- Districts outline -->
-                <path d="M110 16 L164 28 L172 55 L110 55 Z" fill="rgba(46,125,82,0.08)"/>
-                <path d="M110 55 L172 55 L168 88 L110 88 Z" fill="rgba(46,125,82,0.06)"/>
-                <!-- City pins -->
-                <circle cx="120" cy="44" r="3" fill="rgba(184,134,11,0.4)" stroke="var(--amber)" stroke-width="1"/>
-                <text x="128" y="47" font-family="Space Grotesk" font-size="7" fill="rgba(255,255,255,0.35)">Orange Walk</text>
-                <circle cx="128" cy="80" r="3" fill="rgba(184,134,11,0.4)" stroke="var(--amber)" stroke-width="1"/>
-                <text x="136" y="83" font-family="Space Grotesk" font-size="7" fill="rgba(255,255,255,0.35)">Corozal</text>
-                <circle cx="118" cy="132" r="5" fill="rgba(184,134,11,0.2)" stroke="var(--amber)" stroke-width="1.5"/>
-                <circle cx="118" cy="132" r="2" fill="var(--amber)"/>
-                <text x="128" y="136" font-family="Space Grotesk" font-size="7" font-weight="700" fill="rgba(255,255,255,0.5)">Belmopan</text>
-                <circle cx="148" cy="108" r="3" fill="rgba(184,134,11,0.3)" stroke="var(--amber)" stroke-width="1"/>
-                <text x="156" y="111" font-family="Space Grotesk" font-size="7" fill="rgba(255,255,255,0.35)">Belize City</text>
-                <circle cx="96" cy="192" r="3" fill="rgba(184,134,11,0.3)" stroke="var(--amber)" stroke-width="1"/>
-                <text x="64" y="192" font-family="Space Grotesk" font-size="7" fill="rgba(255,255,255,0.35)">Placencia</text>
-                <circle cx="80" cy="218" r="3" fill="rgba(184,134,11,0.3)" stroke="var(--amber)" stroke-width="1"/>
-                <text x="48" y="218" font-family="Space Grotesk" font-size="7" fill="rgba(255,255,255,0.35)">PG</text>
-                <!-- Outer ring -->
-                <circle cx="110" cy="132" r="105" stroke="rgba(184,134,11,0.05)" stroke-width="1" stroke-dasharray="3 6"/>
-              </svg>
-            </div>
-            <div class="map-stat-row">
-              <div class="map-stat"><div class="ms-val" data-count="6">0</div><div class="ms-label">Districts</div></div>
-              <div class="map-stat"><div class="ms-val" data-count="400">0</div><div class="ms-label">K+ Pop.</div></div>
-              <div class="map-stat"><div class="ms-val">BZ</div><div class="ms-label">Market</div></div>
-            </div>
+          <div class="map-stats">
+            <div class="ms"><div class="ms-v">6</div><div class="ms-l">Districts</div></div>
+            <div class="ms"><div class="ms-v">400K</div><div class="ms-l">Population</div></div>
+            <div class="ms"><div class="ms-v">BZ</div><div class="ms-l">Market</div></div>
           </div>
-
-          <!-- Panel 3: Services snapshot -->
-          <div class="showcase-panel" id="panel-2">
-            <div class="panel-header">
-              <div class="panel-title">What We Do</div>
-              <div class="panel-live">2 phases active</div>
-            </div>
-            <div class="service-row">
-              <div class="sr-icon">📋</div>
-              <div><div class="sr-name">Business Plans & Audit</div><div class="sr-desc">Loan-ready plans, financial projections, market analysis</div></div>
-            </div>
-            <div class="service-row">
-              <div class="sr-icon">🌐</div>
-              <div><div class="sr-name">Brand & Website</div><div class="sr-desc">Identity, websites designed to generate leads</div></div>
-            </div>
-            <div class="service-row" style="opacity:0.45;">
-              <div class="sr-icon">⚙️</div>
-              <div><div class="sr-name">Systems & Automation</div><div class="sr-desc">CRM, workflows, SOPs — coming soon</div></div>
-            </div>
-            <div class="service-row" style="opacity:0.45;">
-              <div class="sr-icon">📈</div>
-              <div><div class="sr-name">Optimization & Scale</div><div class="sr-desc">KPIs, AI integration, fractional COO — coming soon</div></div>
-            </div>
+        </div>
+        <div class="sc-panel" id="p2">
+          <div class="ph"><div class="ph-title">What We Do</div><div class="ph-live">3 phases active</div></div>
+          <div class="srow"><div class="si"><svg viewBox="0 0 16 16" fill="none" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="12" height="12" rx="1"/><line x1="5" y1="6" x2="11" y2="6"/><line x1="5" y1="9" x2="9" y2="9"/></svg></div><div><div class="sname">Business Plans & Audit</div><div class="sdesc">Loan-ready plans, financials, market analysis</div></div></div>
+          <div class="srow"><div class="si"><svg viewBox="0 0 16 16" fill="none" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><line x1="8" y1="2" x2="8" y2="4"/><line x1="14" y1="8" x2="12" y2="8"/></svg></div><div><div class="sname">Brand & Website</div><div class="sdesc">Identity, lead-generating websites</div></div></div>
+          <div class="srow"><div class="si"><svg viewBox="0 0 16 16" fill="none" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2"/></svg></div><div><div class="sname">Systems & Automation</div><div class="sdesc">CRM, workflows, SOPs — available now</div></div></div>
+          <div class="srow" style="opacity:0.38"><div class="si"><svg viewBox="0 0 16 16" fill="none" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round"><polyline points="2,12 6,7 9,10 14,4"/></svg></div><div><div class="sname">Optimization & Scale</div><div class="sdesc">KPIs, AI integration — coming soon</div></div></div>
+        </div>
+        <div class="sc-panel" id="p3">
+          <div class="ph"><div class="ph-title">Why Canopy</div><div class="ph-live">Belize-based</div></div>
+          <div class="tmet">
+            <div class="tc"><div class="tv">5<span>+</span></div><div class="tl2">Phase framework</div></div>
+            <div class="tc"><div class="tv">100<span>%</span></div><div class="tl2">Remote delivery</div></div>
+            <div class="tc"><div class="tv">1<span>:</span>1</div><div class="tl2">Founder-led</div></div>
+            <div class="tc"><div class="tv">BZ</div><div class="tl2">Local roots</div></div>
           </div>
-
-          <!-- Panel 4: Why us / trust signals -->
-          <div class="showcase-panel" id="panel-3">
-            <div class="panel-header">
-              <div class="panel-title">Why Canopy</div>
-              <div class="panel-live">Belize-based</div>
-            </div>
-            <div class="trust-metric">
-              <div class="tm-cell"><div class="tm-val">5<span>+</span></div><div class="tm-label">Phase framework</div></div>
-              <div class="tm-cell"><div class="tm-val">100<span>%</span></div><div class="tm-label">Remote delivery</div></div>
-              <div class="tm-cell"><div class="tm-val">1<span>:</span>1</div><div class="tm-label">Founder-led</div></div>
-              <div class="tm-cell"><div class="tm-val">BZ</div><div class="tm-label">Local roots</div></div>
-            </div>
-            <div class="trust-quote">
-              <div class="tq-text">"We build our own business on the same framework we sell — and document every step publicly."</div>
-              <div class="tq-name">Martin Gayot · Founder, Canopy Consulting</div>
-            </div>
+          <div class="tq">
+            <div class="tq-t">"We build Canopy Consulting on the same framework we sell. You buy into a process you can watch work."</div>
+            <div class="tq-n">Martin Gayot · Founder</div>
           </div>
-
-        </div><!-- end panels -->
-      </div><!-- end showcase -->
-    </div>
-
-  
-
-  <!-- ── STAT STRIP ── -->
-  <div class="intro-strip">
-    <div class="intro-stat reveal"><div class="num"><span data-count="5">5</span></div><div class="label">Phase growth framework</div></div>
-    <div class="intro-stat reveal"><div class="num"><span data-count="2">2</span> <span class="unit">Now</span></div><div class="label">Phases available today</div></div>
-    <div class="intro-stat reveal"><div class="num">BZ</div><div class="label">Rooted in Belize</div></div>
-  </div>
-
-  <!-- ── ABOUT TEASER ── -->
-  <div class="about-teaser">
-    <div class="about-leaf-art reveal">
-      <div class="leaf-ring">
-        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="100" cy="70" rx="22" ry="38" fill="#1A4D3A" transform="rotate(-10 100 70)"/>
-          <ellipse cx="70" cy="90" rx="18" ry="32" fill="#2E7D52" transform="rotate(-35 70 90)"/>
-          <ellipse cx="130" cy="90" rx="18" ry="32" fill="#2E7D52" transform="rotate(35 130 90)"/>
-          <ellipse cx="55" cy="115" rx="15" ry="26" fill="#3D7A5A" transform="rotate(-50 55 115)"/>
-          <ellipse cx="145" cy="115" rx="15" ry="26" fill="#3D7A5A" transform="rotate(50 145 115)"/>
-          <ellipse cx="72" cy="108" rx="12" ry="8" fill="#B8860B" opacity="0.8" transform="rotate(-30 72 108)"/>
-          <ellipse cx="128" cy="108" rx="12" ry="8" fill="#B8860B" opacity="0.8" transform="rotate(30 128 108)"/>
-          <path d="M100 140 L100 175" stroke="#2C3E35" stroke-width="3" stroke-linecap="round"/>
-          <path d="M100 175 Q82 180 68 185" stroke="#2C3E35" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <path d="M100 175 Q118 180 132 185" stroke="#2C3E35" stroke-width="2" stroke-linecap="round" fill="none"/>
-        </svg>
+        </div>
       </div>
     </div>
-    <div class="about-text reveal">
-      <div class="eyebrow"><div class="eyebrow-line"></div><span>Who We Are</span></div>
-      <h2 class="section-title" style="margin-bottom:18px;">A partner at every stage of your business journey.</h2>
-      <p>Canopy Consulting is a Belize-based business consulting firm built to give small and mid-sized businesses access to structured, strategic support that was once reserved for large corporations.</p>
-      <p>We do not just advise. We build alongside you — from your first business plan to a fully optimized, scalable operation.</p>
-      <div style="margin-top:24px;"><a href="pages/about.html" class="btn btn-dark">Our Story</a></div>
-    </div>
   </div>
+</section>
 
-  <!-- ── JOURNEY ── -->
-  <div class="journey-section">
-    <div class="journey-header">
-      <div>
-        <div class="eyebrow"><div class="eyebrow-line"></div><span>The Growth Journey</span></div>
-        <h2 class="section-title light" style="margin-bottom:0;">Every business grows through <em>five stages.</em></h2>
-      </div>
-      <p class="section-lead light">Enter wherever you are. The framework meets you at your current stage and builds from there.</p>
-    </div>
-    <div class="phase-grid stagger-children">
-      <a href="pages/journey.html" class="phase-card available"><div class="pc-num">01</div><div class="pc-icon">🌱</div><div class="pc-name">Foundation</div><p class="pc-desc">Business plans, financial projections, loan prep, market positioning.</p><span class="badge badge-gold">Available</span></a>
-      <a href="pages/journey.html" class="phase-card available"><div class="pc-num">02</div><div class="pc-icon">🌿</div><div class="pc-name">Presence</div><p class="pc-desc">Website design, brand identity, lead capture, digital footprint.</p><span class="badge badge-gold">Available</span></a>
-      <a href="pages/journey.html" class="phase-card"><div class="pc-num">03</div><div class="pc-icon">🌳</div><div class="pc-name">Systems</div><p class="pc-desc">CRM, workflow automation, SOP documentation, process design.</p><span class="badge badge-ghost">Coming Soon</span></a>
-      <a href="pages/journey.html" class="phase-card"><div class="pc-num">04</div><div class="pc-icon">🌲</div><div class="pc-name">Optimization</div><p class="pc-desc">KPI dashboards, profitability analysis, cost reduction.</p><span class="badge badge-ghost">Coming Soon</span></a>
-      <a href="pages/journey.html" class="phase-card"><div class="pc-num">05</div><div class="pc-icon">🌴</div><div class="pc-name">Scale</div><p class="pc-desc">AI integration, advanced automation, expansion strategy.</p><span class="badge badge-ghost">Coming Soon</span></a>
-    </div>
+<div class="stats">
+  <div class="stat"><div class="stat-n">5<em>+</em></div><div class="stat-l">Phase growth framework</div></div>
+  <div class="stat"><div class="stat-n">3<em>Now</em></div><div class="stat-l">Phases available today</div></div>
+  <div class="stat"><div class="stat-n">BZ</div><div class="stat-l">Rooted in Belize</div></div>
+</div>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <svg width="80" height="20" viewBox="0 0 80 20" fill="none"><rect x="0" y="6" width="8" height="8" stroke="rgba(184,134,11,0.4)" stroke-width="0.8"/><rect x="2" y="8" width="4" height="4" stroke="rgba(184,134,11,0.3)" stroke-width="0.6"/><line x1="12" y1="10" x2="68" y2="10" stroke="rgba(184,134,11,0.25)" stroke-width="0.8"/><circle cx="40" cy="10" r="3" stroke="rgba(184,134,11,0.4)" stroke-width="0.8" fill="none"/><circle cx="40" cy="10" r="1.5" fill="rgba(184,134,11,0.4)"/><rect x="72" y="6" width="8" height="8" stroke="rgba(184,134,11,0.4)" stroke-width="0.8"/></svg>
+    <div class="divider-text">Sub Umbra Floreo</div>
+    <svg width="80" height="20" viewBox="0 0 80 20" fill="none"><rect x="0" y="6" width="8" height="8" stroke="rgba(184,134,11,0.4)" stroke-width="0.8"/><line x1="12" y1="10" x2="68" y2="10" stroke="rgba(184,134,11,0.25)" stroke-width="0.8"/><circle cx="40" cy="10" r="3" stroke="rgba(184,134,11,0.4)" stroke-width="0.8" fill="none"/><circle cx="40" cy="10" r="1.5" fill="rgba(184,134,11,0.4)"/><rect x="72" y="6" width="8" height="8" stroke="rgba(184,134,11,0.4)" stroke-width="0.8"/></svg>
   </div>
+  <div class="divider-line"></div>
+</div>
 
-  <!-- ── WHY ── -->
-  <div class="why-section">
-    <div class="eyebrow"><div class="eyebrow-line"></div><span>Why Canopy</span></div>
-    <h2 class="section-title">Strategy. Systems. Results.</h2>
-    <div class="why-grid">
-      <div class="why-card reveal" data-num="01"><div class="wc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h3 class="wc-title">End-to-End Partnership</h3><p class="wc-text">Most consultants offer strategy or execution. We offer both — from your first plan to a fully scaled operation.</p></div>
-      <div class="why-card reveal" data-num="02"><div class="wc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><h3 class="wc-title">Radical Transparency</h3><p class="wc-text">We build Canopy using our own framework and document it publicly. Buy into a process you can watch work.</p></div>
-      <div class="why-card reveal" data-num="03"><div class="wc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3 class="wc-title">Rooted in Belize</h3><p class="wc-text">We know the Belizean market — its opportunities, culture, and challenges. Here, building alongside you.</p></div>
-    </div>
-  </div>
-
-  <!-- ── SERVICES ── -->
-  <div class="services-section">
-    <div class="services-header">
-      <div><div class="eyebrow"><div class="eyebrow-line"></div><span>Services</span></div><h2 class="section-title" style="margin-bottom:0;">Where are you in your journey?</h2></div>
-      <p class="section-lead">Phases 1 and 2 are available now. Phases 3–5 are coming — join the waitlist.</p>
-    </div>
-    <div class="sp-grid">
-      <div class="sp-card reveal"><span class="sp-tag badge badge-gold">Available Now</span><div class="sp-phase">Phase 1 — Foundation</div><h3 class="sp-title">Launch & Foundation</h3><p class="sp-text">Build on solid ground. Strategic and financial blueprint ready for lenders and investors.</p><ul class="sp-list"><li>Loan-ready business plan</li><li>Financial projections</li><li>Market & competitive analysis</li><li>Pricing strategy</li></ul><a href="pages/services.html" class="btn btn-dark">Learn More</a></div>
-      <div class="sp-card reveal"><span class="sp-tag badge badge-gold">Available Now</span><div class="sp-phase">Phase 2 — Presence</div><h3 class="sp-title">Brand & Presence</h3><p class="sp-text">A professional digital footprint designed to generate leads, not just look good.</p><ul class="sp-list"><li>Website design & development</li><li>Brand identity & guidelines</li><li>Lead capture systems</li><li>Google Business setup</li></ul><a href="pages/services.html" class="btn btn-dark">Learn More</a></div>
-      <div class="sp-card dimmed reveal"><span class="sp-tag badge badge-ghost">Coming Soon</span><div class="sp-phase">Phase 3 — Systems</div><h3 class="sp-title">Systems Setup</h3><p class="sp-text">CRM, automation, and SOPs that turn chaotic operations into repeatable, scalable systems.</p><ul class="sp-list"><li>CRM selection & setup</li><li>Workflow automation</li><li>SOP documentation</li></ul><a href="pages/contact.html" class="btn btn-ghost-dark">Join Waitlist</a></div>
-      <div class="sp-card dimmed reveal"><span class="sp-tag badge badge-ghost">Coming Soon</span><div class="sp-phase">Phases 4 & 5</div><h3 class="sp-title">Optimization & Scale</h3><p class="sp-text">KPI dashboards, profitability analysis, AI integration, and fractional COO advisory.</p><ul class="sp-list"><li>KPI dashboards</li><li>AI tool integration</li><li>Fractional COO retainer</li></ul><a href="pages/contact.html" class="btn btn-ghost-dark">Join Waitlist</a></div>
-    </div>
-  </div>
-
-  <!-- ── BELIZE STRIP ── -->
-  <div class="belize-strip">
-    <div class="belize-text reveal">
-      <div class="eyebrow"><div class="eyebrow-line"></div><span>Rooted in Belize</span></div>
-      <h2><em>Sub Umbra Floreo.</em></h2>
-      <p>Under the shade, we flourish. The national motto of Belize — and the idea at the heart of everything Canopy Consulting does. We provide the structure and shelter that lets businesses grow.</p>
-      <a href="pages/about.html" class="btn btn-gold">Our Story</a>
-    </div>
-    <div class="belize-map-art reveal">
-      <svg width="260" height="320" viewBox="0 0 220 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M110 16 L164 28 L172 55 L168 88 L178 112 L170 138 L178 162 L162 190 L154 220 L136 242 L110 248 L84 238 L68 212 L58 186 L50 160 L52 132 L44 106 L48 78 L60 52 L84 30 Z" fill="rgba(46,125,82,0.18)" stroke="rgba(184,134,11,0.45)" stroke-width="1.5" stroke-linejoin="round"/>
-        <circle cx="118" cy="132" r="6" fill="rgba(184,134,11,0.2)" stroke="var(--amber)" stroke-width="1.5"/>
-        <circle cx="118" cy="132" r="3" fill="var(--amber)" opacity="0.9"/>
-        <text x="130" y="136" font-family="Space Grotesk, sans-serif" font-size="9" fill="rgba(255,255,255,0.45)" letter-spacing="1">BELIZE</text>
-        <circle cx="110" cy="132" r="120" stroke="rgba(184,134,11,0.05)" stroke-width="1" stroke-dasharray="3 6"/>
+<section class="about" id="about">
+  <div class="leaf-art">
+    <div class="leaf-ring">
+      <svg width="160" height="160" viewBox="0 0 200 200" fill="none">
+        <ellipse cx="100" cy="68" rx="20" ry="35" fill="#1A4D3A" transform="rotate(-10 100 68)"/>
+        <ellipse cx="70" cy="88" rx="16" ry="29" fill="#2E7D52" transform="rotate(-35 70 88)"/>
+        <ellipse cx="130" cy="88" rx="16" ry="29" fill="#2E7D52" transform="rotate(35 130 88)"/>
+        <ellipse cx="55" cy="112" rx="13" ry="23" fill="#3D7A5A" transform="rotate(-50 55 112)"/>
+        <ellipse cx="145" cy="112" rx="13" ry="23" fill="#3D7A5A" transform="rotate(50 145 112)"/>
+        <ellipse cx="72" cy="106" rx="11" ry="7" fill="#B8860B" opacity="0.85" transform="rotate(-30 72 106)"/>
+        <ellipse cx="128" cy="106" rx="11" ry="7" fill="#B8860B" opacity="0.85" transform="rotate(30 128 106)"/>
+        <path d="M100 138L100 168" stroke="#2C3E35" stroke-width="3" stroke-linecap="round"/>
+        <path d="M100 168Q84 174 70 178" stroke="#2C3E35" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M100 168Q116 174 130 178" stroke="#2C3E35" stroke-width="2" stroke-linecap="round" fill="none"/>
       </svg>
     </div>
   </div>
-
-  <!-- ── CTA ── -->
-  <div class="cta-strip geo-pattern">
-    <h2>Ready to build something that lasts?</h2>
-    <div class="rule"></div>
-    <p>Start with a free 30-minute discovery call. No pressure — just clarity on where your business is and where it could be.</p>
-    <a href="pages/contact.html" class="btn btn-gold">Book Your Free Discovery Call</a>
+  <div class="about-text">
+    <div class="eyebrow"><div class="eyebrow-line"></div><span>Who We Are</span></div>
+    <h2 class="pd" style="font-size:clamp(26px,3vw,40px);font-weight:700;color:#1A4D3A;line-height:1.15;margin-bottom:18px;">A partner at every stage of your business journey.</h2>
+    <p>Canopy Consulting is a Belize-based business consulting firm built to give small and mid-sized businesses access to structured, strategic support.</p>
+    <p style="font-size:14px;color:#4A5248;line-height:1.9;">We do not just advise. We build alongside you — from your first business plan to a fully optimized, scalable operation. We build our own business on the same framework we sell, so you can see the process work before you buy into it.</p>
+    <div class="vals">
+      <div class="val"><div class="val-n">01</div><div class="val-t">Radical honesty</div><div class="val-d">We tell you what you need to hear.</div></div>
+      <div class="val"><div class="val-n">02</div><div class="val-t">Build, don't just advise</div><div class="val-d">We stay in the work until it functions.</div></div>
+      <div class="val"><div class="val-n">03</div><div class="val-t">Deep roots</div><div class="val-d">We know Belize — its market and culture.</div></div>
+      <div class="val"><div class="val-n">04</div><div class="val-t">Proven framework</div><div class="val-d">Same system we use to run our own business.</div></div>
+    </div>
   </div>
+</section>
 
-  <div id="footer-slot"></div>
+<div class="divider" style="background:#E8F2EC;">
+  <div class="divider-line"></div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <svg width="100" height="20" viewBox="0 0 100 20" fill="none"><polygon points="10,18 50,2 90,18" stroke="rgba(184,134,11,0.3)" stroke-width="0.8" fill="none"/><polygon points="20,18 50,8 80,18" stroke="rgba(184,134,11,0.2)" stroke-width="0.6" fill="none"/></svg>
+    <div class="divider-text">Under the shade, we flourish</div>
+    <svg width="100" height="20" viewBox="0 0 100 20" fill="none"><polygon points="10,2 50,18 90,2" stroke="rgba(184,134,11,0.3)" stroke-width="0.8" fill="none"/><polygon points="20,2 50,12 80,2" stroke="rgba(184,134,11,0.2)" stroke-width="0.6" fill="none"/></svg>
+  </div>
+  <div class="divider-line"></div>
+</div>
 
-  <script src="js/main.js"></script>
-  <script>
-    let currentTab = 0;
-    const totalTabs = 4;
-    let autoRotate;
-    let progress = 0;
-    const INTERVAL = 5000;
-    const TICK = 50;
+<section class="journey" id="journey">
+  <svg class="jgeo" viewBox="0 0 300 300" fill="none">
+    <polygon points="150,10 290,280 10,280" stroke="rgba(184,134,11,0.06)" stroke-width="1" fill="none"/>
+    <polygon points="150,50 250,260 50,260" stroke="rgba(184,134,11,0.05)" stroke-width="1" fill="none"/>
+    <polygon points="150,90 210,240 90,240" stroke="rgba(184,134,11,0.04)" stroke-width="1" fill="none"/>
+  </svg>
+  <div class="eyebrow"><div class="eyebrow-line"></div><span>The Growth Journey</span></div>
+  <h2>Every business grows through <em>five stages.</em></h2>
+  <p class="journey-lead">Enter wherever you are. Click each phase to see what is included.</p>
+  <div class="phases">
+    <div class="phase avail" onclick="selPhase(0)">
+      <div class="p-num">01</div><span class="p-icon">🌱</span>
+      <div class="p-name">Foundation</div><p class="p-desc">Build your business on solid ground.</p>
+      <span class="badge bg">Available</span>
+      <div class="p-detail"><ul><li>Loan-ready business plan</li><li>Financial projections</li><li>Market &amp; competitive analysis</li><li>Pricing &amp; offer structure</li><li>Business Audit</li></ul></div>
+    </div>
+    <div class="phase avail" onclick="selPhase(1)">
+      <div class="p-num">02</div><span class="p-icon">🌿</span>
+      <div class="p-name">Presence</div><p class="p-desc">Make your business visible and credible.</p>
+      <span class="badge bg">Available</span>
+      <div class="p-detail"><ul><li>Website design &amp; development</li><li>Brand identity &amp; guidelines</li><li>Lead capture systems</li><li>Google Business setup</li><li>Social media foundation</li></ul></div>
+    </div>
+    <div class="phase avail" onclick="selPhase(2)">
+      <div class="p-num">03</div><span class="p-icon">🌳</span>
+      <div class="p-name">Systems</div><p class="p-desc">Turn chaos into repeatable systems.</p>
+      <span class="badge bg">Available</span>
+      <div class="p-detail"><ul><li>CRM selection &amp; setup</li><li>Workflow automation</li><li>SOP documentation</li><li>Tech stack consolidation</li><li>Team training &amp; handoff</li></ul></div>
+    </div>
+    <div class="phase" onclick="selPhase(3)">
+      <div class="p-num">04</div><span class="p-icon">🌲</span>
+      <div class="p-name">Optimization</div><p class="p-desc">Make your business more profitable.</p>
+      <span class="badge bs">Coming Soon</span>
+      <div class="p-detail"><ul><li>KPI dashboard setup</li><li>Profitability audit</li><li>Cost reduction analysis</li><li>Conversion optimization</li><li>Revenue growth strategy</li></ul></div>
+    </div>
+    <div class="phase" onclick="selPhase(4)">
+      <div class="p-num">05</div><span class="p-icon">🌴</span>
+      <div class="p-name">Scale</div><p class="p-desc">Grow without adding chaos.</p>
+      <span class="badge bs">Coming Soon</span>
+      <div class="p-detail"><ul><li>AI tool integration</li><li>Advanced automation</li><li>Expansion strategy</li><li>Fractional COO advisory</li><li>Monthly retainer</li></ul></div>
+    </div>
+  </div>
+</section>
 
-    function switchTab(idx) {
-      currentTab = idx;
-      document.querySelectorAll('.showcase-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
-      document.querySelectorAll('.showcase-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
-      progress = 0;
-      const fill = document.getElementById('progressFill');
-      if (fill) fill.style.width = '0%';
-      clearInterval(autoRotate);
-      startAutoRotate();
-    }
+<section class="why" id="why">
+  <svg class="why-geo" viewBox="0 0 380 380" fill="none">
+    <circle cx="190" cy="190" r="170" stroke="rgba(26,77,58,0.05)" stroke-width="1" fill="none"/>
+    <circle cx="190" cy="190" r="130" stroke="rgba(26,77,58,0.04)" stroke-width="1" fill="none"/>
+    <circle cx="190" cy="190" r="90" stroke="rgba(26,77,58,0.035)" stroke-width="1" fill="none"/>
+    <circle cx="190" cy="190" r="50" stroke="rgba(26,77,58,0.03)" stroke-width="1" fill="none"/>
+  </svg>
+  <div class="eyebrow"><div class="eyebrow-line"></div><span>Why Canopy</span></div>
+  <h2 class="pd" style="font-size:clamp(26px,3vw,42px);font-weight:700;color:#1A4D3A;line-height:1.15;margin-bottom:0;">Strategy. Systems. Results.</h2>
+  <div class="why-grid">
+    <div class="wcard" data-n="01">
+      <div class="wc-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <div class="wc-t">End-to-End Partnership</div>
+      <div class="wc-d">Most consultants offer strategy or execution. We offer both — from your first plan to a fully scaled operation. One partner, the whole journey.</div>
+    </div>
+    <div class="wcard" data-n="02">
+      <div class="wc-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <div class="wc-t">Proven Framework</div>
+      <div class="wc-d">We build Canopy Consulting on the same five-phase framework we sell. You buy into a process you can watch work in real time.</div>
+    </div>
+    <div class="wcard" data-n="03">
+      <div class="wc-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="wc-t">Rooted in Belize</div>
+      <div class="wc-d">We know the Belizean market — its opportunities, its culture, its challenges. Not parachuting in. Building here, long-term.</div>
+    </div>
+  </div>
+</section>
 
-    function startAutoRotate() {
-      autoRotate = setInterval(() => {
-        progress += (TICK / INTERVAL) * 100;
-        const fill = document.getElementById('progressFill');
-        if (fill) fill.style.width = Math.min(progress, 100) + '%';
-        if (progress >= 100) {
-          currentTab = (currentTab + 1) % totalTabs;
-          switchTab(currentTab);
-        }
-      }, TICK);
-    }
+<section class="belize" id="belize">
+  <svg class="belize-geo" viewBox="0 0 340 340" fill="none">
+    <polygon points="170,10 330,310 10,310" stroke="rgba(255,255,255,0.04)" stroke-width="1" fill="none"/>
+    <polygon points="170,50 290,290 50,290" stroke="rgba(255,255,255,0.03)" stroke-width="1" fill="none"/>
+    <polygon points="170,90 250,270 90,270" stroke="rgba(255,255,255,0.025)" stroke-width="1" fill="none"/>
+  </svg>
+  <div class="belize-text">
+    <div class="motto">Sub Umbra Floreo</div>
+    <h2><em>Under the shade, we flourish.</em></h2>
+    <p>The national motto of Belize — and the idea at the heart of everything Canopy Consulting does. We provide the structure and shelter that lets businesses grow.</p>
+    <button class="btn-g" onclick="scroll2('contact')">Work With Us</button>
+  </div>
+  <div class="belize-map">
+    <svg width="200" height="300" viewBox="0 0 140 210" fill="none">
+      <path d="M38 8 L42 6 L48 8 L52 6 L56 10 L60 8 L64 12 L80 14 L84 18 L80 22 L84 26 L80 28 L82 34 L78 36 L80 40 L76 42 L78 50 L74 54 L76 60 L78 66 L74 70 L76 76 L74 82 L72 88 L74 96 L70 102 L72 110 L68 116 L70 124 L66 130 L68 138 L64 144 L62 152 L58 158 L56 166 L52 172 L48 178 L44 184 L40 190 L36 196 L32 200 L28 196 L26 188 L28 180 L26 172 L28 164 L26 156 L28 148 L26 140 L28 132 L26 124 L28 116 L26 108 L28 100 L26 92 L28 84 L26 76 L28 68 L26 60 L28 52 L26 44 L28 36 L30 28 L28 20 L32 14 L38 8 Z" fill="rgba(46,125,82,0.22)" stroke="rgba(184,134,11,0.55)" stroke-width="1.4" stroke-linejoin="round"/>
+      <ellipse cx="92" cy="20" rx="5" ry="3" fill="rgba(46,125,82,0.2)" stroke="rgba(184,134,11,0.4)" stroke-width="0.8"/>
+      <ellipse cx="98" cy="32" rx="4" ry="2.5" fill="rgba(46,125,82,0.18)" stroke="rgba(184,134,11,0.35)" stroke-width="0.7"/>
+      <ellipse cx="93" cy="44" rx="3" ry="1.8" fill="rgba(46,125,82,0.15)" stroke="rgba(184,134,11,0.3)" stroke-width="0.6"/>
+      <circle cx="52" cy="108" r="7" fill="rgba(184,134,11,0.15)" stroke="#B8860B" stroke-width="1.5"/>
+      <circle cx="52" cy="108" r="3.5" fill="#B8860B" opacity="0.9"/>
+      <text x="62" y="112" font-family="Space Grotesk,sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,0.6)">Belmopan</text>
+      <circle cx="68" cy="62" r="3" fill="rgba(184,134,11,0.5)" stroke="#B8860B" stroke-width="1"/>
+      <text x="72" y="60" font-family="Space Grotesk,sans-serif" font-size="7" fill="rgba(255,255,255,0.45)">Belize City</text>
+      <circle cx="43" cy="40" r="2.5" fill="rgba(184,134,11,0.4)" stroke="#B8860B" stroke-width="0.8"/>
+      <text x="14" y="38" font-family="Space Grotesk,sans-serif" font-size="7" fill="rgba(255,255,255,0.35)">Orange Walk</text>
+      <circle cx="38" cy="170" r="2.5" fill="rgba(184,134,11,0.4)" stroke="#B8860B" stroke-width="0.8"/>
+      <text x="8" y="175" font-family="Space Grotesk,sans-serif" font-size="7" fill="rgba(255,255,255,0.35)">Placencia</text>
+      <circle cx="34" cy="195" r="2.5" fill="rgba(184,134,11,0.4)" stroke="#B8860B" stroke-width="0.8"/>
+      <text x="8" y="200" font-family="Space Grotesk,sans-serif" font-size="7" fill="rgba(255,255,255,0.35)">P. Gorda</text>
+      <circle cx="52" cy="104" r="105" stroke="rgba(184,134,11,0.06)" stroke-width="1" stroke-dasharray="3 6" fill="none"/>
+    </svg>
+  </div>
+</section>
 
-    document.addEventListener('DOMContentLoaded', () => {
-      startAutoRotate();
-      const showcase = document.querySelector('.showcase');
-      if (showcase) {
-        showcase.addEventListener('mouseenter', () => clearInterval(autoRotate));
-        showcase.addEventListener('mouseleave', () => startAutoRotate());
-      }
-    });
-  </script>
+<section class="services" id="services">
+  <div class="eyebrow"><div class="eyebrow-line"></div><span>Services</span></div>
+  <h2 class="pd" style="font-size:clamp(26px,3vw,42px);font-weight:700;color:#1A4D3A;line-height:1.15;">Where are you in your journey?</h2>
+  <div class="svc-grid">
+    <div class="sc">
+      <div class="sc-tag badge bg">Available</div>
+      <div class="sc-ph">Phase 1 — Foundation</div>
+      <div class="sc-t">Launch &amp; Foundation</div>
+      <div class="sc-d">Build on solid ground. Strategic and financial blueprint ready for lenders and investors.</div>
+      <ul class="sc-list"><li>Loan-ready business plan</li><li>Financial projections</li><li>Market analysis</li><li>Pricing strategy</li></ul>
+      <button class="btn-d" onclick="scroll2('contact')">Start Here</button>
+    </div>
+    <div class="sc">
+      <div class="sc-tag badge bg">Available</div>
+      <div class="sc-ph">Phase 2 — Presence</div>
+      <div class="sc-t">Brand &amp; Presence</div>
+      <div class="sc-d">A professional digital footprint designed to generate leads, not just look good.</div>
+      <ul class="sc-list"><li>Website design &amp; development</li><li>Brand identity &amp; guidelines</li><li>Lead capture systems</li><li>Google Business setup</li></ul>
+      <button class="btn-d" onclick="scroll2('contact')">Start Here</button>
+    </div>
+    <div class="sc">
+      <div class="sc-tag badge bg">Available</div>
+      <div class="sc-ph">Phase 3 — Systems</div>
+      <div class="sc-t">Systems Setup</div>
+      <div class="sc-d">CRM, automation, and SOPs that turn chaotic operations into repeatable, scalable systems.</div>
+      <ul class="sc-list"><li>CRM selection &amp; setup</li><li>Workflow automation</li><li>SOP documentation</li><li>Tech stack consolidation</li></ul>
+      <button class="btn-d" onclick="scroll2('contact')">Start Here</button>
+    </div>
+    <div class="sc dim">
+      <div class="sc-tag badge bs">Coming Soon</div>
+      <div class="sc-ph">Phases 4 &amp; 5</div>
+      <div class="sc-t">Optimization &amp; Scale</div>
+      <div class="sc-d">KPI dashboards, profitability analysis, AI integration, and fractional COO advisory.</div>
+      <ul class="sc-list"><li>KPI dashboards</li><li>AI tool integration</li><li>Fractional COO retainer</li></ul>
+      <button class="btn-gh" onclick="scroll2('contact')">Join Waitlist</button>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <svg class="contact-geo" viewBox="0 0 320 320" fill="none">
+    <rect x="20" y="20" width="280" height="280" stroke="rgba(184,134,11,0.07)" stroke-width="0.8"/>
+    <rect x="50" y="50" width="220" height="220" stroke="rgba(184,134,11,0.06)" stroke-width="0.8"/>
+    <rect x="80" y="80" width="160" height="160" stroke="rgba(184,134,11,0.05)" stroke-width="0.8"/>
+    <line x1="20" y1="20" x2="300" y2="300" stroke="rgba(184,134,11,0.04)" stroke-width="0.6" fill="none"/>
+    <line x1="300" y1="20" x2="20" y2="300" stroke="rgba(184,134,11,0.04)" stroke-width="0.6" fill="none"/>
+  </svg>
+  <div>
+    <div class="eyebrow"><div class="eyebrow-line"></div><span>Get in Touch</span></div>
+    <h2>Let's start with an <em>honest conversation.</em></h2>
+    <p class="contact-sub">No pitch. No pressure. Just 30 minutes to understand where your business is and whether we are the right fit.</p>
+    <div class="cd">
+      <div class="cd-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <div><div class="cd-l">Email</div><div class="cd-v">hello@canopyconsulting.bz</div></div>
+    </div>
+    <div class="cd">
+      <div class="cd-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div><div class="cd-l">Based In</div><div class="cd-v">Belize · Remote delivery worldwide</div></div>
+    </div>
+    <div class="contact-motto">Sub Umbra Floreo — Under the shade, we flourish.</div>
+  </div>
+  <div>
+    <div class="form-row">
+      <div class="form-g"><label>First Name</label><input type="text" placeholder="Martin"/></div>
+      <div class="form-g"><label>Last Name</label><input type="text" placeholder="Gayot"/></div>
+    </div>
+    <div class="form-g"><label>Email</label><input type="email" placeholder="you@yourbusiness.com"/></div>
+    <div class="form-g"><label>Business Name</label><input type="text" placeholder="Your Business"/></div>
+    <div class="form-g">
+      <label>Where are you in your journey?</label>
+      <select>
+        <option value="" disabled selected>Select a phase...</option>
+        <option>Phase 1 — Foundation</option>
+        <option>Phase 2 — Presence</option>
+        <option>Phase 3 — Systems</option>
+        <option>Phase 4 — Optimization</option>
+        <option>Phase 5 — Scale</option>
+        <option>Not sure — I need a Business Audit first</option>
+      </select>
+    </div>
+    <div class="form-g"><label>Biggest challenge</label><textarea placeholder="Share as much or as little as you like..."></textarea></div>
+    <button class="btn-g" style="width:100%;text-align:center;padding:14px;">Send My Request</button>
+    <div class="form-note">We do not share your information. You will hear back within 24 hours.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-l">© 2025 Canopy Consulting · Belize · All rights reserved</div>
+  <div class="foot-links">
+    <a onclick="scroll2('about')">About</a>
+    <a onclick="scroll2('journey')">Journey</a>
+    <a onclick="scroll2('services')">Services</a>
+    <a onclick="scroll2('contact')">Contact</a>
+  </div>
+  <div class="foot-r">Sub Umbra Floreo</div>
+</footer>
+
+<script>
+function scroll2(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
+function selPhase(i){document.querySelectorAll('.phase').forEach((p,j)=>p.classList.toggle('sel',j===i))}
+let ct=0,prog=0,ar;
+const TI=5200,TK=60;
+function tab(i){
+  ct=i;prog=0;
+  document.querySelectorAll('.sc-tab').forEach((t,j)=>t.classList.toggle('on',j===i));
+  document.querySelectorAll('.sc-panel').forEach((p,j)=>p.classList.toggle('on',j===i));
+  const pf=document.getElementById('pf');if(pf)pf.style.width='0%';
+  clearInterval(ar);startAR();
+}
+function startAR(){
+  ar=setInterval(()=>{
+    prog+=(TK/TI)*100;
+    const pf=document.getElementById('pf');
+    if(pf)pf.style.width=Math.min(prog,100)+'%';
+    if(prog>=100){ct=(ct+1)%4;tab(ct);}
+  },TK);
+}
+startAR();
+const sc=document.querySelector('.showcase');
+if(sc){sc.addEventListener('mouseenter',()=>clearInterval(ar));sc.addEventListener('mouseleave',()=>startAR())}
+</script>
 </body>
 </html>
