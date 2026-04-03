@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Canopy Group — Deep roots. Wide reach. Unstoppable growth.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET + TOKENS ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1A1A18;overflow-x:hidden;line-height:1.6}
+
+:root{
+  --ink:#1A1A18;
+  --ink2:#4A4A45;
+  --ink3:#8A8A82;
+  --forest:#1C4A35;
+  --forest2:#2A6B4E;
+  --forest3:#3D8B65;
+  --leaf:#5BAF82;
+  --sage:#C8E6D4;
+  --mist:#F0F7F3;
+  --amber:#B8820A;
+  --amber2:#E8A820;
+  --amber-pale:#FDF5DC;
+  --cream:#FAFAF8;
+  --cream2:#F2F1EC;
+  --white:#FFFFFF;
+  --border:#E8E8E2;
+  --border2:#D4D4CC;
+  --r:8px;
+  --r2:16px;
+  --r3:24px;
+}
+
+/* ── TYPE ── */
+.serif{font-family:'Instrument Serif',Georgia,serif}
+h1,h2,h3{line-height:1.15;letter-spacing:-0.02em}
+p{color:var(--ink2);line-height:1.75}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 60px;
+  background:rgba(250,250,248,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:box-shadow .3s;
+}
+.nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.06)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-mark{width:30px;height:34px}
+.nav-logo-text .name{font-family:'Instrument Serif',serif;font-size:17px;color:var(--forest);display:block;line-height:1.1}
+.nav-logo-text .tag{font-size:9px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);display:block}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:13px;font-weight:500;color:var(--ink2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--forest)}
+.nav-btn{background:var(--forest);color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;padding:10px 22px;border:none;border-radius:var(--r);cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s,transform .15s}
+.nav-btn:hover{background:var(--forest2);transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:0 60px;
+  padding-top:68px;
+  background:var(--white);
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at 70% 50%,rgba(91,175,130,0.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+/* Subtle Mayan grid pattern */
+.hero::after{
+  content:'';
+  position:absolute;
+  right:0;top:0;bottom:0;width:50%;
+  background-image:
+    linear-gradient(rgba(28,74,53,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(28,74,53,0.03) 1px,transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+}
+.hero-left{position:relative;z-index:2;padding-right:48px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--mist);border:1px solid var(--sage);
+  padding:6px 14px;border-radius:100px;
+  margin-bottom:32px;
+}
+.hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--leaf);animation:pulse .2e+1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.2)}}
+.hero-eyebrow span{font-size:12px;font-weight:500;color:var(--forest);letter-spacing:.3px}
+.hero h1{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(42px,5vw,68px);
+  color:var(--ink);
+  margin-bottom:24px;
+  max-width:580px;
+}
+.hero h1 em{font-style:italic;color:var(--forest)}
+.hero-sub{
+  font-size:18px;
+  color:var(--ink2);
+  line-height:1.75;
+  max-width:460px;
+  margin-bottom:44px;
+}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.btn-primary{
+  background:var(--forest);color:#fff;
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:600;
+  padding:14px 28px;border:none;border-radius:var(--r);
+  cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;transition:background .2s,transform .15s;
+}
+.btn-primary:hover{background:var(--forest2);transform:translateY(-1px)}
+.btn-secondary{
+  background:transparent;color:var(--ink);
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
+  padding:14px 28px;border:1.5px solid var(--border2);border-radius:var(--r);
+  cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;transition:all .2s;
+}
+.btn-secondary:hover{border-color:var(--forest);color:var(--forest);background:var(--mist)}
+.hero-trust{display:flex;align-items:center;gap:16px;margin-top:44px}
+.hero-trust-line{width:1px;height:32px;background:var(--border2)}
+.hero-trust-item{font-size:12px;font-weight:500;color:var(--ink3);display:flex;align-items:center;gap:6px}
+.hero-trust-item::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--leaf)}
+
+/* Hero right: phase preview */
+.hero-right{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  padding-left:20px;
+}
+.phase-preview-stack{width:100%;max-width:420px;display:flex;flex-direction:column;gap:10px}
+.phase-pip{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 20px;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--r2);
+  cursor:pointer;
+  transition:all .25s;
+  text-decoration:none;
+}
+.phase-pip:hover{border-color:var(--forest);box-shadow:0 4px 20px rgba(28,74,53,0.08);transform:translateX(4px)}
+.phase-pip.active{border-color:var(--forest);background:var(--mist)}
+.phase-pip.locked{opacity:.5;cursor:default}
+.phase-pip.locked:hover{transform:none;border-color:var(--border);box-shadow:none;background:var(--white)}
+.pip-num{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--forest);color:#fff;
+  font-size:13px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.phase-pip.locked .pip-num{background:var(--cream2);color:var(--ink3)}
+.pip-body{flex:1;min-width:0}
+.pip-name{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.pip-desc{font-size:12px;color:var(--ink3)}
+.pip-badge{
+  font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
+  padding:3px 9px;border-radius:100px;flex-shrink:0;
+}
+.pip-badge.live{background:var(--sage);color:var(--forest)}
+.pip-badge.soon{background:var(--cream2);color:var(--ink3)}
+.hero-scroll-cue{
+  position:absolute;bottom:36px;left:60px;
+  display:flex;align-items:center;gap:10px;
+  color:var(--ink3);font-size:12px;font-weight:500;
+}
+.scroll-line{width:32px;height:1px;background:var(--border2);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--forest);animation:scan 2s ease-in-out infinite}
+@keyframes scan{0%{left:-100%}60%{left:100%}100%{left:100%}}
+
+/* ── SECTION SHARED ── */
+section{padding:100px 60px}
+.section-label{
+  font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--amber);display:flex;align-items:center;gap:10px;margin-bottom:16px;
+}
+.section-label::before{content:'';width:20px;height:1px;background:var(--amber)}
+.section-title{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(32px,4vw,52px);
+  color:var(--ink);margin-bottom:16px;
+}
+.section-title em{font-style:italic;color:var(--forest)}
+.section-lead{font-size:18px;color:var(--ink2);line-height:1.75;max-width:560px}
+
+/* ── JOURNEY SECTION ── */
+.journey-section{background:var(--ink);position:relative;overflow:hidden}
+.journey-section::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+}
+/* Mayan corner ornament */
+.journey-section::after{
+  content:'';
+  position:absolute;top:0;right:0;width:300px;height:300px;
+  background-image:
+    radial-gradient(circle at 100% 0%,rgba(91,175,130,0.08) 0%,transparent 60%);
+  pointer-events:none;
+}
+.journey-section .section-label{color:var(--amber2)}
+.journey-section .section-label::before{background:var(--amber2)}
+.journey-section .section-title{color:#fff}
+.journey-section .section-title em{color:var(--leaf)}
+.journey-section .section-lead{color:rgba(255,255,255,0.55);margin-bottom:64px}
+
+.journey-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:64px;position:relative;z-index:1}
+
+/* Phase timeline */
+.phase-timeline{position:relative;z-index:1}
+.phase-track{
+  display:flex;
+  align-items:stretch;
+  gap:0;
+  margin-bottom:32px;
+}
+.phase-node{
+  flex:1;
+  position:relative;
+  cursor:pointer;
+}
+.phase-node-top{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-bottom:24px;
+  position:relative;
+}
+.phase-node-top::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:50%;
+  width:1px;height:24px;
+  background:rgba(255,255,255,0.1);
+}
+.phase-node:last-child .phase-node-top::after{display:none}
+.phase-connector{
+  position:absolute;
+  top:20px;left:calc(50% + 20px);right:-50%;
+  height:1px;
+  background:rgba(255,255,255,0.1);
+}
+.phase-node:last-child .phase-connector{display:none}
+.phase-node.active .phase-connector{background:rgba(91,175,130,0.4)}
+.phase-circle{
+  width:40px;height:40px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.15);
+  background:rgba(255,255,255,0.04);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:600;color:rgba(255,255,255,0.4);
+  margin-bottom:12px;
+  transition:all .3s;
+  position:relative;z-index:1;
+}
+.phase-node.active .phase-circle{
+  background:var(--forest);border-color:var(--leaf);
+  color:#fff;box-shadow:0 0 0 6px rgba(91,175,130,0.12);
+}
+.phase-node.locked .phase-circle{
+  background:rgba(255,255,255,0.03);
+  border-style:dashed;
+}
+.phase-node-label{font-size:11px;font-weight:500;color:rgba(255,255,255,0.35);text-align:center;letter-spacing:.3px}
+.phase-node.active .phase-node-label{color:var(--leaf);font-weight:600}
+
+/* Phase detail card */
+.phase-detail-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:var(--r2);
+  padding:32px;
+  min-height:280px;
+  display:none;
+  animation:fadeSlide .3s ease;
+}
+.phase-detail-card.visible{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.pdc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;gap:16px}
+.pdc-num{
+  font-family:'Instrument Serif',serif;font-size:48px;
+  color:rgba(255,255,255,0.06);line-height:1;
+}
+.pdc-badge-wrap{display:flex;gap:8px;flex-wrap:wrap}
+.pdc-badge{font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:4px 10px;border-radius:100px}
+.pdc-badge.available{background:rgba(91,175,130,0.15);color:var(--leaf)}
+.pdc-badge.coming{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.35)}
+.pdc-title{font-family:'Instrument Serif',serif;font-size:28px;color:#fff;margin-bottom:8px}
+.pdc-who{font-size:13px;color:var(--amber2);font-weight:500;margin-bottom:12px}
+.pdc-desc{font-size:15px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:24px}
+.pdc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px}
+.pdc-col h5{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px}
+.pdc-col li{font-size:13px;color:rgba(255,255,255,0.55);padding:4px 0;list-style:none;display:flex;align-items:flex-start;gap:7px}
+.pdc-col li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--leaf);flex-shrink:0;margin-top:7px}
+.pdc-outcome{
+  background:rgba(91,175,130,0.08);border:1px solid rgba(91,175,130,0.15);
+  border-radius:var(--r);padding:14px 18px;
+  font-size:13px;color:rgba(255,255,255,0.7);
+  display:flex;align-items:center;gap:10px;margin-bottom:24px;
+}
+.pdc-outcome::before{content:'→';color:var(--leaf);font-weight:700;font-size:16px}
+.pdc-actions{display:flex;gap:12px}
+.btn-phase-cta{
+  background:var(--forest);color:#fff;
+  font-size:13px;font-weight:600;
+  padding:11px 24px;border:none;border-radius:var(--r);
+  cursor:pointer;transition:all .2s;
+  display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+}
+.btn-phase-cta:hover{background:var(--forest2);transform:translateY(-1px)}
+.btn-phase-waitlist{
+  background:transparent;color:rgba(255,255,255,0.5);
+  font-size:13px;font-weight:500;
+  padding:11px 24px;border:1px solid rgba(255,255,255,0.12);border-radius:var(--r);
+  cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:7px;
+}
+.btn-phase-waitlist:hover{border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.8)}
+
+/* ── QUIZ SECTION ── */
+.quiz-section{background:var(--cream);position:relative}
+.quiz-section .section-title{margin-bottom:8px}
+.quiz-section .section-lead{margin-bottom:52px}
+.quiz-card{
+  max-width:720px;margin:0 auto;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r3);padding:48px;
+  box-shadow:0 4px 40px rgba(0,0,0,0.04);
+}
+.quiz-progress{
+  display:flex;align-items:center;gap:6px;margin-bottom:36px;
+}
+.quiz-progress-step{
+  flex:1;height:3px;border-radius:2px;
+  background:var(--border);
+  transition:background .4s;
+}
+.quiz-progress-step.done{background:var(--forest)}
+.quiz-progress-step.active{background:var(--leaf)}
+.quiz-q-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+.quiz-question{font-family:'Instrument Serif',serif;font-size:clamp(20px,2.5vw,28px);color:var(--ink);margin-bottom:32px}
+.quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:36px}
+.quiz-option{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 20px;
+  background:var(--cream);border:1.5px solid var(--border);
+  border-radius:var(--r2);cursor:pointer;
+  transition:all .2s;
+  font-size:15px;color:var(--ink);font-weight:500;
+}
+.quiz-option:hover{border-color:var(--forest);background:var(--mist)}
+.quiz-option.selected{border-color:var(--forest);background:var(--mist);color:var(--forest)}
+.quiz-option-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--white);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+  transition:all .2s;
+}
+.quiz-option.selected .quiz-option-icon{background:var(--forest);border-color:var(--forest)}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center}
+.quiz-back{
+  background:transparent;color:var(--ink3);font-size:13px;font-weight:500;
+  border:none;cursor:pointer;padding:10px 0;
+  display:flex;align-items:center;gap:6px;transition:color .2s;
+}
+.quiz-back:hover{color:var(--ink)}
+.quiz-next{
+  background:var(--forest);color:#fff;
+  font-size:13px;font-weight:600;
+  padding:12px 28px;border:none;border-radius:var(--r);
+  cursor:pointer;display:flex;align-items:center;gap:8px;
+  transition:all .2s;
+}
+.quiz-next:hover{background:var(--forest2);transform:translateY(-1px)}
+.quiz-next:disabled{background:var(--cream2);color:var(--ink3);cursor:not-allowed;transform:none}
+
+/* Quiz result */
+.quiz-result{display:none;text-align:center;animation:fadeSlide .4s ease}
+.quiz-result.visible{display:block}
+.quiz-result-phase{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--mist);border:1px solid var(--sage);
+  padding:8px 20px;border-radius:100px;
+  font-size:13px;font-weight:600;color:var(--forest);
+  margin-bottom:20px;
+}
+.quiz-result h3{font-family:'Instrument Serif',serif;font-size:32px;color:var(--ink);margin-bottom:12px}
+.quiz-result p{font-size:16px;color:var(--ink2);max-width:480px;margin:0 auto 32px}
+.quiz-result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.quiz-restart{
+  background:transparent;color:var(--ink3);font-size:13px;
+  border:none;cursor:pointer;margin-top:16px;
+  text-decoration:underline;text-underline-offset:3px;
+}
+
+/* ── SERVICES SECTION ── */
+.services-section{background:var(--white)}
+.services-section .section-title{margin-bottom:8px}
+.services-section .section-lead{margin-bottom:52px}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border)}
+.service-card{
+  background:var(--white);padding:40px 36px;
+  position:relative;
+  border-top:3px solid transparent;
+  transition:all .25s;
+}
+.service-card:hover{background:var(--mist);border-top-color:var(--forest)}
+.service-card.featured{background:var(--forest);border-top-color:var(--leaf)}
+.service-card.featured:hover{background:var(--forest2)}
+.sc-phase-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+.service-card.featured .sc-phase-label{color:var(--amber2)}
+.sc-icon{
+  width:48px;height:48px;border-radius:var(--r2);
+  background:var(--mist);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;
+}
+.service-card.featured .sc-icon{background:rgba(255,255,255,0.1)}
+.sc-icon svg{width:22px;height:22px}
+.sc-title{font-family:'Instrument Serif',serif;font-size:24px;color:var(--ink);margin-bottom:10px}
+.service-card.featured .sc-title{color:#fff}
+.sc-desc{font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:24px}
+.service-card.featured .sc-desc{color:rgba(255,255,255,0.65)}
+.sc-list{list-style:none;margin-bottom:28px}
+.sc-list li{font-size:13px;color:var(--ink2);padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:10px}
+.sc-list li:last-child{border-bottom:none}
+.service-card.featured .sc-list li{color:rgba(255,255,255,0.65);border-bottom-color:rgba(255,255,255,0.08)}
+.sc-list-dot{width:5px;height:5px;border-radius:50%;background:var(--leaf);flex-shrink:0;margin-top:8px}
+.sc-outcome{
+  font-size:13px;font-weight:500;color:var(--forest);
+  padding:12px 16px;background:var(--mist);border-radius:var(--r);
+  margin-bottom:24px;display:flex;align-items:flex-start;gap:8px;
+  line-height:1.5;
+}
+.service-card.featured .sc-outcome{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.85)}
+.sc-outcome-arrow{color:var(--leaf);font-weight:700;flex-shrink:0}
+.sc-cta{
+  width:100%;background:var(--forest);color:#fff;
+  font-size:13px;font-weight:600;
+  padding:13px 24px;border:none;border-radius:var(--r);
+  cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;
+  text-decoration:none;
+}
+.service-card.featured .sc-cta{background:#fff;color:var(--forest)}
+.sc-cta:hover{opacity:.88;transform:translateY(-1px)}
+
+/* ── PROCESS SECTION ── */
+.process-section{background:var(--cream2)}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);margin-top:52px}
+.process-step{
+  background:var(--cream2);padding:36px 28px;
+  position:relative;overflow:hidden;
+  transition:background .2s;
+}
+.process-step:hover{background:var(--white)}
+.process-step-num{
+  font-family:'Instrument Serif',serif;font-size:64px;
+  color:rgba(28,74,53,0.06);line-height:1;
+  position:absolute;top:16px;right:20px;
+}
+.ps-icon{
+  width:44px;height:44px;border-radius:var(--r2);
+  background:var(--forest);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;
+}
+.ps-icon svg{width:20px;height:20px}
+.ps-num-small{
+  font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:var(--amber);margin-bottom:8px;
+}
+.ps-title{font-family:'Instrument Serif',serif;font-size:20px;color:var(--ink);margin-bottom:8px}
+.ps-desc{font-size:13px;color:var(--ink2);line-height:1.7}
+
+/* ── TRUST SECTION ── */
+.trust-section{background:var(--white)}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.trust-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border)}
+.trust-stat{
+  background:var(--white);padding:32px 28px;
+  transition:background .2s;
+}
+.trust-stat:hover{background:var(--mist)}
+.ts-num{
+  font-family:'Instrument Serif',serif;font-size:48px;
+  color:var(--forest);line-height:1;margin-bottom:6px;
+}
+.ts-label{font-size:13px;color:var(--ink2);font-weight:500}
+.trust-pillars{display:flex;flex-direction:column;gap:20px}
+.trust-pillar{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:20px 24px;
+  background:var(--cream);border-radius:var(--r2);
+  border:1px solid var(--border);
+  transition:all .2s;
+}
+.trust-pillar:hover{border-color:var(--sage);background:var(--mist)}
+.tp-icon{
+  width:40px;height:40px;border-radius:var(--r);
+  background:var(--forest);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.tp-icon svg{width:18px;height:18px}
+.tp-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.tp-desc{font-size:13px;color:var(--ink2);line-height:1.6}
+
+/* Testimonial placeholder */
+.testimonial-placeholder{
+  margin-top:52px;
+  background:var(--mist);border:1px solid var(--sage);
+  border-radius:var(--r2);padding:36px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;
+}
+.tp-card{
+  background:var(--white);border-radius:var(--r2);padding:24px;
+  border:1px solid var(--border);
+  display:flex;flex-direction:column;gap:12px;
+}
+.tp-stars{color:var(--amber2);font-size:14px;letter-spacing:2px}
+.tp-quote{font-family:'Instrument Serif',serif;font-size:15px;color:var(--ink);line-height:1.6;font-style:italic}
+.tp-author{display:flex;align-items:center;gap:10px}
+.tp-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--sage);display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:600;color:var(--forest);flex-shrink:0;
+}
+.tp-name{font-size:13px;font-weight:600;color:var(--ink)}
+.tp-role{font-size:11px;color:var(--ink3)}
+
+/* ── FINAL CTA ── */
+.final-cta{
+  background:var(--forest);
+  padding:120px 60px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.final-cta::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+  background-size:50px 50px;
+  pointer-events:none;
+}
+.final-cta::after{
+  content:'';position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(91,175,130,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.final-cta-inner{position:relative;z-index:1;max-width:640px;margin:0 auto}
+.final-cta .section-label{justify-content:center;color:var(--amber2)}
+.final-cta .section-label::before{background:var(--amber2)}
+.final-cta h2{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(36px,5vw,60px);
+  color:#fff;margin-bottom:20px;
+}
+.final-cta h2 em{font-style:italic;color:var(--leaf)}
+.final-cta p{font-size:18px;color:rgba(255,255,255,0.6);line-height:1.75;max-width:500px;margin:0 auto 44px}
+.final-cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-white{
+  background:#fff;color:var(--forest);
+  font-size:14px;font-weight:600;
+  padding:14px 28px;border:none;border-radius:var(--r);
+  cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;transition:all .2s;
+}
+.btn-white:hover{background:var(--sage);transform:translateY(-1px)}
+.btn-ghost-white{
+  background:transparent;color:#fff;
+  font-size:14px;font-weight:500;
+  padding:14px 28px;border:1.5px solid rgba(255,255,255,0.25);border-radius:var(--r);
+  cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;transition:all .2s;
+}
+.btn-ghost-white:hover{border-color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.06)}
+.final-motto{
+  margin-top:52px;font-family:'Instrument Serif',serif;
+  font-size:14px;font-style:italic;color:rgba(255,255,255,0.25);
+  letter-spacing:.5px;
+}
+
+/* ── FOOTER ── */
+footer{
+  background:#111210;padding:56px 60px 36px;
+}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;margin-bottom:48px;
+  padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.footer-brand .fn{font-family:'Instrument Serif',serif;font-size:20px;color:#fff;margin-bottom:4px}
+.footer-brand .ft{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber2);margin-bottom:16px}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.8;max-width:260px}
+.footer-col h5{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;transition:color .2s;cursor:pointer}
+.footer-col a:hover{color:rgba(255,255,255,0.8)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,0.2)}
+.footer-motto{font-family:'Instrument Serif',serif;font-size:13px;font-style:italic;color:rgba(255,255,255,0.18)}
+
+/* ── UTILITIES ── */
+.text-center{text-align:center}
+.text-center .section-lead{margin:0 auto 52px}
+.text-center .section-label{justify-content:center}
+.divider{height:1px;background:var(--border);margin:0 60px}
+.tag-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--mist);border:1px solid var(--sage);
+  padding:4px 12px;border-radius:100px;
+  font-size:11px;font-weight:500;color:var(--forest);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .nav{padding:0 24px}
+  .hero{grid-template-columns:1fr;padding:88px 24px 60px}
+  .hero-right{display:none}
+  section{padding:72px 24px}
+  .journey-header{grid-template-columns:1fr}
+  .phase-track{gap:0}
+  .pdc-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr}
+  .process-grid{grid-template-columns:1fr 1fr}
+  .trust-grid{grid-template-columns:1fr}
+  .testimonial-placeholder{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .final-cta{padding:80px 24px}
+  footer{padding:48px 24px 28px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <svg class="nav-logo-mark" viewBox="0 0 80 90" fill="none">
+      <path d="M40 4L74 14L74 58Q74 80 40 90Q6 80 6 58L6 14Z" fill="none" stroke="#2A6B4E" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M18 14L18 26L40 26L62 26L62 14" fill="none" stroke="#2A6B4E" stroke-width="3.5" stroke-linejoin="round"/>
+      <rect x="37" y="62" width="7" height="20" rx="2.5" fill="#1C4A35"/>
+      <path d="M40 75Q30 79 22 83" stroke="#1C4A35" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M40 75Q50 79 58 83" stroke="#1C4A35" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <ellipse cx="28" cy="50" rx="10" ry="6" fill="#B8820A" transform="rotate(-28 28 50)"/>
+      <ellipse cx="52" cy="50" rx="10" ry="6" fill="#B8820A" transform="rotate(28 52 50)"/>
+      <ellipse cx="40" cy="36" rx="24" ry="18" fill="#1C4A35"/>
+      <ellipse cx="30" cy="31" rx="15" ry="12" fill="#2A6B4E"/>
+      <ellipse cx="50" cy="31" rx="15" ry="12" fill="#2A6B4E"/>
+      <ellipse cx="40" cy="25" rx="13" ry="13" fill="#3D8B65"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="name">The Canopy Group</span>
+      <span class="tag">Belize</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">The Journey</a>
+    <a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Services</a>
+    <a onclick="document.getElementById('about-us').scrollIntoView({behavior:'smooth'})">About</a>
+    <a class="nav-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Call</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      <span>Business Consulting · Belize</span>
+    </div>
+    <h1 class="serif">Your business deserves a<br><em>clear path forward.</em></h1>
+    <p class="hero-sub">We guide businesses from idea or chaos to structured, scalable, profitable operations — through a proven 5-phase journey built for real results.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
+        Find Your Phase
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+        View Services
+      </button>
+    </div>
+    <div class="hero-trust">
+      <div class="hero-trust-item">5-Phase Framework</div>
+      <div class="hero-trust-line"></div>
+      <div class="hero-trust-item">3 Phases Available</div>
+      <div class="hero-trust-line"></div>
+      <div class="hero-trust-item">Rooted in Belize</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="phase-preview-stack">
+      <div class="phase-pip active" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">
+        <div class="pip-num">1</div>
+        <div class="pip-body">
+          <div class="pip-name">Foundation</div>
+          <div class="pip-desc">Business plan, financials, positioning</div>
+        </div>
+        <div class="pip-badge live">Available</div>
+      </div>
+      <div class="phase-pip" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">
+        <div class="pip-num">2</div>
+        <div class="pip-body">
+          <div class="pip-name">Presence</div>
+          <div class="pip-desc">Brand, website, digital footprint</div>
+        </div>
+        <div class="pip-badge live">Available</div>
+      </div>
+      <div class="phase-pip" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">
+        <div class="pip-num">3</div>
+        <div class="pip-body">
+          <div class="pip-name">Systems</div>
+          <div class="pip-desc">CRM, automation, operations</div>
+        </div>
+        <div class="pip-badge live">Available</div>
+      </div>
+      <div class="phase-pip locked">
+        <div class="pip-num">4</div>
+        <div class="pip-body">
+          <div class="pip-name">Optimization</div>
+          <div class="pip-desc">KPIs, profitability, efficiency</div>
+        </div>
+        <div class="pip-badge soon">Coming Soon</div>
+      </div>
+      <div class="phase-pip locked">
+        <div class="pip-num">5</div>
+        <div class="pip-body">
+          <div class="pip-name">Scale</div>
+          <div class="pip-desc">AI, expansion, strategic advisory</div>
+        </div>
+        <div class="pip-badge soon">Coming Soon</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-cue">
+    <div class="scroll-line"></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- ── JOURNEY SECTION ── -->
+<section class="journey-section" id="journey">
+  <div class="journey-header">
+    <div>
+      <div class="section-label">The Growth Journey</div>
+      <h2 class="section-title">Five phases.<br><em>One complete transformation.</em></h2>
+    </div>
+    <p class="section-lead">Every business — regardless of size or stage — grows through the same five phases. Our entire model is built around this reality. Click any phase to explore what it includes and whether it is right for you.</p>
+  </div>
+
+  <!-- Phase selector track -->
+  <div class="phase-track">
+    <div class="phase-node active" onclick="showPhase(0)" id="node-0">
+      <div class="phase-node-top">
+        <div class="phase-connector"></div>
+        <div class="phase-circle">1</div>
+        <div class="phase-node-label">Foundation</div>
+      </div>
+    </div>
+    <div class="phase-node" onclick="showPhase(1)" id="node-1">
+      <div class="phase-node-top">
+        <div class="phase-connector"></div>
+        <div class="phase-circle">2</div>
+        <div class="phase-node-label">Presence</div>
+      </div>
+    </div>
+    <div class="phase-node" onclick="showPhase(2)" id="node-2">
+      <div class="phase-node-top">
+        <div class="phase-connector"></div>
+        <div class="phase-circle">3</div>
+        <div class="phase-node-label">Systems</div>
+      </div>
+    </div>
+    <div class="phase-node locked" onclick="showPhase(3)" id="node-3">
+      <div class="phase-node-top">
+        <div class="phase-connector"></div>
+        <div class="phase-circle">4</div>
+        <div class="phase-node-label">Optimization</div>
+      </div>
+    </div>
+    <div class="phase-node locked" onclick="showPhase(4)" id="node-4">
+      <div class="phase-node-top">
+        <div class="phase-circle">5</div>
+        <div class="phase-node-label">Scale</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase detail cards -->
+  <div class="phase-detail-card visible" id="phase-0">
+    <div class="pdc-top">
+      <div class="pdc-num">01</div>
+      <div class="pdc-badge-wrap">
+        <span class="pdc-badge available">Available Now</span>
+      </div>
+    </div>
+    <div class="pdc-title">Foundation</div>
+    <div class="pdc-who">For: New businesses, entrepreneurs, and anyone starting from scratch or without a clear plan.</div>
+    <p class="pdc-desc">Before anything else can grow, you need a solid base. Phase 1 creates the strategic, financial, and operational blueprint that every future decision builds on.</p>
+    <div class="pdc-grid">
+      <div class="pdc-col">
+        <h5>Problems Solved</h5>
+        <ul>
+          <li>No clear business direction</li>
+          <li>Can't get funding or loans</li>
+          <li>No pricing strategy</li>
+          <li>Undefined target market</li>
+        </ul>
+      </div>
+      <div class="pdc-col">
+        <h5>Services Included</h5>
+        <ul>
+          <li>Loan-ready business plan</li>
+          <li>Financial projections</li>
+          <li>Market research</li>
+          <li>Pricing strategy</li>
+          <li>Business Audit</li>
+        </ul>
+      </div>
+      <div class="pdc-col">
+        <h5>You Will Have</h5>
+        <ul>
+          <li>A fundable business plan</li>
+          <li>Clear financial model</li>
+          <li>Defined positioning</li>
+          <li>Confidence to launch</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pdc-outcome">You walk away with a clear, professional foundation your business can actually build on.</div>
+    <div class="pdc-actions">
+      <a class="btn-phase-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Start Here
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a class="btn-phase-waitlist" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">View Package Details</a>
+    </div>
+  </div>
+
+  <div class="phase-detail-card" id="phase-1">
+    <div class="pdc-top">
+      <div class="pdc-num">02</div>
+      <div class="pdc-badge-wrap"><span class="pdc-badge available">Available Now</span></div>
+    </div>
+    <div class="pdc-title">Presence</div>
+    <div class="pdc-who">For: Businesses that exist but are invisible online or lack a professional, credible presence.</div>
+    <p class="pdc-desc">A business that cannot be found or trusted online leaves money on the table every day. Phase 2 builds the digital infrastructure that turns visibility into leads.</p>
+    <div class="pdc-grid">
+      <div class="pdc-col">
+        <h5>Problems Solved</h5>
+        <ul>
+          <li>No website or weak online presence</li>
+          <li>Inconsistent branding</li>
+          <li>Leads don't convert</li>
+          <li>Looks unprofessional to clients</li>
+        </ul>
+      </div>
+      <div class="pdc-col">
+        <h5>Services Included</h5>
+        <ul>
+          <li>Website design & build</li>
+          <li>Brand identity & guidelines</li>
+          <li>Lead capture systems</li>
+          <li>Google Business setup</li>
+          <li>Social media foundation</li>
+        </ul>
+      </div>
+      <div class="pdc-col">
+        <h5>You Will Have</h5>
+        <ul>
+          <li>A lead-generating website</li>
+          <li>Cohesive brand identity</li>
+          <li>Professional digital presence</li>
+          <li>Systems to capture leads</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pdc-outcome">Your business becomes visible, credible, and ready to attract the right clients.</div>
+    <div class="pdc-actions">
+      <a class="btn-phase-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start Here <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a class="btn-phase-waitlist" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">View Package Details</a>
+    </div>
+  </div>
+
+  <div class="phase-detail-card" id="phase-2">
+    <div class="pdc-top">
+      <div class="pdc-num">03</div>
+      <div class="pdc-badge-wrap"><span class="pdc-badge available">Available Now</span></div>
+    </div>
+    <div class="pdc-title">Systems</div>
+    <div class="pdc-who">For: Businesses generating revenue but running on memory, spreadsheets, and improvisation.</div>
+    <p class="pdc-desc">Most businesses plateau not from lack of effort but lack of structure. Phase 3 installs the operational backbone that lets your business run predictably — and scale without chaos.</p>
+    <div class="pdc-grid">
+      <div class="pdc-col">
+        <h5>Problems Solved</h5>
+        <ul>
+          <li>Everything depends on you</li>
+          <li>Leads fall through the cracks</li>
+          <li>No documented processes</li>
+          <li>Can't onboard or delegate</li>
+        </ul>
+      </div>
+      <div class="pdc-col">
+        <h5>Services Included</h5>
+        <ul>
+          <li>CRM selection & full setup</li>
+          <li>Workflow automation</li>
+          <li>SOP documentation</li>
+          <li>Tech stack consolidation</li>
+          <li>Team training & handoff</li>
+        </ul>
+      </div>
+      <div class="pdc-col">
+        <h5>You Will Have</h5>
+        <ul>
+          <li>A business that runs on systems</li>
+          <li>Automated follow-up workflows</li>
+          <li>Documented processes</li>
+          <li>A team that can execute</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pdc-outcome">Your business runs on systems instead of memory — whether you're in the room or not.</div>
+    <div class="pdc-actions">
+      <a class="btn-phase-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start Here <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a class="btn-phase-waitlist" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">View Package Details</a>
+    </div>
+  </div>
+
+  <div class="phase-detail-card" id="phase-3">
+    <div class="pdc-top">
+      <div class="pdc-num">04</div>
+      <div class="pdc-badge-wrap"><span class="pdc-badge coming">Coming Soon</span></div>
+    </div>
+    <div class="pdc-title">Optimization</div>
+    <div class="pdc-who">For: Businesses with systems in place that want to become measurably more profitable.</div>
+    <p class="pdc-desc">Once your foundation, presence, and systems are solid, Phase 4 focuses entirely on making the business more profitable. We audit every part of the business for efficiency, identify leaks, and build the data visibility to make smart decisions fast.</p>
+    <div class="pdc-grid">
+      <div class="pdc-col">
+        <h5>Problems Solved</h5>
+        <ul>
+          <li>No visibility into performance</li>
+          <li>High costs, low margins</li>
+          <li>Leads don't convert efficiently</li>
+          <li>No clear growth metrics</li>
+        </ul>
+      </div>
+      <div class="pdc-col">
+        <h5>Services Included</h5>
+        <ul>
+          <li>KPI dashboard setup</li>
+          <li>Profitability audit</li>
+          <li>Cost reduction analysis</li>
+          <li>Conversion optimization</li>
+          <li>Revenue strategy</li>
+        </ul>
+      </div>
+      <div class="pdc-col">
+        <h5>You Will Have</h5>
+        <ul>
+          <li>Full business visibility</li>
+          <li>Improved profit margins</li>
+          <li>Data-driven decisions</li>
+          <li>Clear growth roadmap</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pdc-outcome">Your business becomes measurably more efficient and profitable — without adding headcount.</div>
+    <div class="pdc-actions">
+      <a class="btn-phase-cta" style="background:var(--amber);color:#fff" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Join the Waitlist <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+
+  <div class="phase-detail-card" id="phase-4">
+    <div class="pdc-top">
+      <div class="pdc-num">05</div>
+      <div class="pdc-badge-wrap"><span class="pdc-badge coming">Coming Soon</span></div>
+    </div>
+    <div class="pdc-title">Scale</div>
+    <div class="pdc-who">For: Optimized businesses ready to grow significantly and sustain that growth.</div>
+    <p class="pdc-desc">Phase 5 is where all previous work compounds. With a strong foundation, presence, systems, and optimization in place — you are ready to scale strategically and sustainably.</p>
+    <div class="pdc-grid">
+      <div class="pdc-col">
+        <h5>Problems Solved</h5>
+        <ul>
+          <li>Growth hits a ceiling</li>
+          <li>Can't expand without chaos</li>
+          <li>No AI or automation leverage</li>
+          <li>No strategic growth partner</li>
+        </ul>
+      </div>
+      <div class="pdc-col">
+        <h5>Services Included</h5>
+        <ul>
+          <li>AI tool integration</li>
+          <li>Advanced automation</li>
+          <li>Expansion strategy</li>
+          <li>Fractional COO advisory</li>
+          <li>Monthly retainer support</li>
+        </ul>
+      </div>
+      <div class="pdc-col">
+        <h5>You Will Have</h5>
+        <ul>
+          <li>AI-powered operations</li>
+          <li>A scalable business model</li>
+          <li>Strategic growth partner</li>
+          <li>Unstoppable momentum</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pdc-outcome">Your business grows significantly — with the systems and strategy to sustain every step.</div>
+    <div class="pdc-actions">
+      <a class="btn-phase-cta" style="background:var(--amber);color:#fff" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Join the Waitlist <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ── QUIZ ── -->
+<section class="quiz-section" id="quiz">
+  <div class="text-center">
+    <div class="section-label">Where Are You?</div>
+    <h2 class="section-title">Not sure which phase<br><em>is right for you?</em></h2>
+    <p class="section-lead">Answer four quick questions and we will point you to exactly where you should start.</p>
+  </div>
+  <div class="quiz-card">
+    <!-- Progress -->
+    <div class="quiz-progress" id="quiz-progress">
+      <div class="quiz-progress-step active" id="qp0"></div>
+      <div class="quiz-progress-step" id="qp1"></div>
+      <div class="quiz-progress-step" id="qp2"></div>
+      <div class="quiz-progress-step" id="qp3"></div>
+    </div>
+
+    <!-- Q1 -->
+    <div id="q1" class="quiz-step">
+      <div class="quiz-q-label">Question 1 of 4</div>
+      <div class="quiz-question serif">Where is your business right now?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="selectOption(this,'q1','idea')">
+          <div class="quiz-option-icon">💡</div>I have a business idea but haven't started yet
+        </div>
+        <div class="quiz-option" onclick="selectOption(this,'q1','early')">
+          <div class="quiz-option-icon">🌱</div>I just started — it's early and I'm figuring things out
+        </div>
+        <div class="quiz-option" onclick="selectOption(this,'q1','running')">
+          <div class="quiz-option-icon">🏃</div>I'm up and running but things feel chaotic
+        </div>
+        <div class="quiz-option" onclick="selectOption(this,'q1','established')">
+          <div class="quiz-option-icon">🏢</div>I have an established business that needs to grow
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <div></div>
+        <button class="quiz-next" id="q1-next" onclick="nextQ(1)" disabled>Continue <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div id="q2" class="quiz-step" style="display:none">
+      <div class="quiz-q-label">Question 2 of 4</div>
+      <div class="quiz-question serif">Do you have a professional website and brand identity?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="selectOption(this,'q2','none')">
+          <div class="quiz-option-icon">❌</div>No — I don't have a website or consistent branding
+        </div>
+        <div class="quiz-option" onclick="selectOption(this,'q2','basic')">
+          <div class="quiz-option-icon">📱</div>I have something basic but it doesn't look professional
+        </div>
+        <div class="quiz-option" onclick="selectOption(this,'q2','good')">
+          <div class="quiz-option-icon">✅</div>Yes — I have a solid website and brand
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="quiz-back" onclick="prevQ(2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+        <button class="quiz-next" id="q2-next" onclick="nextQ(2)" disabled>Continue <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div id="q3" class="quiz-step" style="display:none">
+      <div class="quiz-q-label">Question 3 of 4</div>
+      <div class="quiz-question serif">Do you have systems in place — like a CRM, documented processes, or automation?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="selectOption(this,'q3','none')">
+          <div class="quiz-option-icon">😬</div>No — everything lives in my head or spreadsheets
+        </div>
+        <div class="quiz-option" onclick="selectOption(this,'q3','partial')">
+          <div class="quiz-option-icon">🔧</div>I have some tools but nothing is properly set up
+        </div>
+        <div class="quiz-option" onclick="selectOption(this,'q3','good')">
+          <div class="quiz-option-icon">⚙️</div>Yes — I have solid systems and processes in place
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="quiz-back" onclick="prevQ(3)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+        <button class="quiz-next" id="q3-next" onclick="nextQ(3)" disabled>Continue <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div id="q4" class="quiz-step" style="display:none">
+      <div class="quiz-q-label">Question 4 of 4</div>
+      <div class="quiz-question serif">What is your biggest challenge right now?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="selectOption(this,'q4','plan')">
+          <div class="quiz-option-icon">📋</div>I need a plan, funding, or to figure out my business model
+        </div>
+        <div class="quiz-option" onclick="selectOption(this,'q4','visibility')">
+          <div class="quiz-option-icon">👁️</div>I need more visibility — clients can't find me
+        </div>
+        <div class="quiz-option" onclick="selectOption(this,'q4','chaos')">
+          <div class="quiz-option-icon">🌪️</div>My business is chaotic — I need structure and systems
+        </div>
+        <div class="quiz-option" onclick="selectOption(this,'q4','growth')">
+          <div class="quiz-option-icon">📈</div>I need to grow revenue and scale what's working
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="quiz-back" onclick="prevQ(4)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+        <button class="quiz-next" id="q4-next" onclick="showResult()" disabled>See My Result <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="quiz-result" class="quiz-result">
+      <div class="quiz-result-phase" id="result-phase-badge">Phase 1 — Foundation</div>
+      <h3 class="serif" id="result-title">You're ready to build your foundation.</h3>
+      <p id="result-desc">Based on your answers, you need a solid strategic and financial base before anything else. Phase 1 will give you a fundable business plan, clear positioning, and the confidence to move forward.</p>
+      <div class="quiz-result-actions">
+        <button class="btn-primary" onclick="scrollToPhaseAndShow()" id="result-cta">Start with Phase 1</button>
+        <button class="btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Free Call</button>
+      </div>
+      <button class="quiz-restart" onclick="restartQuiz()">Take the quiz again</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="services-section" id="services">
+  <div class="text-center">
+    <div class="section-label">Services & Packages</div>
+    <h2 class="section-title">Everything you need,<br><em>at every stage.</em></h2>
+    <p class="section-lead">Three phases available now. Each package is designed to deliver a specific, measurable transformation for your business.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="sc-phase-label">Phase 1</div>
+      <div class="sc-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C4A35" stroke-width="1.5" stroke-linecap="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+      </div>
+      <div class="sc-title serif">Launch & Foundation</div>
+      <p class="sc-desc">Build your business on solid ground from day one. We create the strategic and financial blueprint your business needs to launch with confidence and attract funding.</p>
+      <ul class="sc-list">
+        <li><div class="sc-list-dot"></div>Investor & loan-ready business plan</li>
+        <li><div class="sc-list-dot"></div>3-year financial projections</li>
+        <li><div class="sc-list-dot"></div>Market research & competitive analysis</li>
+        <li><div class="sc-list-dot"></div>Pricing & offer structure</li>
+        <li><div class="sc-list-dot"></div>Go-to-market strategy</li>
+        <li><div class="sc-list-dot"></div>Business Audit (entry offer)</li>
+      </ul>
+      <div class="sc-outcome"><span class="sc-outcome-arrow">→</span>A funded, positioned business ready to grow.</div>
+      <a class="sc-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Book a Discovery Call
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="service-card featured">
+      <div class="sc-phase-label">Phase 2</div>
+      <div class="sc-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <div class="sc-title serif">Brand & Presence</div>
+      <p class="sc-desc">Make your business impossible to ignore. We build websites designed to convert and brand identities that build instant trust with the right clients.</p>
+      <ul class="sc-list">
+        <li><div class="sc-list-dot"></div>Website design & development</li>
+        <li><div class="sc-list-dot"></div>Brand identity & visual guidelines</li>
+        <li><div class="sc-list-dot"></div>Lead capture & contact systems</li>
+        <li><div class="sc-list-dot"></div>Google Business & directory setup</li>
+        <li><div class="sc-list-dot"></div>Basic SEO foundation</li>
+        <li><div class="sc-list-dot"></div>1-month post-launch support</li>
+      </ul>
+      <div class="sc-outcome"><span class="sc-outcome-arrow">→</span>A professional presence that generates real leads.</div>
+      <a class="sc-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Book a Discovery Call
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="service-card">
+      <div class="sc-phase-label">Phase 3</div>
+      <div class="sc-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C4A35" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/>
+        </svg>
+      </div>
+      <div class="sc-title serif">Systems & Operations</div>
+      <p class="sc-desc">Turn a chaotic business into a well-oiled machine. We implement the CRM, workflows, and processes that let your business run — even when you're not in the room.</p>
+      <ul class="sc-list">
+        <li><div class="sc-list-dot"></div>CRM selection & full implementation</li>
+        <li><div class="sc-list-dot"></div>Workflow & email automation</li>
+        <li><div class="sc-list-dot"></div>SOP creation & documentation</li>
+        <li><div class="sc-list-dot"></div>Tech stack audit & consolidation</li>
+        <li><div class="sc-list-dot"></div>Team training & handoff</li>
+        <li><div class="sc-list-dot"></div>Process efficiency review</li>
+      </ul>
+      <div class="sc-outcome"><span class="sc-outcome-arrow">→</span>A business that runs on systems, not stress.</div>
+      <a class="sc-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Book a Discovery Call
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
+<section class="process-section" id="process">
+  <div class="text-center">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Simple. Structured.<br><em>Always clear.</em></h2>
+    <p class="section-lead">Every engagement follows the same four-step process — so you always know what's happening and what's next.</p>
+  </div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="process-step-num">01</div>
+      <div class="ps-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </div>
+      <div class="ps-num-small">Step 01</div>
+      <div class="ps-title serif">Discover</div>
+      <p class="ps-desc">We start with a free 30-minute discovery call to understand your business, your challenges, and your goals. No pitch — just clarity.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">02</div>
+      <div class="ps-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+      </div>
+      <div class="ps-num-small">Step 02</div>
+      <div class="ps-title serif">Plan</div>
+      <p class="ps-desc">We conduct a Business Audit to identify exactly what phase you're in, what's missing, and what the right package looks like for your specific situation.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">03</div>
+      <div class="ps-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round">
+          <polyline points="16 18 22 12 16 6"/>
+          <polyline points="8 6 2 12 8 18"/>
+        </svg>
+      </div>
+      <div class="ps-num-small">Step 03</div>
+      <div class="ps-title serif">Build</div>
+      <p class="ps-desc">We execute the agreed engagement with weekly check-ins, shared workspaces, and full transparency throughout. You always know the status.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">04</div>
+      <div class="ps-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round">
+          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+          <polyline points="16 7 22 7 22 13"/>
+        </svg>
+      </div>
+      <div class="ps-num-small">Step 04</div>
+      <div class="ps-title serif">Grow</div>
+      <p class="ps-desc">Deliverables in hand, we transition you to the next phase or offer ongoing advisory support. The journey doesn't end — it compounds.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRUST / AUTHORITY ── -->
+<section class="trust-section" id="about-us">
+  <div class="trust-grid">
+    <div>
+      <div class="section-label">Why The Canopy Group</div>
+      <h2 class="section-title">Strategy meets<br><em>real execution.</em></h2>
+      <p class="section-lead" style="margin-bottom:40px;">Most consultants give you advice and leave. We stay in the work — from your first business plan to a fully optimized, scalable operation. One partner. The whole journey.</p>
+      <div class="trust-pillars">
+        <div class="trust-pillar">
+          <div class="tp-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <div class="tp-title">Structured Methodology</div>
+            <p class="tp-desc">Every engagement follows a proven, documented framework. No improvisation. No guesswork. Just a clear, repeatable process.</p>
+          </div>
+        </div>
+        <div class="trust-pillar">
+          <div class="tp-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+          <div>
+            <div class="tp-title">Outcome-Focused</div>
+            <p class="tp-desc">We measure success by your results — not hours logged. Every deliverable is tied to a specific, measurable business outcome.</p>
+          </div>
+        </div>
+        <div class="trust-pillar">
+          <div class="tp-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div>
+            <div class="tp-title">Founder-Led, Always</div>
+            <p class="tp-desc">You work directly with the founder — not a junior associate. The expertise you buy is the expertise you get.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="trust-stats">
+        <div class="trust-stat"><div class="ts-num serif">5</div><div class="ts-label">Phase growth framework</div></div>
+        <div class="trust-stat"><div class="ts-num serif">3</div><div class="ts-label">Phases available today</div></div>
+        <div class="trust-stat"><div class="ts-num serif">1:1</div><div class="ts-label">Founder-led every time</div></div>
+        <div class="trust-stat"><div class="ts-num serif">BZ</div><div class="ts-label">Rooted in Belize</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonial placeholders -->
+  <div class="testimonial-placeholder">
+    <div class="tp-card">
+      <div class="tp-stars">★★★★★</div>
+      <div class="tp-quote serif">"Working with The Canopy Group gave us the structure we had been missing for years. We finally have a business that runs without us being in every decision."</div>
+      <div class="tp-author">
+        <div class="tp-avatar">JM</div>
+        <div>
+          <div class="tp-name">J. Martinez</div>
+          <div class="tp-role">Business Owner, Belize City</div>
+        </div>
+      </div>
+    </div>
+    <div class="tp-card">
+      <div class="tp-stars">★★★★★</div>
+      <div class="tp-quote serif">"The business audit alone changed how I see my company. We identified three major revenue leaks in the first week. The ROI was immediate."</div>
+      <div class="tp-author">
+        <div class="tp-avatar">SR</div>
+        <div>
+          <div class="tp-name">S. Rivera</div>
+          <div class="tp-role">Founder, Service Business</div>
+        </div>
+      </div>
+    </div>
+    <div class="tp-card">
+      <div class="tp-stars">★★★★★</div>
+      <div class="tp-quote serif">"I came in with an idea and left with a full business plan, financial model, and the confidence to approach investors. This is exactly what I needed."</div>
+      <div class="tp-author">
+        <div class="tp-avatar">KP</div>
+        <div>
+          <div class="tp-name">K. Palacio</div>
+          <div class="tp-role">Entrepreneur, Phase 1 Client</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT / FINAL CTA ── -->
+<section class="final-cta" id="contact">
+  <div class="final-cta-inner">
+    <div class="section-label">Get Started</div>
+    <h2 class="serif">Ready to build something <em>that lasts?</em></h2>
+    <p>Start with a free 30-minute discovery call. No pitch, no pressure — just an honest conversation about where your business is and where it could be.</p>
+    <div class="final-cta-actions">
+      <a class="btn-white" href="mailto:hello@thecanopygroup.bz">
+        Book a Free Discovery Call
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <button class="btn-ghost-white" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Find My Phase First</button>
+    </div>
+    <div class="final-motto">Sub Umbra Floreo — Under the shade, we flourish.</div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="fn">The Canopy Group</div>
+      <div class="ft">Belize</div>
+      <p>We help small and mid-sized businesses build the foundations, systems, and strategies they need to grow with confidence. Deep roots. Wide reach. Unstoppable growth.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navigate</h5>
+      <ul>
+        <li><a onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})">Home</a></li>
+        <li><a onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">The Journey</a></li>
+        <li><a onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Find My Phase</a></li>
+        <li><a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Services</a></li>
+        <li><a onclick="document.getElementById('about-us').scrollIntoView({behavior:'smooth'})">About</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a onclick="showPhaseAndScroll(0)">Phase 1 — Foundation</a></li>
+        <li><a onclick="showPhaseAndScroll(1)">Phase 2 — Presence</a></li>
+        <li><a onclick="showPhaseAndScroll(2)">Phase 3 — Systems</a></li>
+        <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Phase 4 — Waitlist</a></li>
+        <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Phase 5 — Waitlist</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:hello@thecanopygroup.bz">hello@thecanopygroup.bz</a></li>
+        <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Discovery Call</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 The Canopy Group · Belize · All rights reserved</p>
+    <span class="footer-motto">Sub Umbra Floreo</span>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20)
+});
+
+// Phase journey selector
+function showPhase(n){
+  for(let i=0;i<5;i++){
+    document.getElementById('node-'+i).classList.remove('active');
+    document.getElementById('phase-'+i).classList.remove('visible');
+  }
+  document.getElementById('node-'+n).classList.add('active');
+  document.getElementById('phase-'+n).classList.add('visible');
+}
+// Default show phase 0
+document.getElementById('phase-0').classList.add('visible');
+
+function showPhaseAndScroll(n){
+  showPhase(n);
+  document.getElementById('journey').scrollIntoView({behavior:'smooth'});
+}
+
+// Quiz logic
+const answers={};
+function selectOption(el,q,val){
+  el.closest('.quiz-options').querySelectorAll('.quiz-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[q]=val;
+  const nextBtn=document.getElementById(q+'-next');
+  if(nextBtn)nextBtn.disabled=false;
+}
+function nextQ(current){
+  document.getElementById('q'+current).style.display='none';
+  document.getElementById('q'+(current+1)).style.display='block';
+  // Update progress
+  document.getElementById('qp'+(current-1)).classList.remove('active');
+  document.getElementById('qp'+(current-1)).classList.add('done');
+  if(current<4)document.getElementById('qp'+current).classList.add('active');
+}
+function prevQ(current){
+  document.getElementById('q'+current).style.display='none';
+  document.getElementById('q'+(current-1)).style.display='block';
+  document.getElementById('qp'+(current-1)).classList.remove('done');
+  document.getElementById('qp'+(current-1)).classList.add('active');
+  if(current>1)document.getElementById('qp'+(current-2)).classList.remove('active');
+}
+
+function calcPhase(){
+  const q1=answers.q1||'',q2=answers.q2||'',q3=answers.q3||'',q4=answers.q4||'';
+  if(q1==='idea'||q4==='plan')return 1;
+  if(q2==='none'||q2==='basic'||q4==='visibility')return 2;
+  if(q3==='none'||q3==='partial'||q4==='chaos')return 3;
+  return 1;
+}
+
+const results={
+  1:{badge:'Phase 1 — Foundation',title:"You're ready to build your foundation.",desc:"Based on your answers, you need a solid strategic and financial base before anything else. Phase 1 will give you a fundable business plan, clear positioning, and the confidence to move forward.",cta:"Start with Phase 1",phase:0},
+  2:{badge:'Phase 2 — Presence',title:"You need a professional presence.",desc:"You have a business but clients can't find you or don't trust what they see. Phase 2 will build you a lead-generating website and brand identity that converts visitors into clients.",cta:"Start with Phase 2",phase:1},
+  3:{badge:'Phase 3 — Systems',title:"It's time to get your systems right.",desc:"Your business is running but it's chaotic. Phase 3 will install the CRM, workflows, and processes that let your business run predictably — whether you're in the room or not.",cta:"Start with Phase 3",phase:2}
+};
+
+function showResult(){
+  document.getElementById('q4').style.display='none';
+  document.getElementById('quiz-result').classList.add('visible');
+  document.querySelectorAll('.quiz-progress-step').forEach(s=>{s.classList.remove('active');s.classList.add('done')});
+  const phase=calcPhase();
+  const r=results[phase];
+  document.getElementById('result-phase-badge').textContent=r.badge;
+  document.getElementById('result-title').textContent=r.title;
+  document.getElementById('result-desc').textContent=r.desc;
+  document.getElementById('result-cta').textContent=r.cta;
+  document.getElementById('result-cta').onclick=()=>showPhaseAndScroll(r.phase);
+}
+
+function scrollToPhaseAndShow(){
+  document.getElementById('journey').scrollIntoView({behavior:'smooth'});
+}
+
+function restartQuiz(){
+  Object.keys(answers).forEach(k=>delete answers[k]);
+  for(let i=1;i<=4;i++){
+    const s=document.getElementById('q'+i);
+    if(s){
+      s.style.display=i===1?'block':'none';
+      s.querySelectorAll('.quiz-option').forEach(o=>o.classList.remove('selected'));
+      const nb=document.getElementById('q'+i+'-next');
+      if(nb)nb.disabled=true;
+    }
+  }
+  document.getElementById('quiz-result').classList.remove('visible');
+  document.querySelectorAll('.quiz-progress-step').forEach((s,i)=>{
+    s.classList.remove('done','active');
+    if(i===0)s.classList.add('active');
+  });
+}
+</script>
+</body>
+</html>
