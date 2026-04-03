@@ -74,23 +74,27 @@ p{color:var(--ink2);line-height:1.75}
   padding:0 60px;
   padding-top:80px;
   margin-top:-40px;
-  background:var(--white);
+  background:linear-gradient(180deg,#C8E8F5 0%,#D8EFF7 25%,#E8F5F0 55%,#EFF7EC 75%,#F2F7EE 100%);
   position:relative;
   overflow:hidden;
 }
-.hero::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background-image:url('hero-bg.jpg');
-  background-size:cover;
-  background-position:center;
-  opacity:0.11;
-  pointer-events:none;
-  z-index:0;
-}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;}
 /* Subtle Mayan grid pattern */
 
+
+.hero-sky-bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.hero-sky-bg svg{
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;left:0;
+}
 .hero-left{position:relative;z-index:2;padding-right:60px;padding-top:0}
 @keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.2)}}
 .hero h1{
@@ -701,6 +705,289 @@ footer{
 
 <!-- ── HERO ── -->
 <section class="hero" id="home">
+  <!-- SKY LAYER SVG -->
+  <div class="hero-sky-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Sky gradient -->
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#A8D8EF" stop-opacity="0.6"/>
+          <stop offset="40%" stop-color="#C8E8F5" stop-opacity="0.4"/>
+          <stop offset="75%" stop-color="#D8F0E8" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#E8F5EE" stop-opacity="0.1"/>
+        </linearGradient>
+        <!-- Leaf gradient -->
+        <linearGradient id="leafDark" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#1C4A35"/>
+          <stop offset="100%" stop-color="#2A6B4E"/>
+        </linearGradient>
+        <linearGradient id="leafMid" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#2A6B4E"/>
+          <stop offset="100%" stop-color="#3D8B65"/>
+        </linearGradient>
+        <linearGradient id="leafLight" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#3D8B65"/>
+          <stop offset="100%" stop-color="#5BAF82"/>
+        </linearGradient>
+        <!-- Sun glow -->
+        <radialGradient id="sunGlow" cx="75%" cy="12%" r="30%">
+          <stop offset="0%" stop-color="#FFF8DC" stop-opacity="0.55"/>
+          <stop offset="40%" stop-color="#FFF0A0" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="#C8E8F5" stop-opacity="0"/>
+        </radialGradient>
+        <!-- Light ray -->
+        <linearGradient id="ray1" x1="0" y1="0" x2="0.3" y2="1">
+          <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="ray2" x1="0" y1="0" x2="0.2" y2="1">
+          <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Sky fill -->
+      <rect width="1440" height="900" fill="url(#skyGrad)"/>
+      <!-- Sun glow -->
+      <rect width="1440" height="900" fill="url(#sunGlow)"/>
+
+      <!-- Light rays filtering through canopy -->
+      <polygon points="1040,0 1100,0 900,900 840,900" fill="url(#ray1)" opacity="0.5"/>
+      <polygon points="1140,0 1165,0 1010,900 985,900" fill="url(#ray2)" opacity="0.4"/>
+      <polygon points="980,0 1000,0 840,900 820,900" fill="url(#ray2)" opacity="0.3"/>
+
+      <!-- ═══ DISTANT WISPY CLOUDS ═══ -->
+      <g opacity="0.35">
+        <ellipse cx="200" cy="80" rx="120" ry="28" fill="#fff"/>
+        <ellipse cx="260" cy="72" rx="80" ry="22" fill="#fff"/>
+        <ellipse cx="150" cy="85" rx="70" ry="18" fill="#fff"/>
+      </g>
+      <g opacity="0.25">
+        <ellipse cx="900" cy="55" rx="100" ry="22" fill="#fff"/>
+        <ellipse cx="950" cy="48" rx="70" ry="18" fill="#fff"/>
+        <ellipse cx="860" cy="60" rx="60" ry="16" fill="#fff"/>
+      </g>
+      <g opacity="0.2">
+        <ellipse cx="600" cy="38" rx="85" ry="18" fill="#fff"/>
+        <ellipse cx="650" cy="32" rx="55" ry="14" fill="#fff"/>
+      </g>
+
+      <!-- ═══ TOUCAN — left, mid-sky ═══ -->
+      <g transform="translate(310,130)" opacity="0.75">
+        <!-- Body -->
+        <ellipse cx="0" cy="0" rx="22" ry="14" fill="#1A1A18"/>
+        <!-- Tail feathers -->
+        <path d="M-20,4 Q-38,2 -42,10 Q-36,8 -30,12 Q-26,6 -20,4Z" fill="#1A1A18"/>
+        <!-- Wing highlight -->
+        <path d="M-8,-8 Q4,-14 18,-10 Q12,-4 -2,-2 Z" fill="#2A2A26" opacity="0.6"/>
+        <!-- Head -->
+        <circle cx="18" cy="-8" r="11" fill="#1A1A18"/>
+        <!-- Eye -->
+        <circle cx="22" cy="-10" r="3.5" fill="#fff"/>
+        <circle cx="23" cy="-10" r="2" fill="#FF4500" opacity="0.8"/>
+        <circle cx="23.5" cy="-10.5" r="0.8" fill="#1A1A18"/>
+        <!-- Beak — large tropical toucan bill -->
+        <path d="M26,-10 Q52,-6 54,2 Q50,8 38,6 Q28,4 24,-4 Z" fill="#E8A820"/>
+        <path d="M26,-10 Q52,-6 54,2 Q50,2 38,1 Q28,0 24,-4 Z" fill="#F5C840"/>
+        <!-- Beak tip accent -->
+        <path d="M50,2 Q54,2 54,2 Q52,8 46,6 Z" fill="#E05000" opacity="0.7"/>
+        <!-- Chest — white/yellow -->
+        <ellipse cx="8" cy="4" rx="12" ry="9" fill="#FFFDE0"/>
+        <ellipse cx="6" cy="8" rx="8" ry="5" fill="#FFD700" opacity="0.5"/>
+        <!-- Feet -->
+        <line x1="-2" y1="12" x2="-4" y2="22" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="4" y1="13" x2="2" y2="22" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M-4,22 L-8,25 M-4,22 L-2,26 M-4,22 L0,25" stroke="#555" stroke-width="1" stroke-linecap="round" fill="none"/>
+        <path d="M2,22 L-2,25 M2,22 L4,26 M2,22 L6,25" stroke="#555" stroke-width="1" stroke-linecap="round" fill="none"/>
+      </g>
+
+      <!-- ═══ SMALL PARROT — upper right, in flight ═══ -->
+      <g transform="translate(1180,95) rotate(-12)" opacity="0.7">
+        <ellipse cx="0" cy="0" rx="14" ry="8" fill="#2D7A2D"/>
+        <!-- Wings spread -->
+        <path d="M-4,-4 Q-20,-20 -30,-12 Q-18,-8 -8,0 Z" fill="#3D9A3D"/>
+        <path d="M4,-4 Q20,-22 32,-14 Q20,-6 8,0 Z" fill="#3D9A3D"/>
+        <!-- Wing tips -->
+        <path d="M-28,-12 Q-36,-10 -30,-12Z" fill="#1C4A35"/>
+        <path d="M30,-14 Q38,-12 32,-14Z" fill="#1C4A35"/>
+        <!-- Head -->
+        <circle cx="12" cy="-5" r="8" fill="#2D7A2D"/>
+        <!-- Red face patch -->
+        <circle cx="15" cy="-5" r="5" fill="#CC2200" opacity="0.85"/>
+        <!-- Eye -->
+        <circle cx="16" cy="-6" r="2" fill="#FFD700"/>
+        <circle cx="16.5" cy="-6" r="1" fill="#1A1A18"/>
+        <!-- Beak -->
+        <path d="M19,-4 Q24,-2 22,2 Q18,2 17,-1 Z" fill="#888" opacity="0.9"/>
+        <!-- Tail -->
+        <path d="M-12,4 Q-28,12 -32,8 Q-26,6 -12,4Z" fill="#2D7A2D"/>
+        <path d="M-14,6 Q-30,16 -28,20 Q-22,14 -14,6Z" fill="#E8A820" opacity="0.7"/>
+      </g>
+
+      <!-- ═══ SMALL BIRD SILHOUETTE — distant, far right ═══ -->
+      <g transform="translate(1320,70)" opacity="0.4">
+        <path d="M0,0 Q-12,-8 -20,-4 Q-12,0 0,0Z" fill="#1A1A18"/>
+        <path d="M0,0 Q12,-10 20,-5 Q12,0 0,0Z" fill="#1A1A18"/>
+        <circle cx="1" cy="-1" r="3" fill="#1A1A18"/>
+      </g>
+      <!-- Another distant bird -->
+      <g transform="translate(420,60)" opacity="0.3">
+        <path d="M0,0 Q-10,-7 -16,-3 Q-10,0 0,0Z" fill="#1A1A18"/>
+        <path d="M0,0 Q10,-8 16,-4 Q10,0 0,0Z" fill="#1A1A18"/>
+        <circle cx="1" cy="-1" r="2.5" fill="#1A1A18"/>
+      </g>
+
+      <!-- ═══ CANOPY LEAVES — breaking in from edges & bottom ═══ -->
+
+      <!-- TOP-LEFT corner: large palm fronds -->
+      <g opacity="0.9">
+        <!-- Main frond spine -->
+        <path d="M-10,-20 Q80,120 60,280" stroke="url(#leafDark)" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <!-- Frond leaflets left -->
+        <path d="M8,20 Q-30,10 -50,25 Q-20,30 8,20Z" fill="url(#leafDark)"/>
+        <path d="M18,50 Q-25,38 -48,55 Q-18,62 18,50Z" fill="url(#leafDark)"/>
+        <path d="M28,80 Q-18,68 -40,88 Q-12,96 28,80Z" fill="url(#leafMid)"/>
+        <path d="M36,110 Q-8,100 -28,122 Q-2,130 36,110Z" fill="url(#leafMid)"/>
+        <path d="M42,140 Q0,132 -18,156 Q8,163 42,140Z" fill="url(#leafLight)"/>
+        <!-- Frond leaflets right -->
+        <path d="M10,25 Q50,8 72,18 Q48,32 10,25Z" fill="url(#leafDark)"/>
+        <path d="M20,55 Q62,36 86,46 Q60,62 20,55Z" fill="url(#leafDark)"/>
+        <path d="M30,85 Q70,66 95,78 Q68,95 30,85Z" fill="url(#leafMid)"/>
+        <path d="M38,115 Q78,98 102,112 Q74,128 38,115Z" fill="url(#leafMid)"/>
+      </g>
+
+      <!-- Second overlapping frond from top-left -->
+      <g transform="translate(-15, -10)" opacity="0.75">
+        <path d="M30,-30 Q100,100 90,260" stroke="url(#leafMid)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M48,10 Q20,-8 2,2 Q24,18 48,10Z" fill="url(#leafDark)"/>
+        <path d="M62,45 Q32,26 12,38 Q36,55 62,45Z" fill="url(#leafDark)"/>
+        <path d="M72,80 Q44,62 24,76 Q48,92 72,80Z" fill="url(#leafMid)"/>
+        <path d="M80,115 Q54,98 34,114 Q58,130 80,115Z" fill="url(#leafLight)"/>
+        <path d="M50,12 Q82,-4 102,6 Q80,22 50,12Z" fill="url(#leafDark)"/>
+        <path d="M64,48 Q98,32 118,44 Q96,62 64,48Z" fill="url(#leafMid)"/>
+        <path d="M74,84 Q108,68 130,82 Q106,100 74,84Z" fill="url(#leafMid)"/>
+      </g>
+
+      <!-- TOP-RIGHT corner: large fronds coming in -->
+      <g transform="translate(1440,0)" opacity="0.88">
+        <path d="M20,-20 Q-70,130 -55,290" stroke="url(#leafDark)" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <!-- Left leaflets (toward center) -->
+        <path d="M2,20 Q-45,8 -68,22 Q-42,32 2,20Z" fill="url(#leafDark)"/>
+        <path d="M-8,52 Q-56,38 -80,54 Q-54,65 -8,52Z" fill="url(#leafDark)"/>
+        <path d="M-16,84 Q-65,70 -90,88 Q-62,100 -16,84Z" fill="url(#leafMid)"/>
+        <path d="M-22,116 Q-72,104 -96,124 Q-68,135 -22,116Z" fill="url(#leafMid)"/>
+        <path d="M-28,148 Q-78,138 -100,160 Q-72,170 -28,148Z" fill="url(#leafLight)"/>
+        <!-- Right leaflets (off screen) -->
+        <path d="M4,24 Q40,8 60,18 Q38,34 4,24Z" fill="url(#leafDark)"/>
+        <path d="M-4,56 Q34,38 56,50 Q32,66 -4,56Z" fill="url(#leafDark)"/>
+        <path d="M-12,88 Q26,72 50,86 Q24,102 -12,88Z" fill="url(#leafMid)"/>
+      </g>
+
+      <!-- Second frond top-right -->
+      <g transform="translate(1460, -15)" opacity="0.7">
+        <path d="M-20,-10 Q-110,110 -95,270" stroke="url(#leafMid)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M-28,18 Q-72,4 -96,18 Q-68,30 -28,18Z" fill="url(#leafDark)"/>
+        <path d="M-38,52 Q-84,36 -110,52 Q-80,66 -38,52Z" fill="url(#leafMid)"/>
+        <path d="M-46,86 Q-94,70 -120,88 Q-90,102 -46,86Z" fill="url(#leafMid)"/>
+        <path d="M-52,120 Q-102,106 -126,126 Q-96,140 -52,120Z" fill="url(#leafLight)"/>
+        <path d="M-26,20 Q10,4 32,16 Q8,30 -26,20Z" fill="url(#leafDark)"/>
+        <path d="M-36,54 Q2,36 26,50 Q2,66 -36,54Z" fill="url(#leafMid)"/>
+      </g>
+
+      <!-- BOTTOM center-left: large dramatic leaf tips pointing up -->
+      <g transform="translate(120, 900)" opacity="0.92">
+        <!-- Big banana/heliconia leaf -->
+        <path d="M0,0 Q-40,-180 -20,-320 Q20,-280 60,-140 Q30,-80 0,0Z" fill="url(#leafDark)"/>
+        <!-- Leaf midrib -->
+        <path d="M0,0 Q-10,-160 -10,-320" stroke="#1C4A35" stroke-width="2" fill="none" opacity="0.4"/>
+        <!-- Second leaf overlapping -->
+        <path d="M30,-10 Q10,-190 40,-340 Q80,-300 100,-160 Q70,-90 30,-10Z" fill="url(#leafMid)" opacity="0.85"/>
+        <path d="M-40,-5 Q-80,-160 -60,-290 Q-30,-270 -10,-130 Q-20,-70 -40,-5Z" fill="url(#leafLight)" opacity="0.7"/>
+      </g>
+
+      <!-- BOTTOM right: more leaf tips -->
+      <g transform="translate(1300, 900)" opacity="0.88">
+        <path d="M0,0 Q40,-170 20,-310 Q-20,-270 -60,-130 Q-30,-70 0,0Z" fill="url(#leafDark)"/>
+        <path d="M-30,-8 Q-10,-180 -40,-320 Q-80,-280 -100,-150 Q-70,-85 -30,-8Z" fill="url(#leafMid)" opacity="0.82"/>
+        <path d="M40,-5 Q80,-150 60,-280 Q30,-260 10,-120 Q20,-65 40,-5Z" fill="url(#leafLight)" opacity="0.7"/>
+      </g>
+
+      <!-- BOTTOM center: medium leaf peek -->
+      <g transform="translate(650, 900)" opacity="0.6">
+        <path d="M0,0 Q-20,-120 0,-200 Q25,-160 20,-80 Q10,-40 0,0Z" fill="url(#leafMid)"/>
+        <path d="M25,-10 Q50,-110 35,-190 Q60,-150 55,-70 Q45,-35 25,-10Z" fill="url(#leafDark)" opacity="0.7"/>
+      </g>
+
+      <!-- BOTTOM far-left: large frond -->
+      <g transform="translate(-20, 900)" opacity="0.8">
+        <path d="M20,0 Q60,-200 100,-380 Q140,-340 130,-200 Q100,-100 20,0Z" fill="url(#leafDark)"/>
+        <path d="M60,-10 Q100,-180 140,-340 Q168,-300 155,-180 Q140,-100 60,-10Z" fill="url(#leafMid)" opacity="0.75"/>
+      </g>
+
+      <!-- ═══ TROPICAL FRUIT — red & orange clusters on leaf tips ═══ -->
+      <!-- Small fruit cluster top-left area -->
+      <g transform="translate(72,158)" opacity="0.9">
+        <circle cx="0" cy="0" r="7" fill="#CC3300"/>
+        <circle cx="12" cy="-4" r="6" fill="#DD4400"/>
+        <circle cx="6" cy="-12" r="5" fill="#BB2200"/>
+        <circle cx="-4" cy="-8" r="4.5" fill="#EE5500" opacity="0.8"/>
+        <!-- Small green leaves at fruit top -->
+        <path d="M6,-12 Q0,-20 -6,-16 Q0,-10 6,-12Z" fill="#2A6B4E" opacity="0.9"/>
+        <path d="M6,-12 Q14,-18 16,-12 Q10,-8 6,-12Z" fill="#3D8B65" opacity="0.8"/>
+      </g>
+
+      <!-- Small berries near right canopy -->
+      <g transform="translate(1368,116)" opacity="0.85">
+        <circle cx="0" cy="0" r="5.5" fill="#FFAA00"/>
+        <circle cx="10" cy="-5" r="5" fill="#FF8800"/>
+        <circle cx="5" cy="-13" r="4.5" fill="#FFCC00"/>
+        <circle cx="-6" cy="-6" r="4" fill="#FF6600" opacity="0.8"/>
+        <path d="M5,-13 Q-2,-22 -8,-17 Q-2,-11 5,-13Z" fill="#2A6B4E"/>
+        <path d="M5,-13 Q12,-20 15,-14 Q9,-10 5,-13Z" fill="#3D8B65"/>
+      </g>
+
+      <!-- ═══ BUTTERFLY — near upper canopy ═══ -->
+      <g transform="translate(550,190) rotate(8)" opacity="0.65">
+        <!-- Upper wings -->
+        <path d="M0,0 Q-18,-22 -30,-12 Q-22,0 0,0Z" fill="#E8A820" opacity="0.9"/>
+        <path d="M0,0 Q18,-24 30,-13 Q22,0 0,0Z" fill="#E8A820" opacity="0.9"/>
+        <!-- Wing spots -->
+        <circle cx="-18" cy="-12" r="4" fill="#1A1A18" opacity="0.5"/>
+        <circle cx="18" cy="-13" r="4" fill="#1A1A18" opacity="0.5"/>
+        <!-- Lower wings -->
+        <path d="M0,0 Q-20,16 -28,8 Q-18,0 0,0Z" fill="#CC7700" opacity="0.8"/>
+        <path d="M0,0 Q20,17 28,8 Q18,0 0,0Z" fill="#CC7700" opacity="0.8"/>
+        <!-- Body -->
+        <ellipse cx="0" cy="0" rx="2.5" ry="7" fill="#1A1A18" opacity="0.8"/>
+        <!-- Antennae -->
+        <path d="M-1,-7 Q-8,-18 -10,-22" stroke="#1A1A18" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <path d="M1,-7 Q8,-18 10,-22" stroke="#1A1A18" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <circle cx="-10" cy="-22" r="1.5" fill="#1A1A18" opacity="0.7"/>
+        <circle cx="10" cy="-22" r="1.5" fill="#1A1A18" opacity="0.7"/>
+      </g>
+
+      <!-- ═══ MONKEY SILHOUETTE — hanging from upper right frond ═══ -->
+      <g transform="translate(1370,240)" opacity="0.55">
+        <!-- Tail wrapping branch -->
+        <path d="M0,-30 Q20,-40 22,-20 Q20,0 10,10 Q5,20 8,32" stroke="#1A1A18" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- Body -->
+        <ellipse cx="0" cy="0" rx="14" ry="18" fill="#1A1A18"/>
+        <!-- Head -->
+        <circle cx="0" cy="-28" r="13" fill="#1A1A18"/>
+        <!-- Face pale patch -->
+        <ellipse cx="0" cy="-26" rx="8" ry="7" fill="#3A2A1A" opacity="0.6"/>
+        <!-- Arms hanging -->
+        <path d="M-14,-5 Q-30,-15 -28,-32" stroke="#1A1A18" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M14,-5 Q28,-12 26,-28" stroke="#1A1A18" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- Legs -->
+        <path d="M-8,18 Q-12,34 -10,42" stroke="#1A1A18" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M8,18 Q10,34 8,42" stroke="#1A1A18" stroke-width="5" fill="none" stroke-linecap="round"/>
+      </g>
+
+    </svg>
+  </div>
+  <!-- END SKY LAYER -->
+
   <div class="hero-left">
 
     <h1 class="serif">Your business deserves a<br><em>clear path forward.</em></h1>
