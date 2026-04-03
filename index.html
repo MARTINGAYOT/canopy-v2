@@ -85,21 +85,12 @@ p{color:var(--ink2);line-height:1.75}
   background-image:url('hero-bg.jpg');
   background-size:cover;
   background-position:center;
-  opacity:0.15;
+  opacity:0.11;
   pointer-events:none;
   z-index:0;
 }
 /* Subtle Mayan grid pattern */
-.hero::after{
-  content:'';
-  position:absolute;
-  right:0;top:0;bottom:0;width:50%;
-  background-image:
-    linear-gradient(rgba(28,74,53,0.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(28,74,53,0.03) 1px,transparent 1px);
-  background-size:40px 40px;
-  pointer-events:none;
-}
+
 .hero-left{position:relative;z-index:2;padding-right:48px}
 @keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.2)}}
 .hero h1{
