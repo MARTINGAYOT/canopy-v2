@@ -82,6 +82,19 @@ p{color:var(--ink2);line-height:1.75}
 /* Subtle Mayan grid pattern */
 
 
+.section-nature-bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.section-nature-bg svg{
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;left:0;
+}
 .hero-sky-bg{
   position:absolute;
   inset:0;
@@ -218,7 +231,7 @@ section{padding:100px 60px}
 .section-lead{font-size:18px;color:var(--ink2);line-height:1.75;max-width:560px}
 
 /* ── JOURNEY SECTION ── */
-.journey-section{background:var(--ink);position:relative;overflow:hidden}
+.journey-section{background:linear-gradient(180deg,#0D2818 0%,#112E1C 40%,#0F2618 100%);position:relative;overflow:hidden}
 .journey-section::before{
   content:'';position:absolute;inset:0;
   background-image:
@@ -228,23 +241,17 @@ section{padding:100px 60px}
   pointer-events:none;
 }
 /* Mayan corner ornament */
-.journey-section::after{
-  content:'';
-  position:absolute;top:0;right:0;width:300px;height:300px;
-  background-image:
-    radial-gradient(circle at 100% 0%,rgba(91,175,130,0.08) 0%,transparent 60%);
-  pointer-events:none;
-}
+
 .journey-section .section-label{color:var(--amber2)}
 .journey-section .section-label::before{background:var(--amber2)}
 .journey-section .section-title{color:#fff}
 .journey-section .section-title em{color:var(--leaf)}
 .journey-section .section-lead{color:rgba(255,255,255,0.55);margin-bottom:64px}
 
-.journey-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:64px;position:relative;z-index:1}
+.journey-header{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:64px;position:relative;z-index:1}
 
 /* Phase timeline */
-.phase-timeline{position:relative;z-index:1}
+.phase-timeline{position:relative;z-index:1;position:relative;z-index:1}
 .phase-track{
   display:flex;
   align-items:stretch;
@@ -353,12 +360,17 @@ section{padding:100px 60px}
 .btn-phase-waitlist:hover{border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.8)}
 
 /* ── QUIZ SECTION ── */
-.quiz-section{background:var(--cream);position:relative}
+
+.quiz-section .section-label{color:var(--amber2)}
+.quiz-section .section-label::before{background:var(--amber2)}
+.quiz-section .section-title{color:#fff}
+.quiz-section .section-lead{color:rgba(255,255,255,0.65)}
+.quiz-section{background:linear-gradient(180deg,#0F2618 0%,#1A3D28 20%,#1E4A30 45%,#E8F0E4 70%,#EFF5EC 100%);position:relative;overflow:hidden}
 .quiz-section .section-title{margin-bottom:8px}
 .quiz-section .section-lead{margin-bottom:52px}
-.quiz-card{
+.quiz-card{position:relative;z-index:1;
   max-width:720px;margin:0 auto;
-  background:var(--white);border:1px solid var(--border);
+  background:rgba(255,255,255,0.97);border:1px solid var(--border);
   border-radius:var(--r3);padding:48px;
   box-shadow:0 4px 40px rgba(0,0,0,0.04);
 }
@@ -430,11 +442,11 @@ section{padding:100px 60px}
 }
 
 /* ── SERVICES SECTION ── */
-.services-section{background:var(--white)}
+.services-section{background:linear-gradient(180deg,#E8F0E4 0%,#F0F5EC 30%,#F5F8F2 60%,#F8FAF5 100%);position:relative;overflow:hidden}
 .services-section .section-title{margin-bottom:8px}
 .services-section .section-lead{margin-bottom:52px}
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border)}
-.service-card{
+.services-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border)}
+.service-card{background:rgba(255,255,255,0.88);
   background:var(--white);padding:40px 36px;
   position:relative;
   border-top:3px solid transparent;
@@ -481,14 +493,20 @@ section{padding:100px 60px}
 .sc-cta:hover{opacity:.88;transform:translateY(-1px)}
 
 /* ── PROCESS SECTION ── */
-.process-section{background:var(--cream2)}
-.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);margin-top:52px}
-.process-step{
+
+.process-section .section-label span{color:#6B4820}
+.process-section .section-label::before{background:#6B4820}
+.process-section .section-title{color:#3A2206}
+.process-section .section-lead{color:#5A3A18}
+.ps-num-small{color:#8B5A22}
+.process-section{background:linear-gradient(180deg,#F5F2EA 0%,#EDE8DC 40%,#E2D9C8 70%,#D8CDB8 100%);position:relative;overflow:hidden}
+.process-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);margin-top:52px}
+.process-step{background:rgba(255,255,255,0.55);
   background:var(--cream2);padding:36px 28px;
   position:relative;overflow:hidden;
   transition:background .2s;
 }
-.process-step:hover{background:var(--white)}
+.process-step:hover{background:rgba(255,255,255,0.85)}
 .process-step-num{
   font-family:'Instrument Serif',serif;font-size:64px;
   color:rgba(28,74,53,0.06);line-height:1;
@@ -509,8 +527,24 @@ section{padding:100px 60px}
 .ps-desc{font-size:13px;color:var(--ink2);line-height:1.7}
 
 /* ── TRUST SECTION ── */
-.trust-section{background:var(--white)}
-.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+
+.trust-section .section-label span{color:#5A3A10}
+.trust-section .section-label::before{background:#5A3A10}
+.trust-section .section-title{color:#2A1A06}
+.trust-section .section-lead{color:#4A3018}
+.trust-section .tp-title{color:#2A1A06}
+.trust-section .tp-desc{color:#5A3A18}
+.trust-section .ts-num{color:#2A1A06}
+.trust-section .ts-label{color:#5A3A18}
+.trust-section .tp-quote{color:#2A1A06;font-style:italic}
+.trust-section .tp-name{color:#2A1A06}
+.trust-section .tp-role{color:#5A3A18}
+.trust-section .trust-pillar{background:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.6)}
+.trust-section .trust-stat{background:rgba(255,255,255,0.45)}
+.trust-section .testimonial-placeholder{background:rgba(255,255,255,0.35);border-color:rgba(255,255,255,0.5)}
+.trust-section .tp-card{background:rgba(255,255,255,0.65)}
+.trust-section{background:linear-gradient(180deg,#D8CDB8 0%,#CEBFA8 25%,#C4B498 50%,#BCA888 75%,#B09A7A 100%);position:relative;overflow:hidden}
+.trust-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .trust-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border)}
 .trust-stat{
   background:var(--white);padding:32px 28px;
@@ -566,26 +600,12 @@ section{padding:100px 60px}
 
 /* ── FINAL CTA ── */
 .final-cta{
-  background:var(--forest);
+  background:linear-gradient(180deg,#6B4820 0%,#4A3010 25%,#2E1C06 55%,#1A0E02 80%,#0E0800 100%);
   padding:120px 60px;
   text-align:center;
   position:relative;overflow:hidden;
 }
-.final-cta::before{
-  content:'';position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
-  background-size:50px 50px;
-  pointer-events:none;
-}
-.final-cta::after{
-  content:'';position:absolute;
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(91,175,130,0.12) 0%,transparent 70%);
-  pointer-events:none;
-}
+
 .final-cta-inner{position:relative;z-index:1;max-width:640px;margin:0 auto}
 .final-cta .section-label{justify-content:center;color:var(--amber2)}
 .final-cta .section-label::before{background:var(--amber2)}
@@ -613,7 +633,7 @@ section{padding:100px 60px}
   text-decoration:none;transition:all .2s;
 }
 .btn-ghost-white:hover{border-color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.06)}
-.final-motto{
+.final-motto{color:rgba(255,255,255,0.3);
   margin-top:52px;font-family:'Instrument Serif',serif;
   font-size:14px;font-style:italic;color:rgba(255,255,255,0.25);
   letter-spacing:.5px;
@@ -621,9 +641,11 @@ section{padding:100px 60px}
 
 /* ── FOOTER ── */
 footer{
-  background:#111210;padding:56px 60px 36px;
+  background:linear-gradient(180deg,#0E0800 0%,#080400 60%,#040200 100%);
+  padding:56px 60px 36px;
+  position:relative;overflow:hidden;
 }
-.footer-top{
+.footer-top{position:relative;z-index:1;
   display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
   gap:48px;margin-bottom:48px;
   padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.06);
@@ -636,12 +658,12 @@ footer{
 .footer-col li{margin-bottom:10px}
 .footer-col a{font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;transition:color .2s;cursor:pointer}
 .footer-col a:hover{color:rgba(255,255,255,0.8)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .footer-bottom p{font-size:11px;color:rgba(255,255,255,0.2)}
 .footer-motto{font-family:'Instrument Serif',serif;font-size:13px;font-style:italic;color:rgba(255,255,255,0.18)}
 
 /* ── UTILITIES ── */
-.text-center{text-align:center}
+.text-center{text-align:center;position:relative;z-index:1}
 .text-center .section-lead{margin:0 auto 52px}
 .text-center .section-label{justify-content:center}
 .divider{height:1px;background:var(--border);margin:0 60px}
@@ -665,7 +687,7 @@ footer{
   .process-grid{grid-template-columns:1fr 1fr}
   .trust-grid{grid-template-columns:1fr}
   .testimonial-placeholder{grid-template-columns:1fr}
-  .footer-top{grid-template-columns:1fr 1fr}
+  .footer-top{position:relative;z-index:1;grid-template-columns:1fr 1fr}
   .final-cta{padding:80px 24px}
   footer{padding:48px 24px 28px}
 }
@@ -1077,6 +1099,158 @@ footer{
 
 <!-- ── JOURNEY SECTION ── -->
 <section class="journey-section" id="journey">
+  <div class="section-nature-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="canL" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0A1F0F"/><stop offset="100%" stop-color="#1C4A35"/></linearGradient>
+        <linearGradient id="canM" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1C4A35"/><stop offset="100%" stop-color="#2A6B4E"/></linearGradient>
+        <linearGradient id="canH" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2A6B4E"/><stop offset="100%" stop-color="#3D8B65"/></linearGradient>
+        <radialGradient id="lightPatch" cx="50%" cy="30%" r="40%"><stop offset="0%" stop-color="#5BAF82" stop-opacity="0.06"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+        <radialGradient id="lightPatch2" cx="25%" cy="50%" r="30%"><stop offset="0%" stop-color="#3D8B65" stop-opacity="0.04"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      </defs>
+      <!-- Ambient light patches filtering through -->
+      <rect width="1440" height="900" fill="url(#lightPatch)"/>
+      <rect width="1440" height="900" fill="url(#lightPatch2)"/>
+      <!-- Light shafts from above -->
+      <polygon points="580,0 640,0 500,900 440,900" fill="rgba(255,255,255,0.012)"/>
+      <polygon points="860,0 900,0 780,900 740,900" fill="rgba(255,255,255,0.01)"/>
+      <polygon points="1100,0 1130,0 1020,900 990,900" fill="rgba(255,255,255,0.008)"/>
+
+      <!-- Dense canopy ceiling — overlapping leaves top -->
+      <g opacity="0.95">
+        <!-- Giant left canopy cluster -->
+        <path d="M-60,0 Q60,-20 100,80 Q60,100 0,60 Z" fill="#0A1F0F"/>
+        <path d="M-40,0 Q120,20 140,120 Q80,130 20,80 Z" fill="#112A18"/>
+        <path d="M20,0 Q180,10 200,100 Q140,120 60,70 Z" fill="#0D2318"/>
+        <path d="M80,0 Q220,-10 250,90 Q180,115 100,60 Z" fill="#0A1F0F"/>
+        <path d="M160,0 Q290,0 310,80 Q240,110 160,60 Z" fill="#112A18"/>
+        <path d="M240,0 Q360,-15 390,70 Q310,100 230,55 Z" fill="#0D2318"/>
+        <!-- Leaf veins -->
+        <path d="M60,0 Q80,50 100,80" stroke="#1C4A35" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <path d="M160,0 Q180,45 200,100" stroke="#1C4A35" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <!-- Middle canopy -->
+        <path d="M320,0 Q450,-10 480,75 Q400,100 320,55 Z" fill="#0A1F0F"/>
+        <path d="M400,0 Q520,10 545,80 Q465,108 390,65 Z" fill="#112A18"/>
+        <path d="M500,0 Q620,-5 650,72 Q570,100 490,60 Z" fill="#0A1F0F"/>
+        <path d="M600,0 Q720,10 745,78 Q660,105 580,62 Z" fill="#0D2318"/>
+        <path d="M700,0 Q820,-5 848,74 Q762,100 680,58 Z" fill="#112A18"/>
+        <path d="M800,0 Q920,8 948,76 Q860,104 778,60 Z" fill="#0A1F0F"/>
+        <!-- Right canopy -->
+        <path d="M900,0 Q1030,-8 1058,72 Q968,100 880,56 Z" fill="#0D2318"/>
+        <path d="M1000,0 Q1140,5 1165,78 Q1070,106 980,60 Z" fill="#112A18"/>
+        <path d="M1100,0 Q1240,-5 1268,74 Q1172,102 1080,58 Z" fill="#0A1F0F"/>
+        <path d="M1200,0 Q1360,10 1380,80 Q1280,108 1180,62 Z" fill="#0D2318"/>
+        <path d="M1320,0 Q1460,-8 1480,72 Q1380,100 1290,56 Z" fill="#112A18"/>
+        <!-- Second row canopy — lighter, deeper in -->
+        <path d="M-20,30 Q120,15 160,95 Q80,118 0,78 Z" fill="#1C4A35" opacity="0.6"/>
+        <path d="M140,25 Q280,10 320,92 Q240,118 160,80 Z" fill="#1C4A35" opacity="0.55"/>
+        <path d="M300,20 Q440,5 480,88 Q400,115 318,76 Z" fill="#2A6B4E" opacity="0.5"/>
+        <path d="M460,25 Q600,8 640,90 Q555,116 475,78 Z" fill="#1C4A35" opacity="0.55"/>
+        <path d="M620,18 Q760,3 800,86 Q715,113 632,74 Z" fill="#2A6B4E" opacity="0.5"/>
+        <path d="M780,22 Q920,6 960,88 Q874,115 790,77 Z" fill="#1C4A35" opacity="0.55"/>
+        <path d="M940,20 Q1085,5 1120,86 Q1034,114 950,76 Z" fill="#2A6B4E" opacity="0.5"/>
+        <path d="M1100,24 Q1250,8 1284,88 Q1196,116 1110,78 Z" fill="#1C4A35" opacity="0.55"/>
+        <path d="M1260,18 Q1410,2 1440,84 Q1360,112 1274,73 Z" fill="#2A6B4E" opacity="0.5"/>
+      </g>
+
+      <!-- BRANCHES crossing through mid-section -->
+      <g opacity="0.85">
+        <!-- Main branch left to center -->
+        <path d="M-20,220 Q180,180 400,240 Q600,290 750,260" stroke="#0A1800" stroke-width="28" fill="none" stroke-linecap="round"/>
+        <path d="M-20,220 Q180,180 400,240 Q600,290 750,260" stroke="#1A3A0A" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <!-- Sub branch up-right -->
+        <path d="M380,235 Q440,160 520,120" stroke="#0A1800" stroke-width="18" fill="none" stroke-linecap="round"/>
+        <path d="M380,235 Q440,160 520,120" stroke="#1A3A0A" stroke-width="11" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <!-- Branch right side -->
+        <path d="M1460,300 Q1280,240 1060,290 Q880,330 720,300" stroke="#0A1800" stroke-width="24" fill="none" stroke-linecap="round"/>
+        <path d="M1460,300 Q1280,240 1060,290 Q880,330 720,300" stroke="#1A3A0A" stroke-width="15" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <!-- Sub branch dipping down -->
+        <path d="M1080,285 Q1120,360 1100,440" stroke="#0A1800" stroke-width="16" fill="none" stroke-linecap="round"/>
+        <path d="M1080,285 Q1120,360 1100,440" stroke="#1A3A0A" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <!-- Thin branch center -->
+        <path d="M700,260 Q760,200 840,180" stroke="#0A1800" stroke-width="12" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <!-- Hanging vines from branches -->
+      <g opacity="0.7">
+        <path d="M280,230 Q270,320 290,420 Q300,500 280,580" stroke="#1C4A35" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M350,240 Q360,340 340,440 Q320,520 340,620" stroke="#2A6B4E" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M560,200 Q548,300 558,400 Q568,480 548,560" stroke="#1C4A35" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M900,275 Q888,375 900,475 Q910,550 895,640" stroke="#1C4A35" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M960,280 Q972,380 958,480 Q945,560 960,650" stroke="#2A6B4E" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Vine leaves -->
+        <ellipse cx="284" cy="320" rx="8" ry="4" fill="#2A6B4E" transform="rotate(-30 284 320)" opacity="0.8"/>
+        <ellipse cx="278" cy="420" rx="8" ry="4" fill="#3D8B65" transform="rotate(20 278 420)" opacity="0.7"/>
+        <ellipse cx="554" cy="300" rx="8" ry="4" fill="#2A6B4E" transform="rotate(-25 554 300)" opacity="0.8"/>
+        <ellipse cx="562" cy="400" rx="8" ry="4" fill="#3D8B65" transform="rotate(15 562 400)" opacity="0.7"/>
+        <ellipse cx="896" cy="375" rx="8" ry="4" fill="#2A6B4E" transform="rotate(-20 896 375)" opacity="0.8"/>
+        <ellipse cx="904" cy="475" rx="8" ry="4" fill="#3D8B65" transform="rotate(25 904 475)" opacity="0.7"/>
+      </g>
+
+      <!-- Orchids on branches -->
+      <g transform="translate(500,200)" opacity="0.8">
+        <path d="M0,0 Q-12,-8 -8,-18 Q0,-14 8,-18 Q12,-8 0,0Z" fill="#CC44AA"/>
+        <path d="M0,0 Q-15,4 -14,14 Q-6,8 0,0Z" fill="#DD55BB"/>
+        <path d="M0,0 Q15,4 14,14 Q6,8 0,0Z" fill="#DD55BB"/>
+        <path d="M0,0 Q0,12 0,20" stroke="#FF88CC" stroke-width="2" fill="none"/>
+        <circle cx="0" cy="-2" r="3" fill="#FFEEAA"/>
+      </g>
+      <g transform="translate(1060,310)" opacity="0.75">
+        <path d="M0,0 Q-10,-7 -7,-16 Q0,-12 7,-16 Q10,-7 0,0Z" fill="#AA3388"/>
+        <path d="M0,0 Q-13,3 -12,12 Q-5,7 0,0Z" fill="#BB4499"/>
+        <path d="M0,0 Q13,3 12,12 Q5,7 0,0Z" fill="#BB4499"/>
+        <circle cx="0" cy="-2" r="2.5" fill="#FFDDAA"/>
+      </g>
+
+      <!-- TOUCAN on left branch -->
+      <g transform="translate(185,210) scale(1.3)" opacity="0.85">
+        <ellipse cx="0" cy="0" rx="22" ry="14" fill="#1A1A18"/>
+        <path d="M-20,4 Q-38,2 -42,10 Q-36,8 -30,12 Q-26,6 -20,4Z" fill="#1A1A18"/>
+        <circle cx="18" cy="-8" r="11" fill="#1A1A18"/>
+        <circle cx="22" cy="-10" r="3.5" fill="#fff"/>
+        <circle cx="23" cy="-10" r="2" fill="#FF4500" opacity="0.8"/>
+        <circle cx="23.5" cy="-10.5" r="0.8" fill="#1A1A18"/>
+        <path d="M26,-10 Q52,-6 54,2 Q50,8 38,6 Q28,4 24,-4 Z" fill="#E8A820"/>
+        <path d="M26,-10 Q52,-6 54,2 Q50,2 38,1 Q28,0 24,-4 Z" fill="#F5C840"/>
+        <ellipse cx="8" cy="4" rx="12" ry="9" fill="#FFFDE0"/>
+        <ellipse cx="6" cy="8" rx="8" ry="5" fill="#FFD700" opacity="0.5"/>
+        <line x1="-2" y1="12" x2="-6" y2="22" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="4" y1="13" x2="0" y2="22" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+      </g>
+
+      <!-- HOWLER MONKEY on right branch -->
+      <g transform="translate(1200,265)" opacity="0.7">
+        <path d="M0,-20 Q30,-35 32,-10 Q28,10 12,18" stroke="#1A0E00" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <ellipse cx="0" cy="0" rx="16" ry="20" fill="#1A0E00"/>
+        <circle cx="0" cy="-30" r="14" fill="#1A0E00"/>
+        <ellipse cx="0" cy="-28" rx="9" ry="8" fill="#2A1A08" opacity="0.7"/>
+        <path d="M-16,-8 Q-34,-18 -30,-36" stroke="#1A0E00" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M16,-8 Q32,-16 28,-32" stroke="#1A0E00" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M-8,20 Q-12,38 -10,48" stroke="#1A0E00" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M8,20 Q10,38 8,48" stroke="#1A0E00" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <circle cx="-4" cy="-30" r="3" fill="#3A2A10" opacity="0.8"/>
+        <circle cx="4" cy="-30" r="3" fill="#3A2A10" opacity="0.8"/>
+      </g>
+
+      <!-- Mid-canopy leaves left side -->
+      <g opacity="0.8">
+        <path d="M-30,400 Q60,350 120,420 Q80,460 -20,440 Z" fill="#1C4A35"/>
+        <path d="M-20,460 Q80,410 140,480 Q95,520 -10,498 Z" fill="#2A6B4E" opacity="0.8"/>
+        <path d="M0,520 Q100,470 158,542 Q110,580 10,556 Z" fill="#1C4A35" opacity="0.75"/>
+      </g>
+      <!-- Mid-canopy leaves right side -->
+      <g opacity="0.8">
+        <path d="M1470,380 Q1370,330 1310,400 Q1355,440 1460,420 Z" fill="#1C4A35"/>
+        <path d="M1460,440 Q1360,390 1298,460 Q1345,500 1450,478 Z" fill="#2A6B4E" opacity="0.8"/>
+        <path d="M1440,500 Q1340,452 1280,522 Q1328,560 1430,538 Z" fill="#1C4A35" opacity="0.75"/>
+      </g>
+
+      <!-- Bottom fade into next section -->
+      <rect x="0" y="750" width="1440" height="150" fill="url(#btmFade)" opacity="0.6"/>
+      <defs><linearGradient id="btmFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0D2818" stop-opacity="0"/><stop offset="100%" stop-color="#112030" stop-opacity="0.4"/></linearGradient></defs>
+    </svg>
+  </div>
+
   <div class="journey-header">
     <div>
       <div class="section-label">The Growth Journey</div>
@@ -1355,6 +1529,142 @@ footer{
 
 <!-- ── QUIZ ── -->
 <section class="quiz-section" id="quiz">
+  <div class="section-nature-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="qLeafD" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1C4A35"/><stop offset="100%" stop-color="#2A6B4E"/></linearGradient>
+        <linearGradient id="qLeafL" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3D8B65"/><stop offset="100%" stop-color="#5BAF82"/></linearGradient>
+      </defs>
+
+      <!-- Upper trunk sections left -->
+      <rect x="-20" y="0" width="80" height="500" rx="8" fill="#2A1A06" opacity="0.7"/>
+      <rect x="15" y="0" width="20" height="500" fill="#3A2A10" opacity="0.3"/>
+      <!-- Bark texture lines -->
+      <path d="M-10,50 Q10,60 -5,80" stroke="#1A0E00" stroke-width="1.5" fill="none" opacity="0.5"/>
+      <path d="M-10,120 Q15,130 -5,155" stroke="#1A0E00" stroke-width="1.5" fill="none" opacity="0.5"/>
+      <path d="M-10,200 Q12,212 -5,238" stroke="#1A0E00" stroke-width="1.5" fill="none" opacity="0.5"/>
+      <path d="M-10,300 Q14,312 -5,340" stroke="#1A0E00" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+      <!-- Upper trunk right -->
+      <rect x="1380" y="0" width="80" height="500" rx="8" fill="#2A1A06" opacity="0.65"/>
+      <rect x="1405" y="0" width="20" height="500" fill="#3A2A10" opacity="0.25"/>
+
+      <!-- Large branch from left trunk -->
+      <path d="M60,120 Q300,80 500,140 Q640,175 720,160" stroke="#2A1A06" stroke-width="32" fill="none" stroke-linecap="round"/>
+      <path d="M60,120 Q300,80 500,140 Q640,175 720,160" stroke="#3A2A10" stroke-width="20" fill="none" stroke-linecap="round" opacity="0.4"/>
+      <!-- Sub branch up -->
+      <path d="M420,130 Q480,60 550,30" stroke="#2A1A06" stroke-width="20" fill="none" stroke-linecap="round"/>
+
+      <!-- Large branch from right -->
+      <path d="M1380,160 Q1200,110 1020,165 Q880,200 760,185" stroke="#2A1A06" stroke-width="28" fill="none" stroke-linecap="round"/>
+      <path d="M1380,160 Q1200,110 1020,165 Q880,200 760,185" stroke="#3A2A10" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.35"/>
+
+      <!-- Hanging vines with leaves -->
+      <g opacity="0.75">
+        <path d="M200,95 Q190,200 205,320 Q215,420 200,520" stroke="#2A6B4E" stroke-width="2.5" fill="none"/>
+        <path d="M380,120 Q368,220 382,340 Q394,440 380,540" stroke="#1C4A35" stroke-width="2.5" fill="none"/>
+        <path d="M620,155 Q608,255 622,375" stroke="#2A6B4E" stroke-width="2" fill="none"/>
+        <path d="M1050,160 Q1038,260 1052,380" stroke="#1C4A35" stroke-width="2.5" fill="none"/>
+        <path d="M1250,140 Q1238,240 1252,360 Q1264,455 1250,545" stroke="#2A6B4E" stroke-width="2.5" fill="none"/>
+        <!-- Leaves on vines -->
+        <ellipse cx="197" cy="200" rx="9" ry="5" fill="#2A6B4E" transform="rotate(-35 197 200)"/>
+        <ellipse cx="205" cy="320" rx="9" ry="5" fill="#3D8B65" transform="rotate(25 205 320)"/>
+        <ellipse cx="378" cy="220" rx="9" ry="5" fill="#2A6B4E" transform="rotate(-28 378 220)"/>
+        <ellipse cx="385" cy="340" rx="9" ry="5" fill="#3D8B65" transform="rotate(20 385 340)"/>
+        <ellipse cx="1048" cy="260" rx="9" ry="5" fill="#2A6B4E" transform="rotate(-30 1048 260)"/>
+        <ellipse cx="1055" cy="375" rx="9" ry="5" fill="#3D8B65" transform="rotate(22 1055 375)"/>
+        <ellipse cx="1248" cy="240" rx="9" ry="5" fill="#2A6B4E" transform="rotate(-28 1248 240)"/>
+        <ellipse cx="1255" cy="360" rx="9" ry="5" fill="#3D8B65" transform="rotate(18 1255 360)"/>
+      </g>
+
+      <!-- TREE FROG on left branch -->
+      <g transform="translate(310,100)" opacity="0.85">
+        <ellipse cx="0" cy="0" rx="14" ry="10" fill="#3AC840"/>
+        <ellipse cx="0" cy="-2" rx="10" ry="7" fill="#55E055"/>
+        <!-- Head -->
+        <ellipse cx="12" cy="-4" r="9" fill="#3AC840"/>
+        <ellipse cx="12" cy="-5" rx="7" ry="6" fill="#50D850"/>
+        <!-- Big eyes -->
+        <circle cx="15" cy="-8" r="5" fill="#FF8800"/>
+        <circle cx="15.5" cy="-8" r="3" fill="#1A1A18"/>
+        <circle cx="16" cy="-8.5" r="1" fill="#fff" opacity="0.8"/>
+        <circle cx="9" cy="-8" r="4" fill="#FF8800"/>
+        <circle cx="9.5" cy="-8" r="2.5" fill="#1A1A18"/>
+        <!-- Mouth line -->
+        <path d="M8,-2 Q12,0 16,-2" stroke="#1A8A1A" stroke-width="1" fill="none"/>
+        <!-- Legs gripping -->
+        <path d="M-12,5 Q-22,14 -20,22" stroke="#2A9A2A" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M-10,8 Q-18,18 -14,26" stroke="#2A9A2A" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M10,8 Q18,16 16,24" stroke="#2A9A2A" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M12,5 Q24,12 22,20" stroke="#2A9A2A" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <!-- Toe pads -->
+        <circle cx="-20" cy="22" r="3" fill="#2A9A2A"/>
+        <circle cx="-14" cy="26" r="3" fill="#2A9A2A"/>
+        <circle cx="16" cy="24" r="3" fill="#2A9A2A"/>
+        <circle cx="22" cy="20" r="3" fill="#2A9A2A"/>
+        <!-- Blue side stripe -->
+        <path d="M-8,2 Q0,0 8,2" stroke="#4488FF" stroke-width="3" fill="none" opacity="0.7"/>
+      </g>
+
+      <!-- Orchid cluster on branch -->
+      <g transform="translate(680,145)" opacity="0.85">
+        <g transform="translate(0,0)">
+          <path d="M0,0 Q-14,-10 -10,-22 Q0,-16 10,-22 Q14,-10 0,0Z" fill="#DD44BB"/>
+          <path d="M0,0 Q-18,5 -16,18 Q-7,10 0,0Z" fill="#EE55CC"/>
+          <path d="M0,0 Q18,5 16,18 Q7,10 0,0Z" fill="#EE55CC"/>
+          <path d="M0,0 Q2,14 2,22" stroke="#FFAADD" stroke-width="2" fill="none"/>
+          <circle cx="0" cy="-2" r="4" fill="#FFEEAA"/>
+        </g>
+        <g transform="translate(28,-8)">
+          <path d="M0,0 Q-11,-8 -8,-18 Q0,-13 8,-18 Q11,-8 0,0Z" fill="#BB3399"/>
+          <path d="M0,0 Q-15,4 -13,15 Q-6,8 0,0Z" fill="#CC44AA"/>
+          <path d="M0,0 Q15,4 13,15 Q6,8 0,0Z" fill="#CC44AA"/>
+          <circle cx="0" cy="-2" r="3" fill="#FFEEAA"/>
+        </g>
+        <g transform="translate(-24,-5)">
+          <path d="M0,0 Q-10,-7 -7,-16 Q0,-11 7,-16 Q10,-7 0,0Z" fill="#EE66CC"/>
+          <path d="M0,0 Q-13,3 -11,13 Q-5,7 0,0Z" fill="#FF77DD"/>
+          <path d="M0,0 Q13,3 11,13 Q5,7 0,0Z" fill="#FF77DD"/>
+          <circle cx="0" cy="-2" r="2.5" fill="#FFFFAA"/>
+        </g>
+      </g>
+
+      <!-- Bromeliad on right branch -->
+      <g transform="translate(1100,150)" opacity="0.8">
+        <path d="M0,0 Q-20,-30 -5,-50 Q5,-40 10,-50 Q25,-30 0,0Z" fill="#CC3300"/>
+        <path d="M0,0 Q-30,-10 -40,5 Q-25,10 0,0Z" fill="#DD4400" opacity="0.8"/>
+        <path d="M0,0 Q30,-10 40,5 Q25,10 0,0Z" fill="#DD4400" opacity="0.8"/>
+        <path d="M0,0 Q-25,15 -30,30 Q-15,20 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q25,15 30,30 Q15,20 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q0,20 0,35" stroke="#2A6B4E" stroke-width="3" fill="none"/>
+        <!-- Water droplet in bromeliad -->
+        <ellipse cx="0" cy="-35" rx="5" ry="3" fill="#88CCFF" opacity="0.6"/>
+      </g>
+
+      <!-- MORPHO BUTTERFLY left side -->
+      <g transform="translate(140,340)" opacity="0.7">
+        <path d="M0,0 Q-22,-28 -38,-15 Q-26,0 0,0Z" fill="#1144CC"/>
+        <path d="M0,0 Q22,-30 38,-16 Q26,0 0,0Z" fill="#1144CC"/>
+        <path d="M-2,0 Q-10,-24 -30,-12" stroke="#4488FF" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <path d="M2,0 Q10,-26 30,-13" stroke="#4488FF" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <path d="M0,0 Q-24,20 -32,10 Q-20,0 0,0Z" fill="#0033AA"/>
+        <path d="M0,0 Q24,20 32,10 Q20,0 0,0Z" fill="#0033AA"/>
+        <!-- Iridescent sheen -->
+        <path d="M0,0 Q-20,-24 -34,-12" stroke="#88AAFF" stroke-width="8" fill="none" opacity="0.25"/>
+        <path d="M0,0 Q20,-26 34,-13" stroke="#88AAFF" stroke-width="8" fill="none" opacity="0.25"/>
+        <ellipse cx="0" cy="0" rx="2.5" ry="8" fill="#1A1A18"/>
+      </g>
+
+      <!-- Mid-transition: leaves becoming larger, lighter -->
+      <g opacity="0.5">
+        <path d="M-30,680 Q80,630 160,700 Q110,740 -20,720 Z" fill="#3D8B65"/>
+        <path d="M1470,660 Q1360,610 1280,680 Q1330,720 1460,700 Z" fill="#3D8B65"/>
+        <path d="M200,720 Q320,670 400,740 Q350,780 190,758 Z" fill="#5BAF82" opacity="0.7"/>
+        <path d="M1240,700 Q1120,650 1040,720 Q1095,758 1250,738 Z" fill="#5BAF82" opacity="0.7"/>
+      </g>
+    </svg>
+  </div>
+
   <div class="text-center">
     <div class="section-label">Where Are You?</div>
     <h2 class="section-title">Not sure which phase<br><em>is right for you?</em></h2>
@@ -1475,6 +1785,95 @@ footer{
 
 <!-- ── SERVICES ── -->
 <section class="services-section" id="services">
+  <div class="section-nature-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="svcTrunk" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A2A10"/><stop offset="40%" stop-color="#4A3418"/><stop offset="100%" stop-color="#3A2A10"/></linearGradient>
+        <radialGradient id="svcLight" cx="50%" cy="20%" r="50%"><stop offset="0%" stop-color="#FFFDE0" stop-opacity="0.08"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      </defs>
+      <rect width="1440" height="900" fill="url(#svcLight)"/>
+
+      <!-- LEFT TRUNK — thick, textured -->
+      <rect x="-30" y="0" width="110" height="900" fill="url(#svcTrunk)" rx="6" opacity="0.18"/>
+      <rect x="20" y="0" width="28" height="900" fill="#5A4428" opacity="0.07"/>
+      <!-- Bark texture -->
+      <path d="M-20,80 Q15,95 -5,125" stroke="#3A2A10" stroke-width="2" fill="none" opacity="0.12"/>
+      <path d="M-15,200 Q18,215 -4,250" stroke="#3A2A10" stroke-width="2" fill="none" opacity="0.1"/>
+      <path d="M-18,340 Q16,355 -6,390" stroke="#3A2A10" stroke-width="2" fill="none" opacity="0.1"/>
+      <path d="M-16,480 Q14,494 -8,528" stroke="#3A2A10" stroke-width="2" fill="none" opacity="0.12"/>
+      <path d="M-14,620 Q16,636 -6,668" stroke="#3A2A10" stroke-width="2" fill="none" opacity="0.1"/>
+      <path d="M-12,760 Q18,774 -5,808" stroke="#3A2A10" stroke-width="2" fill="none" opacity="0.1"/>
+      <!-- Moss patches on trunk -->
+      <ellipse cx="10" cy="300" rx="20" ry="12" fill="#2A6B4E" opacity="0.12" transform="rotate(-5 10 300)"/>
+      <ellipse cx="5" cy="550" rx="18" ry="10" fill="#3D8B65" opacity="0.1" transform="rotate(3 5 550)"/>
+      <ellipse cx="12" cy="720" rx="22" ry="13" fill="#2A6B4E" opacity="0.1"/>
+
+      <!-- RIGHT TRUNK -->
+      <rect x="1360" y="0" width="110" height="900" fill="url(#svcTrunk)" rx="6" opacity="0.15"/>
+      <rect x="1392" y="0" width="28" height="900" fill="#5A4428" opacity="0.06"/>
+      <path d="M1380,100 Q1412,115 1395,148" stroke="#3A2A10" stroke-width="2" fill="none" opacity="0.1"/>
+      <path d="M1382,260 Q1414,275 1397,308" stroke="#3A2A10" stroke-width="2" fill="none" opacity="0.1"/>
+      <path d="M1380,420 Q1412,435 1395,468" stroke="#3A2A10" stroke-width="2" fill="none" opacity="0.1"/>
+      <path d="M1382,580 Q1414,595 1397,628" stroke="#3A2A10" stroke-width="2" fill="none" opacity="0.1"/>
+      <path d="M1380,740 Q1412,755 1395,788" stroke="#3A2A10" stroke-width="2" fill="none" opacity="0.1"/>
+      <ellipse cx="1410" cy="280" rx="20" ry="12" fill="#2A6B4E" opacity="0.1" transform="rotate(5 1410 280)"/>
+      <ellipse cx="1405" cy="560" rx="18" ry="10" fill="#3D8B65" opacity="0.08"/>
+      <ellipse cx="1408" cy="760" rx="22" ry="13" fill="#2A6B4E" opacity="0.09"/>
+
+      <!-- Vines hanging down both sides -->
+      <g opacity="0.25">
+        <path d="M30,0 Q18,100 32,220 Q42,320 28,440 Q16,540 30,660" stroke="#2A6B4E" stroke-width="2.5" fill="none"/>
+        <path d="M55,0 Q68,120 50,240 Q36,340 52,460" stroke="#1C4A35" stroke-width="2" fill="none"/>
+        <path d="M1410,0 Q1398,100 1412,220 Q1422,320 1408,440 Q1396,540 1410,660" stroke="#2A6B4E" stroke-width="2.5" fill="none"/>
+        <path d="M1385,0 Q1398,120 1380,240 Q1366,340 1382,460" stroke="#1C4A35" stroke-width="2" fill="none"/>
+        <!-- Vine leaf accents -->
+        <ellipse cx="28" cy="220" rx="8" ry="5" fill="#2A6B4E" transform="rotate(-30 28 220)" opacity="0.9"/>
+        <ellipse cx="33" cy="440" rx="8" ry="5" fill="#3D8B65" transform="rotate(20 33 440)" opacity="0.9"/>
+        <ellipse cx="1408" cy="220" rx="8" ry="5" fill="#2A6B4E" transform="rotate(30 1408 220)" opacity="0.9"/>
+        <ellipse cx="1412" cy="440" rx="8" ry="5" fill="#3D8B65" transform="rotate(-20 1412 440)" opacity="0.9"/>
+      </g>
+
+      <!-- BROMELIAD LEFT — colorful air plant on trunk -->
+      <g transform="translate(50,200)" opacity="0.22">
+        <path d="M0,0 Q-18,-28 -3,-48 Q4,-36 9,-48 Q22,-28 0,0Z" fill="#CC3300"/>
+        <path d="M0,0 Q-28,-8 -36,8 Q-22,12 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q28,-8 36,8 Q22,12 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q-22,16 -26,30 Q-12,18 0,0Z" fill="#2A6B4E"/>
+        <path d="M0,0 Q22,16 26,30 Q12,18 0,0Z" fill="#2A6B4E"/>
+      </g>
+      <g transform="translate(45,480)" opacity="0.2">
+        <path d="M0,0 Q-15,-24 -2,-40 Q4,-30 8,-40 Q18,-24 0,0Z" fill="#FFAA00"/>
+        <path d="M0,0 Q-24,-6 -30,8 Q-18,10 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q24,-6 30,8 Q18,10 0,0Z" fill="#1C4A35"/>
+      </g>
+      <!-- BROMELIAD RIGHT -->
+      <g transform="translate(1395,320)" opacity="0.2">
+        <path d="M0,0 Q-16,-26 -2,-44 Q4,-33 8,-44 Q20,-26 0,0Z" fill="#DD4400"/>
+        <path d="M0,0 Q-26,-7 -32,8 Q-20,12 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q26,-7 32,8 Q20,12 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q-20,14 -24,28 Q-11,16 0,0Z" fill="#2A6B4E"/>
+        <path d="M0,0 Q20,14 24,28 Q11,16 0,0Z" fill="#2A6B4E"/>
+      </g>
+
+      <!-- Dappled light circles (filtered sunlight) -->
+      <g opacity="0.05">
+        <circle cx="380" cy="180" r="60" fill="#FFFDE0"/>
+        <circle cx="720" cy="280" r="45" fill="#FFFDE0"/>
+        <circle cx="1060" cy="160" r="55" fill="#FFFDE0"/>
+        <circle cx="240" cy="520" r="40" fill="#FFFDE0"/>
+        <circle cx="860" cy="440" r="50" fill="#FFFDE0"/>
+        <circle cx="1200" cy="560" r="38" fill="#FFFDE0"/>
+      </g>
+
+      <!-- Faint leaf shadows on ground/background -->
+      <g opacity="0.04">
+        <ellipse cx="400" cy="350" rx="80" ry="40" fill="#1C4A35" transform="rotate(-15 400 350)"/>
+        <ellipse cx="800" cy="500" rx="100" ry="45" fill="#1C4A35" transform="rotate(10 800 500)"/>
+        <ellipse cx="1100" cy="300" rx="75" ry="38" fill="#1C4A35" transform="rotate(-8 1100 300)"/>
+      </g>
+    </svg>
+  </div>
+
   <div class="text-center">
     <div class="section-label">Services & Packages</div>
     <h2 class="section-title">Everything you need,<br><em>at every stage.</em></h2>
@@ -1566,6 +1965,92 @@ footer{
 
 <!-- ── PROCESS ── -->
 <section class="process-section" id="process">
+  <div class="section-nature-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="pTrunk" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4A3418"/><stop offset="50%" stop-color="#5A4228"/><stop offset="100%" stop-color="#4A3418"/></linearGradient>
+        <linearGradient id="pRoot" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#5A4228"/><stop offset="100%" stop-color="#3A2A10"/></linearGradient>
+      </defs>
+
+      <!-- LEFT TRUNK BASE — widening at bottom -->
+      <path d="M-40,0 Q-20,300 0,500 Q10,700 30,900 Q-10,900 -50,900 Q-60,700 -70,500 Q-80,300 -60,0 Z" fill="url(#pTrunk)" opacity="0.16"/>
+      <!-- Trunk buttress roots emerging left -->
+      <path d="M0,400 Q60,500 80,700 Q60,700 20,600 Q-10,520 0,400Z" fill="url(#pRoot)" opacity="0.13"/>
+      <path d="M10,350 Q90,450 120,650 Q95,655 55,560 Q20,470 10,350Z" fill="url(#pRoot)" opacity="0.1"/>
+      <path d="M-10,480 Q40,560 50,750 Q30,752 5,660 Q-15,580 -10,480Z" fill="#3A2A10" opacity="0.1"/>
+
+      <!-- RIGHT TRUNK BASE -->
+      <path d="M1480,0 Q1460,300 1440,500 Q1430,700 1410,900 Q1450,900 1490,900 Q1500,700 1510,500 Q1520,300 1500,0 Z" fill="url(#pTrunk)" opacity="0.14"/>
+      <!-- Buttress roots right -->
+      <path d="M1440,400 Q1380,500 1360,700 Q1380,700 1420,600 Q1450,520 1440,400Z" fill="url(#pRoot)" opacity="0.12"/>
+      <path d="M1430,350 Q1350,450 1320,650 Q1345,655 1385,560 Q1420,470 1430,350Z" fill="url(#pRoot)" opacity="0.09"/>
+
+      <!-- Ground-level vines crossing -->
+      <g opacity="0.18">
+        <path d="M-30,600 Q200,550 400,610 Q600,660 800,630 Q1000,600 1200,640 Q1350,668 1470,640" stroke="#2A6B4E" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M-30,680 Q180,640 360,695 Q560,748 760,718 Q960,688 1160,728 Q1320,758 1470,730" stroke="#1C4A35" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M-30,750 Q160,720 340,768 Q540,815 740,788 Q940,760 1140,798 Q1300,826 1470,800" stroke="#2A6B4E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <!-- Ground ferns left -->
+      <g transform="translate(80,750)" opacity="0.2">
+        <path d="M0,0 Q-40,-60 -20,-100 Q0,-80 20,-100 Q40,-60 0,0Z" fill="#2A6B4E"/>
+        <path d="M0,0 Q-60,-30 -80,-10 Q-55,10 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q60,-30 80,-10 Q55,10 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q-50,20 -60,50 Q-30,30 0,0Z" fill="#3D8B65"/>
+        <path d="M0,0 Q50,20 60,50 Q30,30 0,0Z" fill="#3D8B65"/>
+        <!-- Fern frond detail -->
+        <path d="M0,0 Q-15,-40 -10,-80" stroke="#2A6B4E" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M-5,-30 Q-20,-28 -22,-20" stroke="#2A6B4E" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <path d="M-8,-50 Q-24,-46 -26,-36" stroke="#2A6B4E" stroke-width="0.8" fill="none" opacity="0.5"/>
+      </g>
+
+      <!-- Ground ferns right -->
+      <g transform="translate(1360,780)" opacity="0.18">
+        <path d="M0,0 Q-40,-55 -18,-95 Q0,-75 18,-95 Q40,-55 0,0Z" fill="#2A6B4E"/>
+        <path d="M0,0 Q-56,-28 -74,-8 Q-50,12 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q56,-28 74,-8 Q50,12 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q-46,18 -55,46 Q-27,28 0,0Z" fill="#3D8B65"/>
+        <path d="M0,0 Q46,18 55,46 Q27,28 0,0Z" fill="#3D8B65"/>
+      </g>
+
+      <!-- Fallen leaf details on ground -->
+      <g opacity="0.12">
+        <ellipse cx="300" cy="820" rx="35" ry="14" fill="#B8820A" transform="rotate(-15 300 820)"/>
+        <ellipse cx="550" cy="840" rx="28" ry="11" fill="#8B6914" transform="rotate(8 550 840)"/>
+        <ellipse cx="780" cy="810" rx="32" ry="13" fill="#A87818" transform="rotate(-20 780 810)"/>
+        <ellipse cx="1000" cy="830" rx="26" ry="10" fill="#B8820A" transform="rotate(12 1000 830)"/>
+        <ellipse cx="1200" cy="815" rx="30" ry="12" fill="#8B6914" transform="rotate(-10 1200 815)"/>
+      </g>
+
+      <!-- JAGUAR silhouette in shadows right -->
+      <g transform="translate(1280,650)" opacity="0.1">
+        <!-- Body crouching -->
+        <ellipse cx="0" cy="0" rx="50" ry="22" fill="#2A1A00"/>
+        <!-- Head -->
+        <circle cx="46" cy="-14" r="20" fill="#2A1A00"/>
+        <!-- Ears -->
+        <polygon points="38,-32 44,-44 52,-32" fill="#2A1A00"/>
+        <polygon points="50,-30 56,-42 62,-30" fill="#2A1A00"/>
+        <!-- Tail -->
+        <path d="M-50,0 Q-80,10 -90,30 Q-80,28 -70,20 Q-60,5 -50,0Z" fill="#2A1A00"/>
+        <!-- Legs -->
+        <rect x="-30" y="18" width="12" height="25" rx="5" fill="#2A1A00"/>
+        <rect x="-10" y="18" width="12" height="28" rx="5" fill="#2A1A00"/>
+        <rect x="20" y="16" width="12" height="26" rx="5" fill="#2A1A00"/>
+        <rect x="38" y="14" width="12" height="24" rx="5" fill="#2A1A00"/>
+      </g>
+
+      <!-- Moss patches on ground -->
+      <g opacity="0.1">
+        <ellipse cx="200" cy="870" rx="60" ry="18" fill="#2A6B4E"/>
+        <ellipse cx="600" cy="875" rx="80" ry="20" fill="#1C4A35"/>
+        <ellipse cx="950" cy="868" rx="70" ry="17" fill="#2A6B4E"/>
+        <ellipse cx="1280" cy="872" rx="55" ry="16" fill="#1C4A35"/>
+      </g>
+    </svg>
+  </div>
+
   <div class="text-center">
     <div class="section-label">How It Works</div>
     <h2 class="section-title">Simple. Structured.<br><em>Always clear.</em></h2>
@@ -1627,6 +2112,120 @@ footer{
 
 <!-- ── TRUST / AUTHORITY ── -->
 <section class="trust-section" id="about-us">
+  <div class="section-nature-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C4B090" stop-opacity="0.3"/><stop offset="100%" stop-color="#8B6940" stop-opacity="0.5"/></linearGradient>
+        <linearGradient id="rootG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4A3418"/><stop offset="100%" stop-color="#2A1A06"/></linearGradient>
+      </defs>
+      <rect width="1440" height="900" fill="url(#floorGrad)"/>
+
+      <!-- Surface roots snaking across -->
+      <g opacity="0.22">
+        <path d="M-40,300 Q100,280 200,320 Q320,358 440,310 Q560,262 680,300 Q800,338 920,295 Q1040,252 1160,290 Q1280,328 1400,300 Q1440,292 1480,298" stroke="#3A2A10" stroke-width="18" fill="none" stroke-linecap="round"/>
+        <path d="M-40,300 Q100,280 200,320 Q320,358 440,310 Q560,262 680,300 Q800,338 920,295 Q1040,252 1160,290 Q1280,328 1400,300" stroke="#4A3418" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <path d="M-40,500 Q120,470 260,508 Q400,544 540,498 Q680,452 820,490 Q960,528 1100,486 Q1240,444 1380,478 Q1440,494 1480,482" stroke="#3A2A10" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <path d="M-40,700 Q150,668 300,704 Q450,738 600,698 Q750,658 900,692 Q1050,726 1200,690 Q1340,654 1480,682" stroke="#3A2A10" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <!-- Branching roots -->
+        <path d="M300,320 Q280,420 310,520" stroke="#3A2A10" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M300,320 Q340,400 360,500" stroke="#3A2A10" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M780,302 Q760,390 790,480" stroke="#3A2A10" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M780,302 Q820,390 840,490" stroke="#3A2A10" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M1180,288 Q1160,380 1190,470" stroke="#3A2A10" stroke-width="7" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <!-- Dense fern layer left -->
+      <g transform="translate(60,600)" opacity="0.2">
+        <path d="M0,0 Q-50,-80 -25,-140 Q0,-110 25,-140 Q50,-80 0,0Z" fill="#2A6B4E"/>
+        <path d="M0,0 Q-75,-35 -95,-5 Q-68,20 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q75,-35 95,-5 Q68,20 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q-65,25 -75,65 Q-40,38 0,0Z" fill="#3D8B65"/>
+        <path d="M0,0 Q65,25 75,65 Q40,38 0,0Z" fill="#3D8B65"/>
+        <path d="M0,0 Q-30,55 -20,100 Q-5,68 0,0Z" fill="#2A6B4E"/>
+        <path d="M0,0 Q30,55 20,100 Q5,68 0,0Z" fill="#2A6B4E"/>
+        <!-- Frond details -->
+        <path d="M0,0 Q-12,-70 -10,-130" stroke="#1C4A35" stroke-width="1.5" fill="none" opacity="0.6"/>
+        <path d="M-4,-40 Q-22,-38 -25,-26" stroke="#1C4A35" stroke-width="1" fill="none" opacity="0.5"/>
+        <path d="M-6,-70 Q-26,-66 -30,-52" stroke="#1C4A35" stroke-width="1" fill="none" opacity="0.5"/>
+        <path d="M-8,-100 Q-28,-94 -32,-78" stroke="#1C4A35" stroke-width="1" fill="none" opacity="0.5"/>
+      </g>
+      <g transform="translate(160,650)" opacity="0.16">
+        <path d="M0,0 Q-40,-65 -18,-115 Q0,-88 18,-115 Q40,-65 0,0Z" fill="#3D8B65"/>
+        <path d="M0,0 Q-60,-28 -78,-4 Q-55,16 0,0Z" fill="#2A6B4E"/>
+        <path d="M0,0 Q60,-28 78,-4 Q55,16 0,0Z" fill="#2A6B4E"/>
+      </g>
+
+      <!-- Fern layer right -->
+      <g transform="translate(1380,580)" opacity="0.18">
+        <path d="M0,0 Q-50,-78 -24,-138 Q0,-108 24,-138 Q50,-78 0,0Z" fill="#2A6B4E"/>
+        <path d="M0,0 Q-72,-33 -92,-3 Q-65,20 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q72,-33 92,-3 Q65,20 0,0Z" fill="#1C4A35"/>
+        <path d="M0,0 Q-62,24 -72,62 Q-38,36 0,0Z" fill="#3D8B65"/>
+        <path d="M0,0 Q62,24 72,62 Q38,36 0,0Z" fill="#3D8B65"/>
+      </g>
+      <g transform="translate(1260,630)" opacity="0.14">
+        <path d="M0,0 Q-38,-62 -16,-110 Q0,-84 16,-110 Q38,-62 0,0Z" fill="#3D8B65"/>
+        <path d="M0,0 Q-58,-26 -74,-2 Q-52,18 0,0Z" fill="#2A6B4E"/>
+        <path d="M0,0 Q58,-26 74,-2 Q52,18 0,0Z" fill="#2A6B4E"/>
+      </g>
+
+      <!-- MUSHROOMS on roots -->
+      <g transform="translate(480,490)" opacity="0.18">
+        <!-- Cap -->
+        <path d="M0,-20 Q-22,-45 -18,-55 Q0,-62 18,-55 Q22,-45 0,-20Z" fill="#CC4400"/>
+        <path d="M0,-20 Q-20,-40 -16,-50 Q0,-56 16,-50 Q20,-40 0,-20Z" fill="#DD5500"/>
+        <!-- White spots -->
+        <circle cx="-8" cy="-42" r="3" fill="#fff" opacity="0.7"/>
+        <circle cx="6" cy="-36" r="2.5" fill="#fff" opacity="0.7"/>
+        <circle cx="-2" cy="-30" r="2" fill="#fff" opacity="0.6"/>
+        <!-- Stem -->
+        <rect x="-5" y="-20" width="10" height="22" rx="4" fill="#F5EDD0"/>
+        <!-- Gills -->
+        <path d="M-18,-22 Q0,-16 18,-22" stroke="#DDD5B8" stroke-width="1" fill="none" opacity="0.6"/>
+      </g>
+      <g transform="translate(520,500)" opacity="0.14">
+        <path d="M0,-14 Q-15,-32 -12,-40 Q0,-46 12,-40 Q15,-32 0,-14Z" fill="#AA3300"/>
+        <circle cx="-5" cy="-30" r="2" fill="#fff" opacity="0.6"/>
+        <circle cx="5" cy="-26" r="1.8" fill="#fff" opacity="0.6"/>
+        <rect x="-4" y="-14" width="8" height="16" rx="3" fill="#EDE5CC"/>
+      </g>
+      <g transform="translate(960,510)" opacity="0.16">
+        <path d="M0,-18 Q-20,-40 -16,-50 Q0,-58 16,-50 Q20,-40 0,-18Z" fill="#BB3300"/>
+        <circle cx="-7" cy="-38" r="2.8" fill="#fff" opacity="0.65"/>
+        <circle cx="5" cy="-32" r="2.2" fill="#fff" opacity="0.65"/>
+        <circle cx="-1" cy="-26" r="1.8" fill="#fff" opacity="0.6"/>
+        <rect x="-4.5" y="-18" width="9" height="20" rx="3.5" fill="#F0E8D0"/>
+      </g>
+
+      <!-- Fallen leaves on floor -->
+      <g opacity="0.14">
+        <ellipse cx="250" cy="760" rx="40" ry="16" fill="#B8820A" transform="rotate(-18 250 760)"/>
+        <ellipse cx="400" cy="780" rx="32" ry="12" fill="#CC6600" transform="rotate(12 400 780)"/>
+        <ellipse cx="600" cy="755" rx="36" ry="14" fill="#AA7010" transform="rotate(-8 600 755)"/>
+        <ellipse cx="820" cy="772" rx="42" ry="16" fill="#B8820A" transform="rotate(15 820 772)"/>
+        <ellipse cx="1020" cy="758" rx="30" ry="12" fill="#CC6600" transform="rotate(-20 1020 758)"/>
+        <ellipse cx="1200" cy="768" rx="38" ry="15" fill="#AA7010" transform="rotate(10 1200 768)"/>
+        <!-- Smaller leaves scattered -->
+        <ellipse cx="340" cy="820" rx="20" ry="8" fill="#CC8800" transform="rotate(-25 340 820)"/>
+        <ellipse cx="700" cy="808" rx="24" ry="9" fill="#B07010" transform="rotate(18 700 808)"/>
+        <ellipse cx="1080" cy="816" rx="22" ry="8" fill="#CC8800" transform="rotate(-12 1080 816)"/>
+      </g>
+
+      <!-- SMALL LIZARD on root -->
+      <g transform="translate(720,305)" opacity="0.15">
+        <path d="M0,0 Q30,5 50,0 Q70,-4 90,8" stroke="#2A6B4E" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M90,8 Q120,18 140,12 Q160,6 180,15" stroke="#2A6B4E" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <ellipse cx="0" cy="0" rx="16" ry="8" fill="#3D8B65"/>
+        <ellipse cx="-12" cy="-1" r="10" fill="#2A6B4E"/>
+        <circle cx="-16" cy="-3" r="2.5" fill="#FFD700"/>
+        <circle cx="-15.5" cy="-3" r="1.2" fill="#1A1A18"/>
+        <path d="M-20,4 Q-28,14 -26,22" stroke="#2A6B4E" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M-6,7 Q-14,18 -10,26" stroke="#2A6B4E" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M10,6 Q18,16 15,24" stroke="#2A6B4E" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
+
   <div class="trust-grid">
     <div>
       <div class="section-label">Why The Canopy Group</div>
@@ -1706,6 +2305,147 @@ footer{
 
 <!-- ── CONTACT / FINAL CTA ── -->
 <section class="final-cta" id="contact">
+  <div class="section-nature-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="rootGlow" cx="50%" cy="30%" r="60%">
+          <stop offset="0%" stop-color="#B8820A" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+        <radialGradient id="mineralGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#E8A820" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+        <linearGradient id="soilL1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5A3A12" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#3A2208" stop-opacity="0.6"/>
+        </linearGradient>
+        <linearGradient id="soilL2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3A2208" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#1E0E02" stop-opacity="0.7"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Soil layer strata -->
+      <rect x="0" y="0" width="1440" height="200" fill="url(#soilL1)"/>
+      <rect x="0" y="200" width="1440" height="300" fill="url(#soilL2)"/>
+
+      <!-- Ambient root glow (where tree feeds) -->
+      <rect width="1440" height="700" fill="url(#rootGlow)"/>
+
+      <!-- Soil texture — fine particles -->
+      <g opacity="0.06">
+        <circle cx="120" cy="80" r="3" fill="#8B6914"/>
+        <circle cx="280" cy="120" r="2" fill="#8B6914"/>
+        <circle cx="450" cy="65" r="3.5" fill="#7A5810"/>
+        <circle cx="600" cy="140" r="2.5" fill="#8B6914"/>
+        <circle cx="780" cy="90" r="3" fill="#7A5810"/>
+        <circle cx="920" cy="130" r="2" fill="#8B6914"/>
+        <circle cx="1100" cy="75" r="3.5" fill="#7A5810"/>
+        <circle cx="1280" cy="110" r="2.5" fill="#8B6914"/>
+        <circle cx="200" cy="280" r="2.5" fill="#6A4A0E"/>
+        <circle cx="500" cy="310" r="3" fill="#6A4A0E"/>
+        <circle cx="720" cy="260" r="2" fill="#7A5810"/>
+        <circle cx="960" cy="290" r="3.5" fill="#6A4A0E"/>
+        <circle cx="1180" cy="270" r="2.5" fill="#7A5810"/>
+        <circle cx="350" cy="460" r="2" fill="#4A3008"/>
+        <circle cx="650" cy="480" r="3" fill="#4A3008"/>
+        <circle cx="900" cy="450" r="2.5" fill="#3A2206"/>
+        <circle cx="1100" cy="470" r="2" fill="#4A3008"/>
+      </g>
+
+      <!-- MAIN TAPROOT — descending from top center -->
+      <g opacity="0.45">
+        <path d="M720,0 Q715,100 710,200 Q705,320 700,450 Q695,560 700,700" stroke="#4A3418" stroke-width="30" fill="none" stroke-linecap="round"/>
+        <path d="M720,0 Q715,100 710,200 Q705,320 700,450 Q695,560 700,700" stroke="#6A4A28" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.5"/>
+      </g>
+
+      <!-- PRIMARY LATERAL ROOTS -->
+      <g opacity="0.38">
+        <!-- Left primary -->
+        <path d="M710,80 Q580,100 440,140 Q300,180 160,200 Q80,210 -20,220" stroke="#4A3418" stroke-width="22" fill="none" stroke-linecap="round"/>
+        <path d="M710,80 Q580,100 440,140 Q300,180 160,200 Q80,210 -20,220" stroke="#6A4A28" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <!-- Right primary -->
+        <path d="M715,80 Q840,102 980,142 Q1120,182 1260,202 Q1360,214 1460,222" stroke="#4A3418" stroke-width="22" fill="none" stroke-linecap="round"/>
+        <path d="M715,80 Q840,102 980,142 Q1120,182 1260,202 Q1360,214 1460,222" stroke="#6A4A28" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <!-- Second left -->
+        <path d="M705,180 Q560,210 420,260 Q280,308 140,320 Q60,326 -30,330" stroke="#3A2A10" stroke-width="16" fill="none" stroke-linecap="round"/>
+        <!-- Second right -->
+        <path d="M712,180 Q858,212 1000,262 Q1140,310 1280,324 Q1370,330 1470,334" stroke="#3A2A10" stroke-width="16" fill="none" stroke-linecap="round"/>
+        <!-- Third level left -->
+        <path d="M700,300 Q540,340 400,400 Q260,458 120,470 Q50,474 -30,478" stroke="#2A1A08" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <!-- Third level right -->
+        <path d="M708,300 Q870,342 1012,402 Q1154,460 1294,474 Q1375,480 1470,482" stroke="#2A1A08" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <!-- Fourth level — finer -->
+        <path d="M698,440 Q520,490 380,560 Q240,628 100,640 Q40,644 -30,646" stroke="#2A1A08" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M706,440 Q885,492 1026,562 Q1168,630 1308,644 Q1388,650 1470,650" stroke="#2A1A08" stroke-width="8" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <!-- SECONDARY ROOTS branching off -->
+      <g opacity="0.3">
+        <!-- From left primary -->
+        <path d="M440,140 Q420,220 440,310" stroke="#2A1A08" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <path d="M440,140 Q480,210 500,300" stroke="#2A1A08" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M260,168 Q240,250 260,340" stroke="#2A1A08" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M140,200 Q130,290 150,380" stroke="#1A0E04" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <!-- From right primary -->
+        <path d="M980,142 Q960,222 980,312" stroke="#2A1A08" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <path d="M980,142 Q1010,210 1020,300" stroke="#2A1A08" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M1160,182 Q1140,265 1160,355" stroke="#2A1A08" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M1280,202 Q1268,290 1280,378" stroke="#1A0E04" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <!-- Fine hair roots at ends -->
+        <path d="M440,310 Q430,360 445,400" stroke="#1A0E04" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M440,310 Q460,360 450,400" stroke="#1A0E04" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M260,340 Q248,390 262,430" stroke="#1A0E04" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M980,312 Q968,362 982,402" stroke="#1A0E04" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M1160,355 Q1148,405 1162,445" stroke="#1A0E04" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- Finest hair roots -->
+        <path d="M445,400 Q438,440 448,470" stroke="#1A0E04" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <path d="M450,400 Q465,440 458,475" stroke="#1A0E04" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <path d="M262,430 Q250,470 264,500" stroke="#1A0E04" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <path d="M982,402 Q970,440 984,472" stroke="#1A0E04" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+      </g>
+
+      <!-- MINERAL DEPOSITS / AMBER GLINTS -->
+      <g opacity="0.5">
+        <!-- Amber mineral veins -->
+        <path d="M180,380 Q220,370 240,390 Q220,400 180,380Z" fill="#E8A820" opacity="0.25"/>
+        <path d="M380,480 Q420,465 445,482 Q420,496 380,480Z" fill="#B8820A" opacity="0.3"/>
+        <path d="M620,540 Q665,528 688,546 Q662,558 620,540Z" fill="#E8A820" opacity="0.2"/>
+        <path d="M960,420 Q1005,408 1028,426 Q1002,438 960,420Z" fill="#B8820A" opacity="0.28"/>
+        <path d="M1180,500 Q1225,486 1248,504 Q1222,516 1180,500Z" fill="#E8A820" opacity="0.22"/>
+        <path d="M1320,380 Q1355,366 1375,382 Q1352,396 1320,380Z" fill="#B8820A" opacity="0.26"/>
+        <!-- Small crystal glints -->
+        <circle cx="520" cy="350" r="3" fill="#E8A820" opacity="0.4"/>
+        <circle cx="800" cy="500" r="2.5" fill="#B8820A" opacity="0.45"/>
+        <circle cx="280" cy="560" r="2" fill="#E8A820" opacity="0.35"/>
+        <circle cx="1060" cy="580" r="3" fill="#B8820A" opacity="0.4"/>
+        <circle cx="1380" cy="460" r="2.5" fill="#E8A820" opacity="0.38"/>
+      </g>
+
+      <!-- Glowing root tips (nutrient absorption) -->
+      <g opacity="0.3">
+        <circle cx="700" cy="700" r="8" fill="#5BAF82"/>
+        <circle cx="700" cy="700" r="4" fill="#8BD4AA" opacity="0.6"/>
+        <circle cx="448" cy="470" r="5" fill="#5BAF82" opacity="0.7"/>
+        <circle cx="982" cy="472" r="5" fill="#5BAF82" opacity="0.7"/>
+        <circle cx="262" cy="430" r="4" fill="#3D8B65" opacity="0.6"/>
+        <circle cx="1162" cy="445" r="4" fill="#3D8B65" opacity="0.6"/>
+        <circle cx="140" cy="640" r="3.5" fill="#5BAF82" opacity="0.5"/>
+        <circle cx="1295" cy="644" r="3.5" fill="#5BAF82" opacity="0.5"/>
+      </g>
+
+      <!-- Earthworm silhouette -->
+      <g transform="translate(580,460)" opacity="0.12">
+        <path d="M0,0 Q20,8 30,0 Q40,-8 55,0 Q68,8 80,2 Q92,-4 100,4" stroke="#8B5A2A" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <circle cx="0" cy="0" r="5" fill="#8B5A2A"/>
+      </g>
+
+      <!-- Tagline glow behind center text -->
+      <rect width="1440" height="700" fill="url(#mineralGlow)" opacity="0.4"/>
+    </svg>
+  </div>
+
   <div class="final-cta-inner">
     <div class="section-label">Get Started</div>
     <h2 class="serif">Ready to build something <em>that lasts?</em></h2>
@@ -1723,6 +2463,50 @@ footer{
 
 <!-- ── FOOTER ── -->
 <footer>
+  <div class="section-nature-bg" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;">
+    <svg viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="ftrGlow" cx="50%" cy="0%" r="60%">
+          <stop offset="0%" stop-color="#3A2208" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <rect width="1440" height="400" fill="url(#ftrGlow)"/>
+      <!-- Very fine root network, almost invisible -->
+      <g opacity="0.12">
+        <path d="M720,0 Q715,60 705,130 Q695,200 700,300 Q698,360 700,400" stroke="#3A2208" stroke-width="18" fill="none" stroke-linecap="round"/>
+        <path d="M706,40 Q580,70 440,100 Q300,130 150,140 Q60,146 -20,150" stroke="#3A2208" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <path d="M712,40 Q840,72 980,102 Q1120,132 1270,142 Q1370,148 1470,152" stroke="#3A2208" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <path d="M700,130 Q560,165 420,210 Q280,255 140,262" stroke="#2A1A08" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <path d="M708,130 Q850,167 990,212 Q1130,257 1280,264 Q1370,270 1470,272" stroke="#2A1A08" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <path d="M698,260 Q540,298 400,340 Q260,380 120,390" stroke="#1A0E04" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M706,260 Q868,300 1008,342 Q1148,382 1288,392 Q1378,398 1470,398" stroke="#1A0E04" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <!-- Fine branches -->
+        <path d="M440,100 Q420,170 440,240" stroke="#2A1A08" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M980,102 Q960,172 978,242" stroke="#2A1A08" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M260,134 Q245,202 262,272" stroke="#1A0E04" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M1160,136 Q1145,204 1158,274" stroke="#1A0E04" stroke-width="5" fill="none" stroke-linecap="round"/>
+      </g>
+      <!-- Mineral amber glints -->
+      <g opacity="0.18">
+        <circle cx="360" cy="180" r="2.5" fill="#B8820A"/>
+        <circle cx="720" cy="300" r="2" fill="#E8A820"/>
+        <circle cx="1080" cy="200" r="2.5" fill="#B8820A"/>
+        <circle cx="520" cy="340" r="1.8" fill="#E8A820"/>
+        <circle cx="920" cy="320" r="2" fill="#B8820A"/>
+        <path d="M240,260 Q268,250 280,264 Q265,274 240,260Z" fill="#B8820A" opacity="0.4"/>
+        <path d="M1160,280 Q1188,268 1200,282 Q1185,292 1160,280Z" fill="#E8A820" opacity="0.35"/>
+      </g>
+      <!-- Glowing root tips at very bottom -->
+      <g opacity="0.2">
+        <circle cx="700" cy="395" r="5" fill="#5BAF82"/>
+        <circle cx="700" cy="395" r="2.5" fill="#8BD4AA" opacity="0.5"/>
+        <circle cx="420" cy="380" r="3.5" fill="#3D8B65" opacity="0.7"/>
+        <circle cx="980" cy="382" r="3.5" fill="#3D8B65" opacity="0.7"/>
+      </g>
+    </svg>
+  </div>
+
   <div class="footer-top">
     <div class="footer-brand">
       <div class="fn">The Canopy Group</div>
