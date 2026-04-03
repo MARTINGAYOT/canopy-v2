@@ -73,6 +73,7 @@ p{color:var(--ink2);line-height:1.75}
   align-items:center;
   padding:0 60px;
   padding-top:80px;
+  margin-top:-40px;
   background:var(--white);
   position:relative;
   overflow:hidden;
@@ -166,8 +167,8 @@ p{color:var(--ink2);line-height:1.75}
 }
 .phase-pip:hover{border-color:var(--forest);background:var(--mist);box-shadow:0 6px 24px rgba(28,74,53,0.1);transform:translateX(5px)}
 .phase-pip.active{border-color:var(--forest);background:var(--mist)}
-.phase-pip.locked{opacity:.5;cursor:default}
-.phase-pip.locked:hover{transform:none;border-color:var(--border);box-shadow:none;background:var(--white)}
+.phase-pip.locked{opacity:1;cursor:default;background:rgba(245,244,240,0.85)}
+.phase-pip.locked:hover{transform:none;border-color:var(--border);box-shadow:none;background:rgba(245,244,240,0.85)}
 .pip-num{
   width:36px;height:36px;border-radius:10px;
   background:var(--forest);color:#fff;
@@ -175,10 +176,13 @@ p{color:var(--ink2);line-height:1.75}
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;
 }
-.phase-pip.locked .pip-num{background:var(--cream2);color:var(--ink3)}
+.phase-pip.locked .pip-num{background:#E8E6DF;color:#8A8A82}
 .pip-body{flex:1;min-width:0}
 .pip-name{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
 .pip-desc{font-size:12px;color:var(--ink3)}
+.phase-pip.locked .pip-name{color:var(--ink2)}
+.phase-pip.locked .pip-desc{color:var(--ink3)}
+.phase-pip.locked .pip-badge.soon{background:#EDEBE4;color:#7A7A72;border:1px solid #D4D0C4;font-weight:600}
 .pip-badge{
   font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
   padding:3px 9px;border-radius:100px;flex-shrink:0;
@@ -744,7 +748,7 @@ footer{
         </div>
         <div class="pip-badge live">Available</div>
       </div>
-      <div class="phase-pip" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">
+      <div class="phase-pip active" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">
         <div class="pip-num">2</div>
         <div class="pip-body">
           <div class="pip-name">Presence</div>
@@ -752,7 +756,7 @@ footer{
         </div>
         <div class="pip-badge live">Available</div>
       </div>
-      <div class="phase-pip" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">
+      <div class="phase-pip active" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">
         <div class="pip-num">3</div>
         <div class="pip-body">
           <div class="pip-name">Systems</div>
