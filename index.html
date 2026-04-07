@@ -674,11 +674,146 @@ footer{
   font-size:11px;font-weight:500;color:var(--forest);
 }
 
+/* ── MOBILE NAV ── */
+.nav-mobile-toggle{
+  display:none;
+  background:transparent;border:none;cursor:pointer;
+  padding:8px;flex-direction:column;gap:5px;
+  align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.nav-mobile-toggle span{
+  display:block;width:22px;height:2px;
+  background:var(--ink);border-radius:2px;
+  transition:transform .3s,opacity .3s;
+}
+.nav-mobile-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-mobile-toggle.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-mobile-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ── CONTACT FORM ── */
+.contact-layout{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:72px;align-items:start;
+  text-align:left;max-width:1080px;margin:0 auto;
+}
+.contact-left .section-label{color:var(--amber2);justify-content:flex-start}
+.contact-left .section-label::before{background:var(--amber2)}
+.contact-left h2{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(32px,4vw,52px);
+  color:#fff;margin-bottom:16px;line-height:1.15;
+}
+.contact-left h2 em{color:var(--leaf);font-style:italic}
+.contact-left>p{font-size:17px;color:rgba(255,255,255,0.58);line-height:1.8;margin-bottom:32px}
+.contact-trust-list{display:flex;flex-direction:column;gap:12px;margin-bottom:40px}
+.contact-trust-item{
+  display:flex;align-items:center;gap:12px;
+  font-size:14px;color:rgba(255,255,255,0.5);
+}
+.contact-trust-item svg{flex-shrink:0}
+.contact-motto{
+  font-family:'Instrument Serif',serif;font-size:13px;
+  font-style:italic;color:rgba(255,255,255,0.2);letter-spacing:.5px;
+}
+.contact-form-card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:var(--r2);padding:36px;
+}
+.contact-form-card h3{
+  font-family:'Instrument Serif',serif;font-size:22px;
+  color:#fff;margin-bottom:6px;
+}
+.contact-form-card>p{
+  font-size:13px;color:rgba(255,255,255,0.4);
+  margin-bottom:28px;line-height:1.6;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.form-label{
+  font-size:11px;font-weight:600;letter-spacing:1px;
+  text-transform:uppercase;color:rgba(255,255,255,0.38);
+}
+.form-input,.form-select,.form-textarea{
+  width:100%;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:var(--r);
+  padding:12px 14px;
+  font-family:'Inter',sans-serif;font-size:14px;
+  color:#fff;
+  transition:border-color .2s,background .2s;
+  outline:none;
+}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,0.22)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{
+  border-color:var(--leaf);background:rgba(255,255,255,0.09);
+}
+.form-select{
+  cursor:pointer;-webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  padding-right:36px;
+}
+.form-select option{background:#1A3D28;color:#fff}
+.form-textarea{resize:vertical;min-height:88px}
+.form-submit{
+  width:100%;background:#fff;color:var(--forest);
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:700;
+  padding:14px 24px;border:none;border-radius:var(--r);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .2s;margin-top:4px;
+}
+.form-submit:hover{background:var(--sage);transform:translateY(-1px)}
+.form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.form-success{
+  display:none;text-align:center;padding:32px 16px;
+}
+.form-success-icon{
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(91,175,130,0.15);border:1px solid rgba(91,175,130,0.3);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;
+}
+.form-success h4{
+  font-family:'Instrument Serif',serif;font-size:22px;
+  color:#fff;margin-bottom:8px;
+}
+.form-success p{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.7}
+
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
-  .nav{padding:0 24px}
+  .nav{padding:0 24px;height:68px}
+  .nav-mobile-toggle{display:flex}
+  .nav-links{
+    display:none;
+    position:fixed;top:68px;left:0;right:0;
+    background:rgba(250,250,248,0.98);
+    backdrop-filter:blur(16px);
+    flex-direction:column;align-items:stretch;
+    padding:12px 24px 24px;
+    border-bottom:1px solid var(--border);
+    box-shadow:0 8px 32px rgba(0,0,0,0.1);
+    gap:0;z-index:199;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{
+    padding:14px 0;font-size:16px;
+    border-left:none !important;
+    border-bottom:1px solid var(--border);
+    color:var(--ink2) !important;
+  }
+  .nav-links a:last-of-type{border-bottom:none}
+  .nav-btn{
+    margin:14px 0 0 !important;padding:14px 24px !important;
+    text-align:center;width:100%;border-radius:var(--r);
+    font-size:15px !important;
+  }
   .hero{grid-template-columns:1fr;padding:88px 24px 60px}
   .hero-right{display:none}
+  .hero-trust{grid-template-columns:1fr 1fr}
   section{padding:72px 24px}
   .journey-header{grid-template-columns:1fr}
   .phase-track{gap:0}
@@ -687,9 +822,26 @@ footer{
   .process-grid{grid-template-columns:1fr 1fr}
   .trust-grid{grid-template-columns:1fr}
   .testimonial-placeholder{grid-template-columns:1fr}
-  .footer-top{position:relative;z-index:1;grid-template-columns:1fr 1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
   .final-cta{padding:80px 24px}
   footer{padding:48px 24px 28px}
+  .contact-layout{grid-template-columns:1fr;gap:48px}
+  .contact-left{text-align:left}
+}
+@media(max-width:600px){
+  .hero h1{font-size:36px}
+  .hero-trust{grid-template-columns:1fr}
+  .process-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .phase-node-label{font-size:9px}
+  section{padding:60px 20px}
+  .nav{padding:0 20px}
+  .final-cta{padding:64px 20px}
+  footer{padding:40px 20px 24px}
+  .quiz-card{padding:32px 24px}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .hero-actions .btn-primary,.hero-actions .btn-secondary{justify-content:center}
 }
 </style>
 </head>
@@ -717,11 +869,14 @@ footer{
       </div>
     </div>
   </a>
-  <div class="nav-links">
-    <a onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">The Journey</a>
-    <a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Services</a>
-    <a onclick="document.getElementById('about-us').scrollIntoView({behavior:'smooth'})">About</a>
-    <a class="nav-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Call</a>
+  <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Open navigation" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="nav-links">
+    <a onclick="closeMobileNav();document.getElementById('journey').scrollIntoView({behavior:'smooth'})">The Journey</a>
+    <a onclick="closeMobileNav();document.getElementById('services').scrollIntoView({behavior:'smooth'})">Services</a>
+    <a onclick="closeMobileNav();document.getElementById('about-us').scrollIntoView({behavior:'smooth'})">About</a>
+    <a class="nav-btn" onclick="closeMobileNav();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Call</a>
   </div>
 </nav>
 
@@ -2446,18 +2601,83 @@ footer{
     </svg>
   </div>
 
-  <div class="final-cta-inner">
-    <div class="section-label">Get Started</div>
-    <h2 class="serif">Ready to build something <em>that lasts?</em></h2>
-    <p>Start with a free 30-minute discovery call. No pitch, no pressure — just an honest conversation about where your business is and where it could be.</p>
-    <div class="final-cta-actions">
-      <a class="btn-white" href="mailto:hello@thecanopygroup.bz">
-        Book a Free Discovery Call
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <button class="btn-ghost-white" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Find My Phase First</button>
+  <div class="contact-layout">
+    <!-- Left: messaging -->
+    <div class="contact-left">
+      <div class="section-label">Get Started</div>
+      <h2>Ready to build something <em>that lasts?</em></h2>
+      <p>Start with a free 30-minute discovery call. No pitch, no pressure — just an honest conversation about where your business is and where it could be.</p>
+      <div class="contact-trust-list">
+        <div class="contact-trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+          Free 30-minute discovery call
+        </div>
+        <div class="contact-trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+          No commitment required
+        </div>
+        <div class="contact-trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+          We respond within one business day
+        </div>
+        <div class="contact-trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+          Serving businesses across Belize &amp; the Caribbean
+        </div>
+      </div>
+      <div class="contact-motto">Sub Umbra Floreo — Under the shade, we flourish.</div>
     </div>
-    <div class="final-motto">Sub Umbra Floreo — Under the shade, we flourish.</div>
+
+    <!-- Right: contact form -->
+    <div class="contact-form-card">
+      <h3>Send us a message</h3>
+      <p>Fill in the form and we'll be in touch within one business day to schedule your call.</p>
+
+      <form id="contact-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-name">Your Name *</label>
+            <input class="form-input" id="cf-name" name="name" type="text" placeholder="Jane Smith" required autocomplete="name"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-email">Email Address *</label>
+            <input class="form-input" id="cf-email" name="email" type="email" placeholder="jane@company.com" required autocomplete="email"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cf-company">Business Name</label>
+            <input class="form-input" id="cf-company" name="company" type="text" placeholder="Acme Ltd." autocomplete="organization"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-phase">Phase of Interest</label>
+            <select class="form-select" id="cf-phase" name="phase">
+              <option value="" disabled selected>Not sure yet</option>
+              <option value="Phase 1 — Foundation">Phase 1 — Foundation</option>
+              <option value="Phase 2 — Presence">Phase 2 — Presence</option>
+              <option value="Phase 3 — Systems">Phase 3 — Systems</option>
+              <option value="Phase 4 / 5 — Waitlist">Phase 4 / 5 — Waitlist</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cf-message">Tell us about your business</label>
+          <textarea class="form-textarea" id="cf-message" name="message" placeholder="What stage is your business at? What's the biggest challenge you're facing right now?"></textarea>
+        </div>
+        <button class="form-submit" type="submit" id="form-submit-btn">
+          Send Message
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+
+      <div class="form-success" id="form-success">
+        <div class="form-success-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h4>Message sent!</h4>
+        <p>Thanks for reaching out. We'll be in touch within one business day to schedule your free discovery call.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2626,6 +2846,60 @@ function showResult(){
 function scrollToPhaseAndShow(){
   document.getElementById('journey').scrollIntoView({behavior:'smooth'});
 }
+
+// Mobile nav
+function toggleMobileNav(){
+  const toggle=document.getElementById('nav-toggle');
+  const links=document.getElementById('nav-links');
+  const open=toggle.classList.toggle('open');
+  links.classList.toggle('open',open);
+  document.body.style.overflow=open?'hidden':'';
+}
+function closeMobileNav(){
+  document.getElementById('nav-toggle').classList.remove('open');
+  document.getElementById('nav-links').classList.remove('open');
+  document.body.style.overflow='';
+}
+// Close mobile nav on outside click
+document.addEventListener('click',function(e){
+  const nav=document.getElementById('nav');
+  if(!nav.contains(e.target))closeMobileNav();
+});
+
+// Contact form
+(function(){
+  const form=document.getElementById('contact-form');
+  if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    const name=form.name.value.trim();
+    const email=form.email.value.trim();
+    if(!name||!email){
+      const first=!name?form.name:form.email;
+      first.focus();
+      first.style.borderColor='#E05050';
+      setTimeout(()=>first.style.borderColor='',2000);
+      return;
+    }
+    const btn=document.getElementById('form-submit-btn');
+    btn.disabled=true;
+    btn.textContent='Sending…';
+    const company=form.company.value.trim()||'Not provided';
+    const phase=form.phase.value||'Not sure yet';
+    const message=form.message.value.trim()||'No message provided';
+    const subject=encodeURIComponent('Discovery Call Request — '+name);
+    const body=encodeURIComponent(
+      'Name: '+name+'\n'+
+      'Email: '+email+'\n'+
+      'Business: '+company+'\n'+
+      'Phase of Interest: '+phase+'\n\n'+
+      'Message:\n'+message
+    );
+    window.open('mailto:hello@thecanopygroup.bz?subject='+subject+'&body='+body,'_blank');
+    form.style.display='none';
+    document.getElementById('form-success').style.display='block';
+  });
+})();
 
 function restartQuiz(){
   Object.keys(answers).forEach(k=>delete answers[k]);
