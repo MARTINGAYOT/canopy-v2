@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canopy Consulting — Deep roots. Wide reach. Unstoppable growth.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;color:#1A1A18;overflow-x:hidden;line-height:1.6;background:#0B1F12}
+
+:root{
+  --ink:#1A1A18;--ink2:#4A4A45;--ink3:#8A8A82;
+  --forest:#1C4A35;--forest2:#2A6B4E;--forest3:#3D8B65;--leaf:#5BAF82;
+  --sage:#C8E6D4;--mist:#F0F7F3;
+  --amber:#B8820A;--amber2:#E8A820;--amber-pale:#FDF5DC;
+  --cream:#FAFAF8;--cream2:#F2F1EC;--white:#FFFFFF;
+  --border:#E8E8E2;--border2:#D4D4CC;
+  --r:8px;--r2:16px;--r3:24px;
+}
+
+/* ─── PHOTO ECOSYSTEM BACKGROUND ──────────────────────────── */
+body{
+  background-image: url('bg.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+/* Dark overlay to deepen contrast and ensure text legibility */
+#ecosystem-bg{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  z-index:0;
+  pointer-events:none;
+  /* Gradient overlay: lighter at top (sky), progressively darker mid/bottom */
+  background: linear-gradient(
+    180deg,
+    rgba(0,10,4,0.08)   0%,
+    rgba(0,12,6,0.18)  15%,
+    rgba(0,10,4,0.28)  35%,
+    rgba(0,8,3,0.38)   55%,
+    rgba(0,6,2,0.48)   75%,
+    rgba(0,4,1,0.65)   90%,
+    rgba(0,2,0,0.80)  100%
+  );
+}
+
+/* Progress indicator — which ecosystem zone we're in */
+.eco-zone-indicator{
+  position:fixed;
+  right:28px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:100;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.eco-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,0.25);
+  transition:all .4s;
+  cursor:pointer;
+}
+.eco-dot.active{background:var(--amber2);transform:scale(1.4)}
+.eco-dot:hover{background:rgba(255,255,255,0.6)}
+
+/* ─── CONTENT LAYER ─────────────────────────────────────────── */
+#content{position:relative;z-index:10}
+
+/* ─── NAV ────────────────────────────────────────────────────── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:80px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 60px;
+  background:rgba(11,31,18,0.0);
+  backdrop-filter:blur(0px);
+  border-bottom:1px solid transparent;
+  transition:all .4s;
+}
+.nav.scrolled{
+  background:rgba(11,31,18,0.88);
+  backdrop-filter:blur(20px);
+  border-bottom-color:rgba(255,255,255,0.06);
+  box-shadow:0 2px 40px rgba(0,0,0,0.3);
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-img{height:80px;width:auto;display:block;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4))}
+.nav-links{display:flex;align-items:center;gap:0}
+.nav-links a{font-size:15px;font-weight:500;color:rgba(255,255,255,0.85);text-decoration:none;transition:color .2s;padding:0 24px}
+.nav-links a:hover{color:#fff}
+.nav-links a+a{border-left:1.5px solid var(--amber)}
+.nav-btn{
+  background:#1C4A35;color:#E8A820 !important;
+  font-family:'Inter',sans-serif;font-size:15px;font-weight:800;
+  padding:16px 34px;border:none;border-radius:var(--r);
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:background .2s,transform .15s;letter-spacing:0.5px;
+  margin-left:32px;line-height:1.4;
+  box-shadow:0 4px 20px rgba(0,0,0,0.3);
+}
+.nav-btn:hover{background:#2A6B4E;color:#E8A820 !important;transform:translateY(-1px)}
+
+/* ─── SECTION SHARED ─────────────────────────────────────────── */
+section{
+  padding:100px 60px;
+  position:relative;
+}
+.section-label{
+  font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--amber2);display:flex;align-items:center;gap:10px;margin-bottom:16px;
+}
+.section-label::before{content:'';width:20px;height:1px;background:var(--amber2)}
+.section-title{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(32px,4vw,52px);
+  color:#fff;margin-bottom:16px;
+  text-shadow:0 2px 20px rgba(0,0,0,0.4);
+}
+.section-title em{font-style:italic;color:var(--leaf)}
+.section-lead{font-size:17px;color:rgba(255,255,255,0.7);line-height:1.8;max-width:560px}
+
+/* Glass panel — base */
+.glass{
+  background:rgba(0,18,8,0.35);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:var(--r2);
+}
+.glass-dark{
+  background:rgba(0,14,6,0.78);
+  backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:var(--r2);
+}
+.glass-light{
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.6);
+  border-radius:var(--r2);
+}
+.glass-amber{
+  background:rgba(80,40,0,0.5);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(232,168,32,0.2);
+  border-radius:var(--r2);
+}
+
+/* ─── HERO ────────────────────────────────────────────────────── */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:80px 60px 60px;
+}
+.hero-left{
+  padding-right:60px;padding-top:20px;
+  /* Soft dark halo behind text — invisible edge, just darkens the leaf area */
+  background: radial-gradient(ellipse 75% 80% at 30% 45%, rgba(0,10,4,0.52) 0%, transparent 100%);
+  border-radius: 24px;
+}
+.hero h1{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(42px,5vw,68px);
+  color:#fff;
+  margin-bottom:24px;
+  max-width:580px;
+  line-height:1.1;
+  text-shadow:0 2px 12px rgba(0,0,0,0.7), 0 4px 40px rgba(0,0,0,0.5);
+}
+.hero h1 em{font-style:italic;color:var(--leaf);text-shadow:0 2px 12px rgba(0,0,0,0.6)}
+.hero-sub{
+  font-size:17px;
+  color:rgba(255,255,255,0.92);
+  line-height:1.8;
+  max-width:480px;
+  margin-bottom:40px;
+  text-shadow:0 1px 8px rgba(0,0,0,0.65);
+}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.btn-primary{
+  background:var(--forest);color:#fff;
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:600;
+  padding:14px 28px;border:none;border-radius:var(--r);
+  cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(28,74,53,0.4);
+}
+.btn-primary:hover{background:var(--forest2);transform:translateY(-1px);box-shadow:0 6px 28px rgba(28,74,53,0.5)}
+.btn-secondary{
+  background:transparent;color:rgba(255,255,255,0.9);
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
+  padding:14px 28px;border:1.5px solid rgba(255,255,255,0.3);border-radius:var(--r);
+  cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;transition:all .2s;
+}
+.btn-secondary:hover{border-color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.08)}
+
+.hero-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:48px}
+.hero-trust-card{
+  padding:18px 20px;
+  display:flex;flex-direction:column;gap:6px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.hero-trust-card:hover{border-color:var(--leaf);box-shadow:0 4px 20px rgba(91,175,130,0.15)}
+.hero-trust-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(91,175,130,0.15);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:4px;
+}
+.hero-trust-icon svg{width:16px;height:16px}
+.hero-trust-label{font-size:13px;font-weight:600;color:#fff;line-height:1.3}
+.hero-trust-desc{font-size:11px;color:rgba(255,255,255,0.55);line-height:1.5}
+
+/* Hero right */
+.hero-right{
+  display:flex;align-items:center;justify-content:center;
+  padding-left:20px;padding-top:20px;
+}
+.phase-preview-stack{width:100%;max-width:440px;display:flex;flex-direction:column;gap:10px}
+.phase-pip{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 22px;
+  cursor:pointer;
+  transition:all .25s;
+  text-decoration:none;
+  background:rgba(0,18,8,0.55);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:var(--r2);
+}
+.phase-pip:hover{border-color:rgba(91,175,130,0.5);background:rgba(0,28,14,0.70);transform:translateX(5px)}
+.phase-pip.active{border-color:rgba(91,175,130,0.55);background:rgba(0,28,14,0.65)}
+.pip-num{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--forest);color:#fff;
+  font-size:13px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.pip-body{flex:1;min-width:0}
+.pip-name{font-size:14px;font-weight:600;color:#fff;margin-bottom:2px}
+.pip-desc{font-size:12px;color:rgba(255,255,255,0.6)}
+
+.hero-scroll-cue{
+  position:absolute;bottom:36px;left:60px;
+  display:flex;align-items:center;gap:10px;
+  color:rgba(255,255,255,0.35);font-size:12px;font-weight:500;
+}
+.scroll-line{width:32px;height:1px;background:rgba(255,255,255,0.2);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--leaf);animation:scan 2s ease-in-out infinite}
+@keyframes scan{0%{left:-100%}60%{left:100%}100%{left:100%}}
+
+/* ─── JOURNEY SECTION ────────────────────────────────────────── */
+.journey-section{padding:100px 60px}
+.journey-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:64px}
+.phase-timeline{position:relative;z-index:1}
+.phase-track{display:flex;align-items:stretch;gap:0;margin-bottom:32px}
+.phase-node{flex:1;position:relative;cursor:pointer}
+.phase-node-top{display:flex;flex-direction:column;align-items:center;padding-bottom:24px;position:relative}
+.phase-node-top::after{content:'';position:absolute;bottom:0;left:50%;width:1px;height:24px;background:rgba(255,255,255,0.1)}
+.phase-node:last-child .phase-node-top::after{display:none}
+.phase-connector{position:absolute;top:20px;left:calc(50% + 20px);right:-50%;height:1px;background:rgba(255,255,255,0.1)}
+.phase-node:last-child .phase-connector{display:none}
+.phase-node.active .phase-connector{background:rgba(91,175,130,0.4)}
+.phase-circle{
+  width:40px;height:40px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.15);
+  background:rgba(255,255,255,0.04);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:600;color:rgba(255,255,255,0.4);
+  margin-bottom:12px;transition:all .3s;position:relative;z-index:1;
+}
+.phase-node.active .phase-circle{background:var(--forest);border-color:var(--leaf);color:#fff;box-shadow:0 0 0 6px rgba(91,175,130,0.12),0 0 20px rgba(91,175,130,0.2)}
+.phase-node.locked .phase-circle{background:rgba(255,255,255,0.03);border-style:dashed}
+.phase-node-label{font-size:11px;font-weight:500;color:rgba(255,255,255,0.35);text-align:center;letter-spacing:.3px}
+.phase-node.active .phase-node-label{color:var(--leaf);font-weight:600}
+
+.phase-detail-card{
+  padding:32px;min-height:280px;display:none;
+  animation:fadeSlide .3s ease;
+}
+.phase-detail-card.visible{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.pdc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;gap:16px}
+.pdc-num{font-family:'Instrument Serif',serif;font-size:48px;color:rgba(255,255,255,0.06);line-height:1}
+.pdc-badge-wrap{display:flex;gap:8px;flex-wrap:wrap}
+.pdc-badge{font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:4px 10px;border-radius:100px}
+.pdc-badge.available{background:rgba(91,175,130,0.15);color:var(--leaf);border:1px solid rgba(91,175,130,0.2)}
+.pdc-badge.coming{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.35);border:1px solid rgba(255,255,255,0.08)}
+.pdc-title{font-family:'Instrument Serif',serif;font-size:28px;color:#fff;margin-bottom:8px}
+.pdc-who{font-size:13px;color:var(--amber2);font-weight:500;margin-bottom:12px}
+.pdc-desc{font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:24px}
+.pdc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px}
+.pdc-col h5{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px}
+.pdc-col li{font-size:13px;color:rgba(255,255,255,0.6);padding:4px 0;list-style:none;display:flex;align-items:flex-start;gap:7px}
+.pdc-col li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--leaf);flex-shrink:0;margin-top:7px}
+.pdc-outcome{
+  background:rgba(91,175,130,0.08);border:1px solid rgba(91,175,130,0.15);
+  border-radius:var(--r);padding:14px 18px;
+  font-size:13px;color:rgba(255,255,255,0.75);
+  display:flex;align-items:center;gap:10px;margin-bottom:24px;
+}
+.pdc-outcome::before{content:'→';color:var(--leaf);font-weight:700;font-size:16px}
+.pdc-actions{display:flex;gap:12px}
+.btn-phase-cta{
+  background:var(--forest);color:#fff;font-size:13px;font-weight:600;
+  padding:11px 24px;border:none;border-radius:var(--r);
+  cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+}
+.btn-phase-cta:hover{background:var(--forest2);transform:translateY(-1px)}
+.btn-phase-waitlist{
+  background:transparent;color:rgba(255,255,255,0.5);font-size:13px;font-weight:500;
+  padding:11px 24px;border:1px solid rgba(255,255,255,0.12);border-radius:var(--r);
+  cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:7px;
+}
+.btn-phase-waitlist:hover{border-color:rgba(255,255,255,0.35);color:rgba(255,255,255,0.8)}
+
+/* ─── QUIZ SECTION ───────────────────────────────────────────── */
+.quiz-section{padding:100px 60px}
+.quiz-section .section-title{margin-bottom:8px}
+.quiz-section .section-lead{margin-bottom:52px}
+.quiz-card{
+  max-width:720px;margin:0 auto;
+  padding:48px;
+  box-shadow:0 8px 60px rgba(0,0,0,0.4);
+}
+.quiz-progress{display:flex;align-items:center;gap:6px;margin-bottom:36px}
+.quiz-progress-step{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,0.1);transition:background .4s}
+.quiz-progress-step.done{background:var(--forest)}
+.quiz-progress-step.active{background:var(--leaf)}
+.quiz-q-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px}
+.quiz-question{font-family:'Instrument Serif',serif;font-size:clamp(20px,2.5vw,28px);color:#fff;margin-bottom:32px}
+.quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:36px}
+.quiz-option{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 20px;
+  background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.1);
+  border-radius:var(--r2);cursor:pointer;
+  transition:all .2s;
+  font-size:15px;color:rgba(255,255,255,0.8);font-weight:500;
+}
+.quiz-option:hover{border-color:var(--leaf);background:rgba(91,175,130,0.08)}
+.quiz-option.selected{border-color:var(--leaf);background:rgba(91,175,130,0.12);color:#fff}
+.quiz-option-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;transition:all .2s;
+}
+.quiz-option.selected .quiz-option-icon{background:var(--forest);border-color:var(--forest)}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center}
+.quiz-back{
+  background:transparent;color:rgba(255,255,255,0.4);font-size:13px;font-weight:500;
+  border:none;cursor:pointer;padding:10px 0;
+  display:flex;align-items:center;gap:6px;transition:color .2s;
+}
+.quiz-back:hover{color:rgba(255,255,255,0.8)}
+.quiz-next{
+  background:var(--forest);color:#fff;font-size:13px;font-weight:600;
+  padding:12px 28px;border:none;border-radius:var(--r);
+  cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .2s;
+}
+.quiz-next:hover{background:var(--forest2);transform:translateY(-1px)}
+.quiz-next:disabled{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.25);cursor:not-allowed;transform:none}
+.quiz-result{display:none;text-align:center;animation:fadeSlide .4s ease}
+.quiz-result.visible{display:block}
+.quiz-result-phase{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(91,175,130,0.12);border:1px solid rgba(91,175,130,0.2);
+  padding:8px 20px;border-radius:100px;
+  font-size:13px;font-weight:600;color:var(--leaf);margin-bottom:20px;
+}
+.quiz-result h3{font-family:'Instrument Serif',serif;font-size:32px;color:#fff;margin-bottom:12px}
+.quiz-result p{font-size:16px;color:rgba(255,255,255,0.65);max-width:480px;margin:0 auto 32px}
+.quiz-result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.quiz-restart{
+  background:transparent;color:rgba(255,255,255,0.35);font-size:13px;
+  border:none;cursor:pointer;margin-top:16px;
+  text-decoration:underline;text-underline-offset:3px;
+}
+.quiz-restart:hover{color:rgba(255,255,255,0.7)}
+
+/* ─── SERVICES SECTION ───────────────────────────────────────── */
+.services-section{padding:100px 60px}
+.services-section .section-title{margin-bottom:8px}
+.services-section .section-lead{margin-bottom:52px}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.04)}
+.service-card{
+  padding:40px 36px;position:relative;
+  background:rgba(0,16,8,0.72);
+  backdrop-filter:blur(20px);
+  border-top:3px solid transparent;
+  border:1px solid rgba(255,255,255,0.07);
+  transition:all .25s;
+}
+.service-card:hover{background:rgba(0,28,14,0.82);border-top-color:var(--forest3);border-color:rgba(91,175,130,0.2)}
+.service-card.featured{background:rgba(20,60,40,0.88);border-top-color:var(--leaf);border-color:rgba(91,175,130,0.25)}
+.service-card.featured:hover{background:rgba(28,74,53,0.92)}
+.sc-phase-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--amber2);margin-bottom:16px}
+.sc-icon{
+  width:48px;height:48px;border-radius:var(--r2);
+  background:rgba(255,255,255,0.07);
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+}
+.service-card.featured .sc-icon{background:rgba(255,255,255,0.12)}
+.sc-icon svg{width:22px;height:22px}
+.sc-title{font-family:'Instrument Serif',serif;font-size:24px;color:#fff;margin-bottom:10px}
+.sc-desc{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:24px}
+.sc-list{list-style:none;margin-bottom:28px}
+.sc-list li{font-size:13px;color:rgba(255,255,255,0.6);padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:flex-start;gap:10px}
+.sc-list li:last-child{border-bottom:none}
+.sc-list-dot{width:5px;height:5px;border-radius:50%;background:var(--leaf);flex-shrink:0;margin-top:8px}
+.sc-outcome{
+  font-size:13px;font-weight:500;color:rgba(255,255,255,0.8);
+  padding:12px 16px;background:rgba(91,175,130,0.1);border:1px solid rgba(91,175,130,0.15);border-radius:var(--r);
+  margin-bottom:24px;display:flex;align-items:flex-start;gap:8px;line-height:1.5;
+}
+.sc-outcome-arrow{color:var(--leaf);font-weight:700;flex-shrink:0}
+.sc-cta{
+  width:100%;background:var(--forest);color:#fff;
+  font-size:13px;font-weight:600;
+  padding:13px 24px;border:none;border-radius:var(--r);
+  cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;
+}
+.service-card.featured .sc-cta{background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2)}
+.service-card.featured .sc-cta:hover{background:rgba(255,255,255,0.22)}
+.sc-cta:hover{opacity:.88;transform:translateY(-1px)}
+
+/* coming soon cards */
+.service-card-soon{
+  padding:40px 36px;
+  background:rgba(10,20,14,0.6);
+  backdrop-filter:blur(10px);
+  border-top:3px solid rgba(184,130,10,0.3);
+  position:relative;
+}
+.service-card-soon .sc-phase-label{color:rgba(232,168,32,0.6)}
+.service-card-soon .sc-title{color:rgba(255,255,255,0.5)}
+.service-card-soon .sc-desc{color:rgba(255,255,255,0.35)}
+.service-card-soon .sc-list li{color:rgba(255,255,255,0.3)}
+.soon-badge{
+  position:absolute;top:20px;right:20px;
+  background:rgba(184,130,10,0.12);border:1px solid rgba(184,130,10,0.2);
+  color:var(--amber2);font-size:10px;font-weight:600;letter-spacing:1px;
+  padding:4px 10px;border-radius:100px;
+}
+.waitlist-btn{
+  width:100%;background:transparent;color:var(--amber2);
+  font-size:13px;font-weight:600;
+  padding:13px 24px;border:1px solid rgba(184,130,10,0.3);border-radius:var(--r);
+  cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;
+}
+.waitlist-btn:hover{background:rgba(184,130,10,0.08);border-color:rgba(184,130,10,0.5)}
+
+/* ─── PROCESS SECTION ────────────────────────────────────────── */
+.process-section{padding:100px 60px}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,0.04);margin-top:52px}
+.process-step{
+  padding:36px 28px;position:relative;overflow:hidden;transition:background .2s;
+  background:rgba(0,14,6,0.68);backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.06);
+}
+.process-step:hover{background:rgba(15,40,22,0.80)}
+.process-step-num{
+  font-family:'Instrument Serif',serif;font-size:64px;
+  color:rgba(255,255,255,0.04);line-height:1;
+  position:absolute;top:16px;right:20px;
+}
+.ps-icon{
+  width:44px;height:44px;border-radius:var(--r2);
+  background:var(--forest);
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+}
+.ps-icon svg{width:20px;height:20px}
+.ps-num-small{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--amber2);margin-bottom:8px}
+.ps-title{font-family:'Instrument Serif',serif;font-size:20px;color:#fff;margin-bottom:8px}
+.ps-desc{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.7}
+
+/* ─── TRUST SECTION ──────────────────────────────────────────── */
+.trust-section{padding:100px 60px}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.trust-section .section-title{color:#fff}
+.trust-section .section-lead{color:rgba(255,255,255,0.65);margin-bottom:40px}
+.trust-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.04)}
+.trust-stat{
+  padding:32px 28px;transition:background .2s;
+  background:rgba(0,12,5,0.72);backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.06);
+}
+.trust-stat:hover{background:rgba(20,50,28,0.82)}
+.ts-num{font-family:'Instrument Serif',serif;font-size:48px;color:var(--leaf);line-height:1;margin-bottom:6px}
+.ts-label{font-size:13px;color:rgba(255,255,255,0.5);font-weight:500}
+.trust-pillars{display:flex;flex-direction:column;gap:16px}
+.trust-pillar{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:20px 24px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);
+  border-radius:var(--r2);transition:all .2s;
+}
+.trust-pillar:hover{border-color:rgba(91,175,130,0.2);background:rgba(28,74,53,0.2)}
+.tp-icon{
+  width:40px;height:40px;border-radius:var(--r);background:var(--forest);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.tp-icon svg{width:18px;height:18px}
+.tp-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
+.tp-desc{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.6}
+.testimonial-placeholder{
+  margin-top:52px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;
+}
+.tp-card{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);
+  border-radius:var(--r2);padding:24px;
+  backdrop-filter:blur(12px);
+  display:flex;flex-direction:column;gap:12px;
+  transition:all .2s;
+}
+.tp-card:hover{background:rgba(255,255,255,0.09);border-color:rgba(91,175,130,0.15)}
+.tp-stars{color:var(--amber2);font-size:14px;letter-spacing:2px}
+.tp-quote{font-family:'Instrument Serif',serif;font-size:15px;color:rgba(255,255,255,0.8);line-height:1.6;font-style:italic}
+.tp-author{display:flex;align-items:center;gap:10px}
+.tp-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(91,175,130,0.2);border:1px solid rgba(91,175,130,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:var(--leaf);flex-shrink:0;
+}
+.tp-name{font-size:13px;font-weight:600;color:#fff}
+.tp-role{font-size:11px;color:rgba(255,255,255,0.4)}
+
+/* ─── FINAL CTA / CONTACT ─────────────────────────────────────── */
+.final-cta{padding:120px 60px;text-align:center}
+.final-cta-inner{max-width:680px;margin:0 auto}
+.final-cta h2{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(36px,5vw,60px);
+  color:#fff;margin-bottom:20px;
+  text-shadow:0 2px 20px rgba(0,0,0,0.5);
+}
+.final-cta h2 em{font-style:italic;color:var(--leaf)}
+.final-cta>div>p{font-size:18px;color:rgba(255,255,255,0.6);line-height:1.75;max-width:500px;margin:0 auto 20px}
+.cta-checklist{
+  display:flex;flex-direction:column;gap:8px;
+  align-items:center;margin-bottom:44px;
+}
+.cta-check{
+  display:flex;align-items:center;gap:8px;
+  font-size:14px;color:rgba(255,255,255,0.78);
+  text-shadow:0 1px 6px rgba(0,0,0,0.5);
+}
+.cta-check::before{content:'✓';color:var(--leaf);font-weight:700}
+.final-cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:52px}
+.btn-cta-primary{
+  background:#fff;color:var(--forest);
+  font-size:14px;font-weight:700;
+  padding:16px 32px;border:none;border-radius:var(--r);
+  cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;transition:all .2s;
+  box-shadow:0 4px 20px rgba(0,0,0,0.3);
+}
+.btn-cta-primary:hover{background:var(--sage);transform:translateY(-1px)}
+.btn-cta-ghost{
+  background:transparent;color:rgba(255,255,255,0.8);
+  font-size:14px;font-weight:500;
+  padding:16px 32px;border:1.5px solid rgba(255,255,255,0.25);border-radius:var(--r);
+  cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;transition:all .2s;
+}
+.btn-cta-ghost:hover{border-color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.06)}
+.final-motto{color:rgba(255,255,255,0.2);font-family:'Instrument Serif',serif;font-size:14px;font-style:italic;letter-spacing:.5px}
+
+/* Contact form */
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;
+  max-width:1000px;margin:60px auto 0;text-align:left;
+}
+.contact-perks{
+  display:flex;flex-direction:column;gap:20px;
+  /* Subtle dark panel behind the perks list */
+  background:rgba(0,10,4,0.45);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:var(--r2);
+  padding:28px 24px;
+}
+.contact-perk{display:flex;gap:14px;align-items:flex-start}
+.cperk-icon{
+  width:36px;height:36px;border-radius:8px;
+  background:rgba(91,175,130,0.12);border:1px solid rgba(91,175,130,0.2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.cperk-icon svg{width:16px;height:16px}
+.cperk-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:2px;text-shadow:0 1px 6px rgba(0,0,0,0.5)}
+.cperk-desc{font-size:13px;color:rgba(255,255,255,0.72)}
+.contact-form-wrap{padding:36px;box-shadow:0 8px 60px rgba(0,0,0,0.4)}
+.contact-form-wrap h4{font-family:'Instrument Serif',serif;font-size:22px;color:#fff;margin-bottom:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-field{margin-bottom:14px}
+.form-field label{display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:.5px;margin-bottom:6px}
+.form-field input,.form-field select,.form-field textarea{
+  width:100%;background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:var(--r);padding:12px 14px;
+  font-family:'Inter',sans-serif;font-size:14px;
+  color:#fff;
+  transition:border-color .2s;
+  outline:none;
+}
+.form-field input::placeholder,.form-field textarea::placeholder{color:rgba(255,255,255,0.2)}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--leaf)}
+.form-field select option{background:#0d2818;color:#fff}
+.form-field textarea{resize:vertical;min-height:100px}
+.form-submit{
+  width:100%;background:var(--forest);color:#fff;
+  font-size:14px;font-weight:700;
+  padding:14px 24px;border:none;border-radius:var(--r);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .2s;margin-top:6px;
+}
+.form-submit:hover{background:var(--forest2);transform:translateY(-1px)}
+.form-success{
+  text-align:center;padding:40px 20px;
+  display:none;
+}
+.form-success.visible{display:block}
+.form-success-icon{
+  width:56px;height:56px;border-radius:50%;
+  background:rgba(91,175,130,0.15);border:2px solid rgba(91,175,130,0.3);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;
+}
+.form-success h4{font-family:'Instrument Serif',serif;font-size:22px;color:#fff;margin-bottom:8px}
+.form-success p{font-size:14px;color:rgba(255,255,255,0.5)}
+
+/* ─── FOOTER ─────────────────────────────────────────────────── */
+footer{
+  padding:56px 60px 36px;
+  background:rgba(4,10,6,0.95);
+  position:relative;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;margin-bottom:48px;
+  padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.footer-brand .fn{font-family:'Instrument Serif',serif;font-size:20px;color:#fff;margin-bottom:4px}
+.footer-brand .ft{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber2);margin-bottom:16px}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,0.3);line-height:1.8;max-width:260px}
+.footer-col h5{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{font-size:13px;color:rgba(255,255,255,0.35);text-decoration:none;transition:color .2s;cursor:pointer}
+.footer-col a:hover{color:rgba(255,255,255,0.8)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,0.18)}
+.footer-motto{font-family:'Instrument Serif',serif;font-size:13px;font-style:italic;color:rgba(255,255,255,0.15)}
+
+/* ─── SECTION BACKGROUNDS — transparent to show photo ── */
+.journey-section,
+.quiz-section,
+.services-section,
+.process-section,
+.trust-section,
+.final-cta{
+  background: transparent !important;
+}
+/* Subtle per-section tint layers for readability at each depth */
+.journey-section{ background: rgba(0,12,5,0.25) !important; }
+.quiz-section    { background: rgba(0,10,4,0.20) !important; }
+.services-section{ background: rgba(0,8,3,0.30) !important; }
+.process-section { background: rgba(0,6,2,0.35) !important; }
+.trust-section   { background: rgba(5,8,2,0.40) !important; }
+.final-cta       { background: rgba(0,4,1,0.55) !important; }
+.text-center{text-align:center}
+.text-center .section-lead{margin:0 auto 52px}
+.text-center .section-label{justify-content:center}
+.serif{font-family:'Instrument Serif',serif}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media(max-width:960px){
+  .nav{padding:0 24px}
+  .hero{grid-template-columns:1fr;padding:88px 24px 60px}
+  .hero-right{display:none}
+  section{padding:72px 24px}
+  .journey-header{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr}
+  .process-grid{grid-template-columns:1fr 1fr}
+  .trust-grid{grid-template-columns:1fr}
+  .testimonial-placeholder{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .final-cta{padding:80px 24px}
+  footer{padding:48px 24px 28px}
+  .pdc-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .eco-zone-indicator{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── ECOSYSTEM BACKGROUND ─────────────────────────────────── -->
+<div id="ecosystem-bg" aria-hidden="true"></div>
+
+<!-- ─── ECO ZONE DOTS ─────────────────────────────────────────── -->
+<nav class="eco-zone-indicator" aria-label="Page sections">
+  <div class="eco-dot active" data-target="home" title="Sky — Hero"></div>
+  <div class="eco-dot" data-target="journey" title="Upper Canopy — Journey"></div>
+  <div class="eco-dot" data-target="quiz" title="Mid Canopy — Quiz"></div>
+  <div class="eco-dot" data-target="services" title="Trunks — Services"></div>
+  <div class="eco-dot" data-target="process" title="Lower Forest — Process"></div>
+  <div class="eco-dot" data-target="about-us" title="Forest Floor — About"></div>
+  <div class="eco-dot" data-target="contact" title="Underground — Contact"></div>
+</nav>
+
+<!-- ─── CONTENT ───────────────────────────────────────────────── -->
+<div id="content">
+
+<!-- ── NAV ── -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <img src="logo.png" alt="Canopy Consulting" class="nav-logo-img"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+    <div style="display:none;align-items:center;gap:10px;">
+      <svg width="36" height="40" viewBox="0 0 80 90" fill="none">
+        <path d="M40 4L74 14L74 58Q74 80 40 90Q6 80 6 58L6 14Z" fill="none" stroke="#5BAF82" stroke-width="3" stroke-linejoin="round"/>
+        <rect x="37" y="62" width="7" height="20" rx="2" fill="#3D8B65"/>
+        <ellipse cx="28" cy="50" rx="10" ry="6" fill="#E8A820" transform="rotate(-28 28 50)"/>
+        <ellipse cx="52" cy="50" rx="10" ry="6" fill="#E8A820" transform="rotate(28 52 50)"/>
+        <ellipse cx="40" cy="36" rx="24" ry="18" fill="#1C4A35"/>
+        <ellipse cx="32" cy="30" rx="15" ry="11" fill="#2A6B4E"/>
+        <ellipse cx="48" cy="30" rx="15" ry="11" fill="#2A6B4E"/>
+        <ellipse cx="40" cy="24" rx="13" ry="12" fill="#3D8B65"/>
+      </svg>
+      <div>
+        <span style="font-family:'Instrument Serif',serif;font-size:16px;color:#fff;display:block;line-height:1.1">Canopy Consulting</span>
+        <span style="font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber2);display:block">Belize</span>
+      </div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">The Journey</a>
+    <a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Services</a>
+    <a onclick="document.getElementById('about-us').scrollIntoView({behavior:'smooth'})">About</a>
+    <a class="nav-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Call</a>
+  </div>
+</nav>
+
+<!-- ── HERO — SKY ── -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <h1>Your business deserves a <em>clear path forward.</em></h1>
+    <p class="hero-sub">We guide businesses from idea or chaos to structured, scalable, profitable operations — through a proven 5-phase journey built for real results.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Find Your Phase
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">View Services</a>
+    </div>
+    <div class="hero-trust">
+      <div class="hero-trust-card glass">
+        <div class="hero-trust-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="hero-trust-label">5 Proven Phases</div>
+        <div class="hero-trust-desc">A structured framework that takes you from idea to scalable operation, step by step.</div>
+      </div>
+      <div class="hero-trust-card glass">
+        <div class="hero-trust-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="hero-trust-label">Built in Belize, for Belize</div>
+        <div class="hero-trust-desc">A framework designed for the realities of the Belizean market — not imported and adapted.</div>
+      </div>
+      <div class="hero-trust-card glass">
+        <div class="hero-trust-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="5"/><path d="M3 21v-2a7 7 0 0 1 14 0v2"/></svg>
+        </div>
+        <div class="hero-trust-label">Local Experts, Global Standards</div>
+        <div class="hero-trust-desc">A small, senior team with international training and deep roots in the Belizean business community.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="phase-preview-stack">
+      <a class="phase-pip active" onclick="showPhaseAndScroll(0)">
+        <div class="pip-num">1</div>
+        <div class="pip-body">
+          <div class="pip-name">Foundation</div>
+          <div class="pip-desc">Business plan, financials, market research &amp; positioning</div>
+        </div>
+      </a>
+      <a class="phase-pip" onclick="showPhaseAndScroll(1)">
+        <div class="pip-num">2</div>
+        <div class="pip-body">
+          <div class="pip-name">Presence</div>
+          <div class="pip-desc">Brand identity, website design &amp; digital footprint</div>
+        </div>
+      </a>
+      <a class="phase-pip" onclick="showPhaseAndScroll(2)">
+        <div class="pip-num">3</div>
+        <div class="pip-body">
+          <div class="pip-name">Systems</div>
+          <div class="pip-desc">CRM, workflow automation &amp; operations documentation</div>
+        </div>
+      </a>
+      <a class="phase-pip" onclick="showPhaseAndScroll(3)">
+        <div class="pip-num">4</div>
+        <div class="pip-body">
+          <div class="pip-name">Optimization</div>
+          <div class="pip-desc">KPI dashboards, profitability audit &amp; revenue strategy</div>
+        </div>
+      </a>
+      <a class="phase-pip" onclick="showPhaseAndScroll(4)">
+        <div class="pip-num">5</div>
+        <div class="pip-body">
+          <div class="pip-name">Scale</div>
+          <div class="pip-desc">AI integration, expansion strategy &amp; fractional COO advisory</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-cue">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- ── JOURNEY — UPPER CANOPY ── -->
+<section class="journey-section" id="journey">
+  <div class="journey-header">
+    <div>
+      <div class="section-label">The Growth Journey</div>
+      <h2 class="section-title">Five phases.<br><em>One complete transformation.</em></h2>
+    </div>
+    <p class="section-lead">Every business — regardless of size or stage — grows through the same five phases. Our entire model is built around this reality. Click any phase to explore what it includes and whether it is right for you.</p>
+  </div>
+
+  <div class="phase-timeline">
+    <div class="phase-track">
+      <div class="phase-node active" onclick="showPhase(0)" id="node-0">
+        <div class="phase-node-top">
+          <div class="phase-connector"></div>
+          <div class="phase-circle">1</div>
+          <div class="phase-node-label">Foundation</div>
+        </div>
+      </div>
+      <div class="phase-node" onclick="showPhase(1)" id="node-1">
+        <div class="phase-node-top">
+          <div class="phase-connector"></div>
+          <div class="phase-circle">2</div>
+          <div class="phase-node-label">Presence</div>
+        </div>
+      </div>
+      <div class="phase-node" onclick="showPhase(2)" id="node-2">
+        <div class="phase-node-top">
+          <div class="phase-connector"></div>
+          <div class="phase-circle">3</div>
+          <div class="phase-node-label">Systems</div>
+        </div>
+      </div>
+      <div class="phase-node locked" onclick="showPhase(3)" id="node-3">
+        <div class="phase-node-top">
+          <div class="phase-connector"></div>
+          <div class="phase-circle">4</div>
+          <div class="phase-node-label">Optimization</div>
+        </div>
+      </div>
+      <div class="phase-node locked" onclick="showPhase(4)" id="node-4">
+        <div class="phase-node-top">
+          <div class="phase-circle">5</div>
+          <div class="phase-node-label">Scale</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-detail-card glass-dark visible" id="phase-0">
+      <div class="pdc-top"><div class="pdc-num">01</div><div class="pdc-badge-wrap"><span class="pdc-badge available">Available Now</span></div></div>
+      <div class="pdc-title">Foundation</div>
+      <div class="pdc-who">For: New businesses, entrepreneurs, and anyone starting from scratch or without a clear plan.</div>
+      <p class="pdc-desc">Before anything else can grow, you need a solid base. Phase 1 creates the strategic, financial, and operational blueprint that every future decision builds on.</p>
+      <div class="pdc-grid">
+        <div class="pdc-col"><h5>Problems Solved</h5><ul><li>No clear business direction</li><li>Can't get funding or loans</li><li>No pricing strategy</li><li>Undefined target market</li></ul></div>
+        <div class="pdc-col"><h5>Services Included</h5><ul><li>Loan-ready business plan</li><li>Financial projections</li><li>Market research</li><li>Pricing strategy</li><li>Business Audit</li></ul></div>
+        <div class="pdc-col"><h5>You Will Have</h5><ul><li>A fundable business plan</li><li>Clear financial model</li><li>Defined positioning</li><li>Confidence to launch</li></ul></div>
+      </div>
+      <div class="pdc-outcome">You walk away with a clear, professional foundation your business can actually build on.</div>
+      <div class="pdc-actions">
+        <a class="btn-phase-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start Here <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a class="btn-phase-waitlist" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">View Package Details</a>
+      </div>
+    </div>
+
+    <div class="phase-detail-card glass-dark" id="phase-1">
+      <div class="pdc-top"><div class="pdc-num">02</div><div class="pdc-badge-wrap"><span class="pdc-badge available">Available Now</span></div></div>
+      <div class="pdc-title">Presence</div>
+      <div class="pdc-who">For: Businesses that exist but are invisible online or lack a professional, credible presence.</div>
+      <p class="pdc-desc">A business that cannot be found or trusted online leaves money on the table every day. Phase 2 builds the digital infrastructure that turns visibility into leads.</p>
+      <div class="pdc-grid">
+        <div class="pdc-col"><h5>Problems Solved</h5><ul><li>No website or weak online presence</li><li>Inconsistent branding</li><li>Leads don't convert</li><li>Looks unprofessional to clients</li></ul></div>
+        <div class="pdc-col"><h5>Services Included</h5><ul><li>Website design &amp; build</li><li>Brand identity &amp; guidelines</li><li>Lead capture systems</li><li>Google Business setup</li><li>Social media foundation</li></ul></div>
+        <div class="pdc-col"><h5>You Will Have</h5><ul><li>A lead-generating website</li><li>Cohesive brand identity</li><li>Professional digital presence</li><li>Systems to capture leads</li></ul></div>
+      </div>
+      <div class="pdc-outcome">Your business becomes visible, credible, and ready to attract the right clients.</div>
+      <div class="pdc-actions">
+        <a class="btn-phase-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start Here <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a class="btn-phase-waitlist" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">View Package Details</a>
+      </div>
+    </div>
+
+    <div class="phase-detail-card glass-dark" id="phase-2">
+      <div class="pdc-top"><div class="pdc-num">03</div><div class="pdc-badge-wrap"><span class="pdc-badge available">Available Now</span></div></div>
+      <div class="pdc-title">Systems</div>
+      <div class="pdc-who">For: Businesses generating revenue but running on memory, spreadsheets, and improvisation.</div>
+      <p class="pdc-desc">Most businesses plateau not from lack of effort but lack of structure. Phase 3 installs the operational backbone that lets your business run predictably — and scale without chaos.</p>
+      <div class="pdc-grid">
+        <div class="pdc-col"><h5>Problems Solved</h5><ul><li>Everything depends on you</li><li>Leads fall through the cracks</li><li>No documented processes</li><li>Can't onboard or delegate</li></ul></div>
+        <div class="pdc-col"><h5>Services Included</h5><ul><li>CRM selection &amp; full setup</li><li>Workflow automation</li><li>SOP documentation</li><li>Tech stack consolidation</li><li>Team training &amp; handoff</li></ul></div>
+        <div class="pdc-col"><h5>You Will Have</h5><ul><li>A business that runs on systems</li><li>Automated follow-up workflows</li><li>Documented processes</li><li>A team that can execute</li></ul></div>
+      </div>
+      <div class="pdc-outcome">Your business runs on systems instead of memory — whether you're in the room or not.</div>
+      <div class="pdc-actions">
+        <a class="btn-phase-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start Here <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a class="btn-phase-waitlist" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">View Package Details</a>
+      </div>
+    </div>
+
+    <div class="phase-detail-card glass-dark" id="phase-3">
+      <div class="pdc-top"><div class="pdc-num">04</div><div class="pdc-badge-wrap"><span class="pdc-badge coming">Coming Soon</span></div></div>
+      <div class="pdc-title">Optimization</div>
+      <div class="pdc-who">For: Businesses with systems in place that want to become measurably more profitable.</div>
+      <p class="pdc-desc">Once your foundation, presence, and systems are solid, Phase 4 focuses entirely on making the business more profitable. We audit every part of the business for efficiency, identify leaks, and build the data visibility to make smart decisions fast.</p>
+      <div class="pdc-grid">
+        <div class="pdc-col"><h5>Problems Solved</h5><ul><li>No visibility into performance</li><li>High costs, low margins</li><li>Leads don't convert efficiently</li><li>No clear growth metrics</li></ul></div>
+        <div class="pdc-col"><h5>Services Included</h5><ul><li>KPI dashboard setup</li><li>Profitability audit</li><li>Cost reduction analysis</li><li>Conversion optimization</li><li>Revenue strategy</li></ul></div>
+        <div class="pdc-col"><h5>You Will Have</h5><ul><li>Full business visibility</li><li>Improved profit margins</li><li>Data-driven decisions</li><li>Clear growth roadmap</li></ul></div>
+      </div>
+      <div class="pdc-outcome">Your business becomes measurably more efficient and profitable — without adding headcount.</div>
+      <div class="pdc-actions">
+        <a class="btn-phase-cta" style="background:var(--amber)" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Join the Waitlist <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <div class="phase-detail-card glass-dark" id="phase-4">
+      <div class="pdc-top"><div class="pdc-num">05</div><div class="pdc-badge-wrap"><span class="pdc-badge coming">Coming Soon</span></div></div>
+      <div class="pdc-title">Scale</div>
+      <div class="pdc-who">For: Optimized businesses ready to grow significantly and sustain that growth.</div>
+      <p class="pdc-desc">Phase 5 is where all previous work compounds. With a strong foundation, presence, systems, and optimization in place — you are ready to scale strategically and sustainably.</p>
+      <div class="pdc-grid">
+        <div class="pdc-col"><h5>Problems Solved</h5><ul><li>Growth hits a ceiling</li><li>Can't expand without chaos</li><li>No AI or automation leverage</li><li>No strategic growth partner</li></ul></div>
+        <div class="pdc-col"><h5>Services Included</h5><ul><li>AI tool integration</li><li>Advanced automation</li><li>Expansion strategy</li><li>Fractional COO advisory</li><li>Monthly retainer support</li></ul></div>
+        <div class="pdc-col"><h5>You Will Have</h5><ul><li>AI-powered operations</li><li>A scalable business model</li><li>Strategic growth partner</li><li>Unstoppable momentum</li></ul></div>
+      </div>
+      <div class="pdc-outcome">Your business grows significantly — with the systems and strategy to sustain every step.</div>
+      <div class="pdc-actions">
+        <a class="btn-phase-cta" style="background:var(--amber)" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Join the Waitlist <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── QUIZ — MID CANOPY ── -->
+<section class="quiz-section" id="quiz">
+  <div class="text-center">
+    <div class="section-label">Where Are You?</div>
+    <h2 class="section-title">Not sure which phase <em>is right for you?</em></h2>
+    <p class="section-lead">Answer four quick questions and we will point you to exactly where you should start.</p>
+  </div>
+
+  <div class="quiz-card glass-dark">
+    <div class="quiz-progress">
+      <div class="quiz-progress-step active" id="qp0"></div>
+      <div class="quiz-progress-step" id="qp1"></div>
+      <div class="quiz-progress-step" id="qp2"></div>
+      <div class="quiz-progress-step" id="qp3"></div>
+    </div>
+
+    <div id="q1">
+      <div class="quiz-q-label">Question 1 of 4</div>
+      <div class="quiz-question">Where is your business right now?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="selectOption(this,'q1','idea')"><div class="quiz-option-icon">💡</div>I have a business idea but haven't started yet</div>
+        <div class="quiz-option" onclick="selectOption(this,'q1','early')"><div class="quiz-option-icon">🌱</div>I just started — it's early and I'm figuring things out</div>
+        <div class="quiz-option" onclick="selectOption(this,'q1','running')"><div class="quiz-option-icon">🏃</div>I'm up and running but things feel chaotic</div>
+        <div class="quiz-option" onclick="selectOption(this,'q1','established')"><div class="quiz-option-icon">🏢</div>I have an established business that needs to grow</div>
+      </div>
+      <div class="quiz-nav">
+        <span></span>
+        <button class="quiz-next" id="q1-next" disabled onclick="nextQ(1)">Continue <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <div id="q2" style="display:none">
+      <div class="quiz-q-label">Question 2 of 4</div>
+      <div class="quiz-question">Do you have a professional website and brand identity?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="selectOption(this,'q2','none')"><div class="quiz-option-icon">❌</div>No — I don't have a website or consistent branding</div>
+        <div class="quiz-option" onclick="selectOption(this,'q2','basic')"><div class="quiz-option-icon">📱</div>I have something basic but it doesn't look professional</div>
+        <div class="quiz-option" onclick="selectOption(this,'q2','solid')"><div class="quiz-option-icon">✅</div>Yes — I have a solid website and brand</div>
+      </div>
+      <div class="quiz-nav">
+        <button class="quiz-back" onclick="prevQ(2)">← Back</button>
+        <button class="quiz-next" id="q2-next" disabled onclick="nextQ(2)">Continue <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <div id="q3" style="display:none">
+      <div class="quiz-q-label">Question 3 of 4</div>
+      <div class="quiz-question">Do you have systems in place — like a CRM, documented processes, or automation?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="selectOption(this,'q3','none')"><div class="quiz-option-icon">😬</div>No — everything lives in my head or spreadsheets</div>
+        <div class="quiz-option" onclick="selectOption(this,'q3','partial')"><div class="quiz-option-icon">🔧</div>I have some tools but nothing is properly set up</div>
+        <div class="quiz-option" onclick="selectOption(this,'q3','solid')"><div class="quiz-option-icon">⚙️</div>Yes — I have solid systems and processes in place</div>
+      </div>
+      <div class="quiz-nav">
+        <button class="quiz-back" onclick="prevQ(3)">← Back</button>
+        <button class="quiz-next" id="q3-next" disabled onclick="nextQ(3)">Continue <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <div id="q4" style="display:none">
+      <div class="quiz-q-label">Question 4 of 4</div>
+      <div class="quiz-question">What is your biggest challenge right now?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="selectOption(this,'q4','plan')"><div class="quiz-option-icon">📋</div>I need a plan, funding, or to figure out my business model</div>
+        <div class="quiz-option" onclick="selectOption(this,'q4','visibility')"><div class="quiz-option-icon">👁️</div>I need more visibility — clients can't find me</div>
+        <div class="quiz-option" onclick="selectOption(this,'q4','chaos')"><div class="quiz-option-icon">🌪️</div>My business is chaotic — I need structure and systems</div>
+        <div class="quiz-option" onclick="selectOption(this,'q4','grow')"><div class="quiz-option-icon">📈</div>I need to grow revenue and scale what's working</div>
+      </div>
+      <div class="quiz-nav">
+        <button class="quiz-back" onclick="prevQ(4)">← Back</button>
+        <button class="quiz-next" id="q4-next" disabled onclick="showResult()">See My Result <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <div class="quiz-result" id="quiz-result">
+      <div class="quiz-result-phase" id="result-phase-badge"></div>
+      <h3 id="result-title"></h3>
+      <p id="result-desc"></p>
+      <div class="quiz-result-actions">
+        <button class="btn-primary" id="result-cta"></button>
+        <a class="btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Free Call</a>
+      </div>
+      <br>
+      <button class="quiz-restart" onclick="restartQuiz()">Take the quiz again</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES — TRUNK ZONE ── -->
+<section class="services-section" id="services">
+  <div class="text-center">
+    <div class="section-label">Services &amp; Packages</div>
+    <h2 class="section-title">Everything you need, <em>at every stage.</em></h2>
+    <p class="section-lead">Three phases available now. Each package is designed to deliver a specific, measurable transformation for your business.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="sc-phase-label">Phase 1</div>
+      <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div class="sc-title serif">Launch &amp; Foundation</div>
+      <p class="sc-desc">Build your business on solid ground from day one. We create the strategic and financial blueprint your business needs to launch with confidence and attract funding.</p>
+      <ul class="sc-list">
+        <li><div class="sc-list-dot"></div>Investor &amp; loan-ready business plan</li>
+        <li><div class="sc-list-dot"></div>3-year financial projections</li>
+        <li><div class="sc-list-dot"></div>Market research &amp; competitive analysis</li>
+        <li><div class="sc-list-dot"></div>Pricing &amp; offer structure</li>
+        <li><div class="sc-list-dot"></div>Go-to-market strategy</li>
+        <li><div class="sc-list-dot"></div>Business Audit (entry offer)</li>
+      </ul>
+      <div class="sc-outcome"><span class="sc-outcome-arrow">→</span>A funded, positioned business ready to grow.</div>
+      <a class="sc-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Discovery Call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="service-card featured">
+      <div class="sc-phase-label">Phase 2</div>
+      <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--amber2)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <div class="sc-title serif">Brand &amp; Presence</div>
+      <p class="sc-desc">Make your business impossible to ignore. We build websites designed to convert and brand identities that build instant trust with the right clients.</p>
+      <ul class="sc-list">
+        <li><div class="sc-list-dot"></div>Website design &amp; development</li>
+        <li><div class="sc-list-dot"></div>Brand identity &amp; visual guidelines</li>
+        <li><div class="sc-list-dot"></div>Lead capture &amp; contact systems</li>
+        <li><div class="sc-list-dot"></div>Google Business &amp; directory setup</li>
+        <li><div class="sc-list-dot"></div>Basic SEO foundation</li>
+        <li><div class="sc-list-dot"></div>1-month post-launch support</li>
+      </ul>
+      <div class="sc-outcome"><span class="sc-outcome-arrow">→</span>A professional presence that generates real leads.</div>
+      <a class="sc-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Discovery Call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="service-card">
+      <div class="sc-phase-label">Phase 3</div>
+      <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/><line x1="9" y1="6.5" x2="15" y2="6.5"/><line x1="12" y1="3" x2="12" y2="10"/><line x1="9" y1="17.5" x2="15" y2="17.5"/></svg></div>
+      <div class="sc-title serif">Systems &amp; Operations</div>
+      <p class="sc-desc">Turn a chaotic business into a well-oiled machine. We implement the CRM, workflows, and processes that let your business run — even when you're not in the room.</p>
+      <ul class="sc-list">
+        <li><div class="sc-list-dot"></div>CRM selection &amp; full implementation</li>
+        <li><div class="sc-list-dot"></div>Workflow &amp; email automation</li>
+        <li><div class="sc-list-dot"></div>SOP creation &amp; documentation</li>
+        <li><div class="sc-list-dot"></div>Tech stack audit &amp; consolidation</li>
+        <li><div class="sc-list-dot"></div>Team training &amp; handoff</li>
+        <li><div class="sc-list-dot"></div>Process efficiency review</li>
+      </ul>
+      <div class="sc-outcome"><span class="sc-outcome-arrow">→</span>A business that runs on systems, not stress.</div>
+      <a class="sc-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Discovery Call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+
+  <!-- Coming soon row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.03);margin-top:2px">
+    <div class="service-card-soon">
+      <div class="soon-badge">Coming Soon</div>
+      <div class="sc-phase-label">Phase 4</div>
+      <div class="sc-title serif">Optimization</div>
+      <p class="sc-desc">KPI dashboards, profitability audits, cost reduction, and conversion optimization. For businesses ready to become measurably more profitable.</p>
+      <ul class="sc-list">
+        <li><div class="sc-list-dot" style="background:rgba(255,255,255,0.2)"></div>KPI dashboard setup</li>
+        <li><div class="sc-list-dot" style="background:rgba(255,255,255,0.2)"></div>Profitability audit</li>
+        <li><div class="sc-list-dot" style="background:rgba(255,255,255,0.2)"></div>Cost reduction analysis</li>
+        <li><div class="sc-list-dot" style="background:rgba(255,255,255,0.2)"></div>Revenue growth strategy</li>
+      </ul>
+      <a class="waitlist-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Join the Waitlist</a>
+    </div>
+    <div class="service-card-soon">
+      <div class="soon-badge">Coming Soon</div>
+      <div class="sc-phase-label">Phase 5</div>
+      <div class="sc-title serif">Scale</div>
+      <p class="sc-desc">AI integration, advanced automation, expansion strategy, and fractional COO advisory. For optimized businesses ready for significant, sustainable growth.</p>
+      <ul class="sc-list">
+        <li><div class="sc-list-dot" style="background:rgba(255,255,255,0.2)"></div>AI tool integration</li>
+        <li><div class="sc-list-dot" style="background:rgba(255,255,255,0.2)"></div>Expansion strategy</li>
+        <li><div class="sc-list-dot" style="background:rgba(255,255,255,0.2)"></div>Fractional COO advisory</li>
+        <li><div class="sc-list-dot" style="background:rgba(255,255,255,0.2)"></div>Monthly retainer support</li>
+      </ul>
+      <a class="waitlist-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Join the Waitlist</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS — LOWER TRUNKS ── -->
+<section class="process-section" id="process">
+  <div class="text-center">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Simple. Structured. <em>Always clear.</em></h2>
+    <p class="section-lead">Every engagement follows the same four-step process — so you always know what's happening and what's next.</p>
+  </div>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="process-step-num">01</div>
+      <div class="ps-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      <div class="ps-num-small">Step 01</div>
+      <div class="ps-title serif">Discover</div>
+      <p class="ps-desc">We start with a free 30-minute discovery call to understand your business, your challenges, and your goals. No pitch — just clarity.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">02</div>
+      <div class="ps-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      <div class="ps-num-small">Step 02</div>
+      <div class="ps-title serif">Plan</div>
+      <p class="ps-desc">We conduct a Business Audit to identify exactly what phase you're in, what's missing, and what the right package looks like for your specific situation.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">03</div>
+      <div class="ps-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+      <div class="ps-num-small">Step 03</div>
+      <div class="ps-title serif">Build</div>
+      <p class="ps-desc">We execute the agreed engagement with weekly check-ins, shared workspaces, and full transparency throughout. You always know the status.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">04</div>
+      <div class="ps-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+      <div class="ps-num-small">Step 04</div>
+      <div class="ps-title serif">Grow</div>
+      <p class="ps-desc">Deliverables in hand, we transition you to the next phase or offer ongoing advisory support. The journey doesn't end — it compounds.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRUST / ABOUT — FOREST FLOOR ── -->
+<section class="trust-section" id="about-us">
+  <div class="trust-grid">
+    <div>
+      <div class="section-label">Why Canopy Consulting</div>
+      <h2 class="section-title">Strategy meets <em>real execution.</em></h2>
+      <p class="section-lead">Most consultants give you advice and leave. We stay in the work — from your first business plan to a fully optimized, scalable operation. One partner. The whole journey.</p>
+      <div class="trust-pillars">
+        <div class="trust-pillar">
+          <div class="tp-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <div class="tp-title">Structured Methodology</div>
+            <p class="tp-desc">Every engagement follows a proven, documented framework. No improvisation. No guesswork. Just a clear, repeatable process.</p>
+          </div>
+        </div>
+        <div class="trust-pillar">
+          <div class="tp-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+          <div>
+            <div class="tp-title">Outcome-Focused</div>
+            <p class="tp-desc">We measure success by your results — not hours logged. Every deliverable is tied to a specific, measurable business outcome.</p>
+          </div>
+        </div>
+        <div class="trust-pillar">
+          <div class="tp-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div>
+            <div class="tp-title">Founder-Led, Always</div>
+            <p class="tp-desc">You work directly with the founder — not a junior associate. The expertise you buy is the expertise you get.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="trust-stats">
+        <div class="trust-stat"><div class="ts-num serif">5</div><div class="ts-label">Phase growth framework</div></div>
+        <div class="trust-stat"><div class="ts-num serif">3</div><div class="ts-label">Phases available today</div></div>
+        <div class="trust-stat"><div class="ts-num serif">1:1</div><div class="ts-label">Founder-led every time</div></div>
+        <div class="trust-stat"><div class="ts-num serif">BZ</div><div class="ts-label">Rooted in Belize</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonial-placeholder">
+    <div class="tp-card">
+      <div class="tp-stars">★★★★★</div>
+      <div class="tp-quote serif">"Working with Canopy Consulting gave us the structure we had been missing for years. We finally have a business that runs without us being in every decision."</div>
+      <div class="tp-author"><div class="tp-avatar">JM</div><div><div class="tp-name">J. Martinez</div><div class="tp-role">Business Owner, Belize City</div></div></div>
+    </div>
+    <div class="tp-card">
+      <div class="tp-stars">★★★★★</div>
+      <div class="tp-quote serif">"The business audit alone changed how I see my company. We identified three major revenue leaks in the first week. The ROI was immediate."</div>
+      <div class="tp-author"><div class="tp-avatar">SR</div><div><div class="tp-name">S. Rivera</div><div class="tp-role">Founder, Service Business</div></div></div>
+    </div>
+    <div class="tp-card">
+      <div class="tp-stars">★★★★★</div>
+      <div class="tp-quote serif">"I came in with an idea and left with a full business plan, financial model, and the confidence to approach investors. This is exactly what I needed."</div>
+      <div class="tp-author"><div class="tp-avatar">KP</div><div><div class="tp-name">K. Palacio</div><div class="tp-role">Entrepreneur, Phase 1 Client</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT / CTA — UNDERGROUND ── -->
+<section class="final-cta" id="contact">
+  <div class="final-cta-inner">
+    <div class="section-label" style="justify-content:center">Get Started</div>
+    <h2 class="serif">Ready to build something <em>that lasts?</em></h2>
+    <p>Start with a free 30-minute discovery call. No pitch, no pressure — just an honest conversation about where your business is and where it could be.</p>
+    <div class="cta-checklist">
+      <div class="cta-check">Free 30-minute discovery call</div>
+      <div class="cta-check">No commitment required</div>
+      <div class="cta-check">We respond within one business day</div>
+      <div class="cta-check">Serving businesses across Belize &amp; the Caribbean</div>
+    </div>
+    <div class="final-cta-actions">
+      <a class="btn-cta-primary" href="mailto:hello@thecanopygroup.bz">
+        Book a Free Discovery Call
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <button class="btn-cta-ghost" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Find My Phase First</button>
+    </div>
+    <div class="final-motto">Sub Umbra Floreo — Under the shade, we flourish.</div>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-perks">
+      <div class="contact-perk">
+        <div class="cperk-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div><div class="cperk-title">Quick response</div><div class="cperk-desc">We respond to all inquiries within one business day.</div></div>
+      </div>
+      <div class="contact-perk">
+        <div class="cperk-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <div><div class="cperk-title">Founder-led from day one</div><div class="cperk-desc">You'll speak directly with Martin Gayot, not a sales rep.</div></div>
+      </div>
+      <div class="contact-perk">
+        <div class="cperk-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="cperk-title">Based in Belize</div><div class="cperk-desc">In-person or remote — we work with businesses across Belize and the Caribbean.</div></div>
+      </div>
+      <div class="contact-perk">
+        <div class="cperk-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber2)" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="cperk-title">No obligation</div><div class="cperk-desc">The discovery call is free. No pitch, no pressure — just clarity.</div></div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap glass-dark">
+      <h4 class="serif">Send us a message</h4>
+      <div id="contact-form">
+        <div class="form-row">
+          <div class="form-field"><label>Your Name *</label><input type="text" placeholder="Martin Gayot" id="f-name"></div>
+          <div class="form-field"><label>Email Address *</label><input type="email" placeholder="hello@yourbusiness.com" id="f-email"></div>
+        </div>
+        <div class="form-field"><label>Business Name</label><input type="text" placeholder="Your Business" id="f-biz"></div>
+        <div class="form-field">
+          <label>Phase of Interest</label>
+          <select id="f-phase">
+            <option value="">Not sure yet</option>
+            <option>Phase 1 — Foundation</option>
+            <option>Phase 2 — Presence</option>
+            <option>Phase 3 — Systems</option>
+            <option>Phase 4 / 5 — Waitlist</option>
+          </select>
+        </div>
+        <div class="form-field"><label>Tell us about your business</label><textarea placeholder="A brief description of where your business is and what you're hoping to achieve..." id="f-msg"></textarea></div>
+        <button class="form-submit" onclick="submitForm()">
+          Send Message
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+      <div class="form-success" id="form-success">
+        <div class="form-success-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--leaf)" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h4 class="serif">Message sent!</h4>
+        <p>Thanks for reaching out. We'll be in touch within one business day to schedule your free discovery call.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="fn">Canopy Consulting</div>
+      <div class="ft">Belize</div>
+      <p>We help small and mid-sized businesses build the foundations, systems, and strategies they need to grow with confidence. Deep roots. Wide reach. Unstoppable growth.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navigate</h5>
+      <ul>
+        <li><a onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})">Home</a></li>
+        <li><a onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">The Journey</a></li>
+        <li><a onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Find My Phase</a></li>
+        <li><a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Services</a></li>
+        <li><a onclick="document.getElementById('about-us').scrollIntoView({behavior:'smooth'})">About</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a onclick="showPhaseAndScroll(0)">Phase 1 — Foundation</a></li>
+        <li><a onclick="showPhaseAndScroll(1)">Phase 2 — Presence</a></li>
+        <li><a onclick="showPhaseAndScroll(2)">Phase 3 — Systems</a></li>
+        <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Phase 4 — Waitlist</a></li>
+        <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Phase 5 — Waitlist</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:hello@thecanopygroup.bz">hello@thecanopygroup.bz</a></li>
+        <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Discovery Call</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Canopy Consulting · Belize · All rights reserved</p>
+    <span class="footer-motto">Sub Umbra Floreo</span>
+  </div>
+</footer>
+
+</div><!-- /content -->
+
+<script>
+// ── NAV ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+  updateEcoDots();
+  parallaxBg();
+});
+
+// ── PARALLAX ECOSYSTEM ──
+// CSS background-attachment:fixed handles parallax natively.
+// We shift background-position-y so the image travels from top (sky)
+// to bottom (roots) as the user scrolls through the page.
+function parallaxBg(){
+  const scrollY = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = Math.min(scrollY / docH, 1);
+  // Map 0→1 scroll progress to 0%→100% background vertical position
+  const pct = progress * 100;
+  document.body.style.backgroundPositionY = pct + '%';
+}
+
+// ── ECO DOTS ──
+const sections = ['home','journey','quiz','services','process','about-us','contact'];
+function updateEcoDots(){
+  const scrollY = window.scrollY + window.innerHeight * 0.4;
+  let current = 0;
+  sections.forEach((id,i)=>{
+    const el = document.getElementById(id);
+    if(el && el.offsetTop <= scrollY) current = i;
+  });
+  document.querySelectorAll('.eco-dot').forEach((d,i)=>{
+    d.classList.toggle('active', i === current);
+  });
+}
+document.querySelectorAll('.eco-dot').forEach((d,i)=>{
+  d.addEventListener('click',()=>{
+    document.getElementById(sections[i]).scrollIntoView({behavior:'smooth'});
+  });
+});
+
+// ── PHASE JOURNEY ──
+function showPhase(n){
+  for(let i=0;i<5;i++){
+    document.getElementById('node-'+i).classList.remove('active');
+    document.getElementById('phase-'+i).classList.remove('visible');
+  }
+  document.getElementById('node-'+n).classList.add('active');
+  document.getElementById('phase-'+n).classList.add('visible');
+}
+document.getElementById('phase-0').classList.add('visible');
+
+function showPhaseAndScroll(n){
+  showPhase(n);
+  document.getElementById('journey').scrollIntoView({behavior:'smooth'});
+}
+
+// ── QUIZ ──
+const answers={};
+function selectOption(el,q,val){
+  el.closest('.quiz-options').querySelectorAll('.quiz-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[q]=val;
+  const nextBtn=document.getElementById(q+'-next');
+  if(nextBtn)nextBtn.disabled=false;
+}
+function nextQ(current){
+  document.getElementById('q'+current).style.display='none';
+  document.getElementById('q'+(current+1)).style.display='block';
+  document.getElementById('qp'+(current-1)).classList.remove('active');
+  document.getElementById('qp'+(current-1)).classList.add('done');
+  if(current<4)document.getElementById('qp'+current).classList.add('active');
+}
+function prevQ(current){
+  document.getElementById('q'+current).style.display='none';
+  document.getElementById('q'+(current-1)).style.display='block';
+  document.getElementById('qp'+(current-1)).classList.remove('done');
+  document.getElementById('qp'+(current-1)).classList.add('active');
+  if(current>1)document.getElementById('qp'+(current-2)).classList.remove('active');
+}
+function calcPhase(){
+  const q1=answers.q1||'',q2=answers.q2||'',q3=answers.q3||'',q4=answers.q4||'';
+  if(q1==='idea'||q4==='plan')return 1;
+  if(q2==='none'||q2==='basic'||q4==='visibility')return 2;
+  if(q3==='none'||q3==='partial'||q4==='chaos')return 3;
+  return 1;
+}
+const results={
+  1:{badge:'Phase 1 — Foundation',title:"You're ready to build your foundation.",desc:"Based on your answers, you need a solid strategic and financial base before anything else. Phase 1 will give you a fundable business plan, clear positioning, and the confidence to move forward.",cta:"Start with Phase 1",phase:0},
+  2:{badge:'Phase 2 — Presence',title:"You need a professional presence.",desc:"You have a business but clients can't find you or don't trust what they see. Phase 2 will build you a lead-generating website and brand identity that converts visitors into clients.",cta:"Start with Phase 2",phase:1},
+  3:{badge:'Phase 3 — Systems',title:"It's time to get your systems right.",desc:"Your business is running but it's chaotic. Phase 3 will install the CRM, workflows, and processes that let your business run predictably — whether you're in the room or not.",cta:"Start with Phase 3",phase:2}
+};
+function showResult(){
+  document.getElementById('q4').style.display='none';
+  document.getElementById('quiz-result').classList.add('visible');
+  document.querySelectorAll('.quiz-progress-step').forEach(s=>{s.classList.remove('active');s.classList.add('done')});
+  const phase=calcPhase();
+  const r=results[phase];
+  document.getElementById('result-phase-badge').textContent=r.badge;
+  document.getElementById('result-title').textContent=r.title;
+  document.getElementById('result-desc').textContent=r.desc;
+  document.getElementById('result-cta').textContent=r.cta;
+  document.getElementById('result-cta').onclick=()=>showPhaseAndScroll(r.phase);
+}
+function restartQuiz(){
+  Object.keys(answers).forEach(k=>delete answers[k]);
+  for(let i=1;i<=4;i++){
+    const s=document.getElementById('q'+i);
+    if(s){
+      s.style.display=i===1?'block':'none';
+      s.querySelectorAll('.quiz-option').forEach(o=>o.classList.remove('selected'));
+      const nb=document.getElementById('q'+i+'-next');
+      if(nb)nb.disabled=true;
+    }
+  }
+  document.getElementById('quiz-result').classList.remove('visible');
+  document.querySelectorAll('.quiz-progress-step').forEach((s,i)=>{
+    s.classList.remove('done','active');
+    if(i===0)s.classList.add('active');
+  });
+}
+
+// ── FORM ──
+function submitForm(){
+  const name = document.getElementById('f-name').value;
+  const email = document.getElementById('f-email').value;
+  if(!name || !email){ alert('Please fill in your name and email.'); return; }
+  document.getElementById('contact-form').style.display='none';
+  document.getElementById('form-success').classList.add('visible');
+}
+
+// Init
+parallaxBg();
+updateEcoDots();
+</script>
+</body>
+</html>
