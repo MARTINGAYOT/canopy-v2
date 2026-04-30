@@ -28,6 +28,11 @@
 <meta name="twitter:description" content="Belize-based business consulting built for entrepreneurs. From business plan to scale — a clear 5-phase path forward.">
 <meta name="twitter:image" content="https://canopyconsulting.bz/og-image.png">
 
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+<meta name="theme-color" content="#1C4A35">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -868,6 +873,92 @@ footer{
   .hero-actions .btn-primary,.hero-actions .btn-secondary{justify-content:center}
 }
 </style>
+
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://canopyconsulting.bz/#organization",
+      "name": "The Canopy Group",
+      "url": "https://canopyconsulting.bz/",
+      "logo": "https://canopyconsulting.bz/logo.png",
+      "description": "Belize-based business consulting firm helping entrepreneurs build, grow, and scale through a structured 5-phase methodology.",
+      "email": "hello@thecanopygroup.bz",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BZ"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/the-canopy-group"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://canopyconsulting.bz/#business",
+      "name": "The Canopy Group",
+      "url": "https://canopyconsulting.bz/",
+      "logo": "https://canopyconsulting.bz/logo.png",
+      "image": "https://canopyconsulting.bz/og-image.png",
+      "description": "Founder-led business consulting in Belize offering strategy, branding, systems, and scaling services through a structured 5-phase growth methodology.",
+      "email": "hello@thecanopygroup.bz",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BZ",
+        "addressRegion": "Belize"
+      },
+      "priceRange": "$$",
+      "areaServed": ["BZ", "Caribbean", "Worldwide"],
+      "serviceType": "Business Consulting"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://canopyconsulting.bz/#website",
+      "url": "https://canopyconsulting.bz/",
+      "name": "The Canopy Group",
+      "publisher": { "@id": "https://canopyconsulting.bz/#organization" }
+    },
+    {
+      "@type": "ItemList",
+      "name": "Consulting Services",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Service",
+            "name": "Foundation — Phase 1",
+            "description": "Business plan, financial projections, market research, pricing strategy, and grant readiness.",
+            "provider": { "@id": "https://canopyconsulting.bz/#organization" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Service",
+            "name": "Presence — Phase 2",
+            "description": "Professional website, brand identity, SEO, social media setup, and lead capture.",
+            "provider": { "@id": "https://canopyconsulting.bz/#organization" }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Service",
+            "name": "Systems — Phase 3",
+            "description": "CRM setup, workflow automation, SOPs, team onboarding, and tech consolidation.",
+            "provider": { "@id": "https://canopyconsulting.bz/#organization" }
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -2782,7 +2873,7 @@ footer{
       <ul>
         <li><a href="mailto:hello@thecanopygroup.bz">hello@thecanopygroup.bz</a></li>
         <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Discovery Call</a></li>
-        <li><a href="#">LinkedIn</a></li>
+        <li><a href="https://www.linkedin.com/company/the-canopy-group" target="_blank" rel="noopener">LinkedIn</a></li>
       </ul>
     </div>
   </div>
